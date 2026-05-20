@@ -1,0 +1,7939 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; connect-src 'self' https:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Scan2BSafe - BCMA Interactive Learning System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        space: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #83a074; 
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        /* Two-Way Smooth Scroll Reveal Engine (Pababa at Paangat) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, opacity;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .carousel-page {
+            display: none !important;
+        }
+        .carousel-page.active {
+            display: grid !important;
+        }
+        .faq-page {
+            display: none;
+        }
+        .faq-page.active {
+            display: block;
+        }
+        .step-scrollbar-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .step-scrollbar-hidden::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-white overflow-x-hidden selection:bg-green-400 selection:text-black">
+
+    <nav id="main-nav" class="fixed top-5 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-[#121214]/90 backdrop-blur-md border border-zinc-800 rounded-full px-4 md:px-6 py-3 flex justify-between items-center z-50">
+        <div class="flex items-center gap-2">
+            <button onclick="openLogoModal('logo.jpg', 'Scan2BSafe Logo')" class="focus:outline-none transition-transform hover:scale-110">
+                <img src="logo.jpg" alt="Scan2BSafe Logo" class="w-6 h-6 object-contain rounded-md">
+            </button>
+            <span class="font-bold text-lg tracking-tight text-white font-space">Scan2<span class="text-green-400">B</span>Safe</span>
+        </div>
+        <div class="hidden lg:flex items-center gap-2 text-[10px] uppercase tracking-widest font-medium">
+            <a href="#home" data-section="home" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">Home</a>
+            <a href="#about-bcma" data-section="about-bcma" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">About</a>
+            <a href="#how-it-works" data-section="how-it-works" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">Workflow</a>
+            <a href="#troubleshooting" data-section="troubleshooting" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">Troubleshoot</a>
+            <a href="#common-drugs" data-section="common-drugs" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">Drugs</a>
+            <a href="#simulation-portal" data-section="simulation-portal" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">Simulation</a>
+            <a href="#about-us-sdg" data-section="about-us-sdg" class="nav-link inline-flex items-center rounded-full px-3 py-2 text-zinc-400 hover:text-green-400 transition-colors">SDG Alignment</a>
+        </div>
+        <div class="hidden lg:flex items-center">
+            <!-- TODO_SIMULATION_LINK: Paste the deployed simulation website URL later -->
+            <a href="#" onclick="openSimulationLink(event)" class="bg-green-400 hover:bg-green-500 text-black text-[10px] font-bold uppercase tracking-widest px-5 py-2.5 rounded-full shadow-lg transition-all">
+                Start Simulation
+            </a>
+        </div>
+        <button id="mobile-nav-toggle" type="button" class="lg:hidden w-11 h-11 rounded-full border border-zinc-700 bg-zinc-900/70 text-white hover:border-green-400 hover:text-green-300 transition-all" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+    <div id="mobile-nav-menu" class="fixed top-20 left-1/2 -translate-x-1/2 w-[92%] max-w-5xl bg-[#121214]/95 backdrop-blur-md border border-zinc-800 rounded-3xl p-4 z-40 hidden lg:hidden shadow-2xl">
+        <div class="grid grid-cols-1 gap-2 text-[11px] uppercase tracking-widest font-medium">
+            <a href="#home" data-section="home" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">Home</a>
+            <a href="#about-bcma" data-section="about-bcma" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">About</a>
+            <a href="#how-it-works" data-section="how-it-works" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">Workflow</a>
+            <a href="#troubleshooting" data-section="troubleshooting" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">Troubleshoot</a>
+            <a href="#common-drugs" data-section="common-drugs" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">Drugs</a>
+            <a href="#simulation-portal" data-section="simulation-portal" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">Simulation</a>
+            <a href="#about-us-sdg" data-section="about-us-sdg" class="nav-link rounded-2xl px-4 py-3 text-zinc-300 hover:text-green-300 hover:bg-zinc-800/70 transition-colors">SDG Alignment</a>
+            <!-- TODO_SIMULATION_LINK: Paste the deployed simulation website URL later -->
+            <a href="#" onclick="openSimulationLink(event)" class="mt-2 inline-flex items-center justify-center rounded-2xl bg-green-400 px-4 py-3 text-[10px] font-bold uppercase tracking-widest text-black shadow-lg transition-all hover:bg-green-500">Start Simulation</a>
+        </div>
+    </div>
+
+    <header id="home" class="relative bg-white text-black pt-36 pb-20 px-6 rounded-b-[45px] md:rounded-b-[80px] overflow-hidden">
+        <div class="absolute top-24 left-10 text-green-500 text-2xl animate-pulse">
+            <i class="fa-solid fa-square-rss"></i>
+        </div>
+        
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 mb-16">
+            <div class="flex-1 space-y-6">
+                <div class="inline-block bg-zinc-100 border border-zinc-200 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide text-zinc-600">
+                    Welcome to Scan2BSafe
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] font-space">
+                    BCMA Interactive <br>
+                    <span class="text-zinc-800 font-medium relative">Learning <span class="absolute bottom-1 left-0 w-full h-[4px] bg-green-400 -z-10"></span></span> System
+                </h1>
+                <p class="text-zinc-500 font-sans text-sm md:text-base max-w-md leading-relaxed">
+                    An interactive platform designed for nursing students to securely learn medication administration using Barcode Medication Administration (BCMA) setups.
+                </p>
+                <div class="flex items-center gap-4 pt-2">
+                    <!-- TODO_SIMULATION_LINK: Paste the deployed simulation website URL later -->
+                    <a href="#" onclick="openSimulationLink(event)" class="bg-zinc-900 hover:bg-black text-white font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full shadow-md transition-all inline-flex items-center gap-2">
+                        <i class="fa-solid fa-play text-[10px] text-green-400"></i> Start Simulation
+                    </a>
+                    <a href="#quick-access" class="border border-zinc-300 hover:border-black text-black font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all">
+                        Quick Access Index
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex-1 relative flex justify-center">
+                <div class="relative w-72 h-96 md:w-80 md:h-[380px] bg-zinc-200 rounded-[35px] overflow-hidden border-4 border-black shadow-2xl">
+                    <img id="hero-img-1" src="scanner.jpg" class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 opacity-100" alt="Nursing Scan Tech 1">
+                    <img id="hero-img-2" src="scanner2.jpg" class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 opacity-0" alt="Nursing Scan Tech 2">
+                </div>
+                
+                <div id="scan-badge-container" class="absolute top-8 -right-4 bg-white border-2 border-black p-4 rounded-2xl flex flex-col gap-2 shadow-2xl min-w-[210px] max-w-[220px] transition-all duration-500 transform translate-y-0 opacity-100">
+                    <div id="badge-status-header" class="flex items-center gap-2 text-emerald-600 font-bold text-xs tracking-wider">
+                        <i class="fa-solid fa-circle-check"></i> SCAN SUCCESSFUL
+                    </div>
+                    <div id="badge-status-body" class="border-t border-zinc-200 pt-2 font-sans text-[11px] space-y-0.5 text-zinc-700">
+                        <p><strong>Patient:</strong> Maria Santos</p>
+                        <p><strong>MRN:</strong> 2026-05-01</p>
+                        <p><strong>Allergies:</strong> <span class="text-red-500 font-semibold">Penicillin</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-5xl mx-auto pt-10 border-t border-zinc-200/80">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div onclick="openContentModal('uc-vision')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('UC.jpg', 'University of the Cordilleras Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="UC.jpg" alt="UC Logo" class="w-full h-full object-contain">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">UC Vision: (SIPAT)</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            UC envisions itself as a community of SCHOLARS aggressively INVOLVED in the pursuit of knowledge who help PRESERVE Filipino culture and values to ACT positively by training them to THINK critically and creatively.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>University of the Cordilleras</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+
+                <div onclick="openContentModal('uc-mission')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('UC.jpg', 'University of the Cordilleras Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="UC.jpg" alt="UC Logo" class="w-full h-full object-contain">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">UC Mission: (FILL)</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            UC's mission is to provide FUNCTIONAL knowledge and skills, dynamic INTERACTION, and LEADERSHIP in various disciplines for a better quality of LIFE.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>Institutional Core Values</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+
+                <div onclick="openContentModal('nursing-vision')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('UCN.jpg', 'UC Nursing Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="UCN.jpg" alt="UCN Logo" class="w-full h-full object-contain">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">Nursing Department Vision</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            To build premier healthcare educators producing globally responsive, scientifically advanced, ethical, and highly collaborative nursing leaders dedicated to compassionate patient safety, community wellness, and pioneering dynamic nursing research.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>College of Nursing</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+
+                <div onclick="openContentModal('nursing-mission')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('UCN.jpg', 'UC Nursing Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="UCN.jpg" alt="UCN Logo" class="w-full h-full object-contain">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">Nursing Department Mission</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            The nursing program is fully committed to delivering modern experiential clinical competencies, robust evidence-based healthcare integration, interactive virtual simulations, and intensive field community practice parameters to nurture top-tier clinical intelligence.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>Clinical Competency Mandate</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+
+                <div onclick="openContentModal('scan2bsafe-vision')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('logo.jpg', 'Scan2BSafe Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="logo.jpg" alt="Scan2BSafe Logo" class="w-full h-full object-contain rounded-md">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">Scan2BSafe Vision</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            Where every nurse and student nurse is equipped with the right BCMA information, reducing preventable medication errors and building a healthcare system grounded in safety, innovation, accessibility, and a culture of lifelong learning.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>Original Project Framework</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+
+                <div onclick="openContentModal('scan2bsafe-mission')" class="bg-zinc-50 border border-zinc-200 text-black p-6 rounded-2xl shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 group cursor-pointer">
+                    <div class="space-y-3">
+                        <button onclick="event.stopPropagation(); openLogoModal('logo.jpg', 'Scan2BSafe Logo')" class="w-10 h-10 flex items-center justify-start transition-transform group-hover:scale-105 focus:outline-none">
+                            <img src="logo.jpg" alt="Scan2BSafe Logo" class="w-full h-full object-contain rounded-md">
+                        </button>
+                        <h3 class="font-bold text-sm font-space tracking-wide text-zinc-900">Scan2BSafe Mission</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-3">
+                            We aim to provide nurses and student nurses with an accessible, interactive platform that supports the development of their BCMA skills in accurate medication administration and ward-based drug knowledge, promoting efficiency, accuracy, and safety at every point of care.
+                        </p>
+                    </div>
+                    <div class="text-[10px] text-zinc-400 font-sans pt-4 mt-4 flex justify-between items-center">
+                        <span>Medication Safety Mandate</span>
+                        <span class="text-green-600 font-bold">Read More →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about-bcma" class="reveal py-16 px-6 max-w-5xl mx-auto border-b border-emerald-900/40">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">B. About BCMA Page</h2>
+            <p class="text-zinc-300 text-xs mt-1">Peer reviewed articles, framework overviews, and clinical importance logs.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div onclick="openContentModal('literature-review')" class="md:col-span-7 bg-white text-black border border-zinc-200 rounded-3xl p-6 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer">
+                <div class="space-y-4">
+                    <div class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Literature Review</div>
+                    <h3 class="font-bold text-lg font-space text-zinc-900 leading-snug">The Impact of Barcode Technology on Medication Safety</h3>
+                    <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-4">
+                        Studies show that leveraging automated clinical checkpoints like BCMA targets points-of-care errors effectively. It safeguards administration pathways and forces electronic matching validation protocols before any drug touches a patient.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-zinc-100 flex justify-between items-center text-[11px] font-bold text-emerald-600">
+                    <span>Read Full Meta-Analysis</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <div onclick="openContentModal('journal-quote')" class="md:col-span-5 bg-white text-black border border-zinc-200 rounded-3xl p-6 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer">
+                <div class="space-y-4">
+                    <div class="text-emerald-500 text-xl"><i class="fa-solid fa-quote-left"></i></div>
+                    <p class="text-zinc-800 font-sans text-xs italic leading-relaxed font-medium">
+                        "Barcode medication administration systems significantly reduce medication administration errors and improve overall point-of-care patient safety parameters within secondary medical wards."
+                    </p>
+                    <p class="text-[10px] text-zinc-400 font-bold font-sans">— Journal of Clinical Nursing Care Quality</p>
+                </div>
+                <button class="mt-6 text-left text-xs font-bold text-zinc-800 hover:text-emerald-600 transition-colors">
+                    View Verified Citations →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="reveal py-16 px-6 max-w-5xl mx-auto border-b border-emerald-900/40">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">C. How BCMA Works Page</h2>
+            <p class="text-zinc-300 text-xs mt-1">Step-by-step validation guide, return demonstration style procedures, and FAQ modules.</p>
+        </div>
+
+        <div class="mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">10-Step Guided Flow</p>
+                    <p class="text-zinc-300 text-xs mt-1 max-w-2xl">Browse left or right to view every BCMA workflow stage in one horizontal line, then open any card for its detailed return demonstration popup.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="scrollHowSteps(-1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button onclick="scrollHowSteps(1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="how-steps-carousel" class="flex gap-4 overflow-x-auto step-scrollbar-hidden snap-x snap-mandatory scroll-smooth pb-2">
+                <div data-how-step-card onclick="openContentModal('step-1')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 01</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">CPOE / EMR</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Medication Order Entry</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The physician enters the medication order in the system, while the CDSS immediately checks allergies, labs, interactions, and contraindications.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-2')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 02</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Pharmacy Review</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Pharmacy Verification and Processing</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The pharmacist validates the order, reviews CDSS alerts, and prepares a verified unit-dose medication linked to the patient's BCMA profile.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-3')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 03</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Barcode Prep</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Medication Dispensing and Barcode Labeling</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">Each dispensed dose is barcode-labeled with traceable details like drug name, strength, expiration date, and linked prescription data.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-4')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 04</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Secure Access</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Nurse Login and System Access</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The nurse logs into the BCMA platform using secure credentials or an ID badge scanner to protect records and ensure accountability.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-5')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 05</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Bedside Check</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Patient Identification</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The wristband barcode is scanned at the bedside so the system can open the right eMAR, allergies, scheduled medications, and instructions.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-6')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 06</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Risk Alerts</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Medication Scanning and CDSS Alert Processing</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The medication barcode is scanned, while BCMA and CDSS verify the dose and check real-time risks such as allergies, interactions, and unsafe ranges.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-7')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 07</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Five Rights</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">System Safety Check</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The system runs an automated Five Rights verification and only approves administration when the order and patient profile fully match.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-8')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 08</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Nursing Judgment</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Clinical Decision and Nurse Confirmation</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">After system approval, the nurse still performs a final patient assessment before giving the medication.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-9')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 09</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">Administration</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Medication Administration</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">The medication is given through the prescribed route using safe handling, aseptic technique, and immediate patient monitoring.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-how-step-card onclick="openContentModal('step-10')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">STEP 10</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">eMAR Log</span>
+                        </div>
+                        <h4 class="font-bold text-sm font-space text-zinc-900">Automatic Documentation</h4>
+                        <p class="text-zinc-600 text-xs font-sans leading-relaxed">After administration, BCMA automatically records the time, nurse, medication details, route, dose, and patient remarks in the eMAR.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Step Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-8 bg-white text-black p-6 rounded-3xl shadow-md border border-zinc-100">
+            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="space-y-2">
+                    <div class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Return Demo Guide</div>
+                    <h3 class="font-bold text-lg font-space text-zinc-900">STEP BY STEP RETURN DEMO STYLE GUIDE</h3>
+                    <p class="text-zinc-600 text-xs font-sans leading-relaxed max-w-3xl">
+                        Barcode Medication Administration (BCMA), is an electronic medication safety system that uses barcode scanning technology to verify the correct patient and medication before administration. It helps reduce medication errors and ensures patient safety by following the rights of medication administration.
+                    </p>
+                </div>
+                <button id="return-demo-toggle" onclick="toggleReturnDemoGuide()" class="shrink-0 inline-flex items-center gap-2 bg-zinc-900 text-white text-[11px] font-bold uppercase tracking-widest px-4 py-3 rounded-full hover:bg-black transition-all">
+                    <span>Read More</span>
+                    <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+            </div>
+
+            <div id="return-demo-full" class="max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-in-out">
+                <div class="border-t border-zinc-200 mt-5 pt-5 space-y-4 text-xs font-sans leading-relaxed text-zinc-700">
+                    <div class="rounded-2xl border border-emerald-200 bg-emerald-50/70 px-5 py-4">
+                        <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-700 font-bold mb-2">Purpose</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>To ensure accurate medication administration</li>
+                            <li>To reduce medication errors</li>
+                            <li>To improve patient safety</li>
+                            <li>To provide accurate electronic documentation</li>
+                            <li>To verify rights of medication administration</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4">
+                        <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-700 font-bold mb-2">Equipment/Materials Needed</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Computer or medication cart with BCMA system</li>
+                            <li>Barcode scanner</li>
+                            <li>Patient’s identification wristband</li>
+                            <li>Prescribed medication with barcode</li>
+                            <li>Electronic Medication Administration Record (eMAR)</li>
+                            <li>Medication tray/cup</li>
+                            <li>Gloves if needed</li>
+                            <li>Alcohol or water if required for medication administration</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4">
+                        <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-700 font-bold mb-2">Rights of Medication Administration</p>
+                        <p class="mb-2">Before administering medications, verify the:</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Right patient</li>
+                            <li>Right medication</li>
+                            <li>Right dose</li>
+                            <li>Right route</li>
+                            <li>Right time</li>
+                            <li>Right documentation</li>
+                        </ul>
+                    </div>
+
+                    <div class="rounded-2xl border border-zinc-200 bg-zinc-50 px-5 py-4">
+                        <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-700 font-bold mb-3">STEP-by-STEP PROCEDURE</p>
+
+                        <div class="space-y-4">
+                            <div class="rounded-xl border border-zinc-200 bg-white px-4 py-3">
+                                <p class="font-bold text-zinc-900 mb-2">PREPARATION PHASE</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Perform Hand Hygiene - Wash hands thoroughly using soap and water or alcohol-based hand rub to prevent infection.</li>
+                                    <li>Log In to the BCMA System - Enter login credentials securely or scan your employee ID badge.</li>
+                                    <li>Review the Physician’s Medication Order – Check medication name, dose, route, time, and allergies in the eMAR.</li>
+                                    <li>Gather and Prepare Medications - Compare the medication label with the order and check the expiration date.</li>
+                                    <li>Prepare Necessary Supplies - Arrange needed equipment and supplies (e.g., water, syringe, gloves, or medicine cup if needed).</li>
+                                </ul>
+                            </div>
+
+                            <div class="rounded-xl border border-zinc-200 bg-white px-4 py-3">
+                                <p class="font-bold text-zinc-900 mb-2">PATIENT IDENTIFICATION AND VERIFICATION PHASE</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Approach the patient – Introduce yourself properly and explain the procedure “I will scan your wristband and medication to ensure safety before giving your medicine.”</li>
+                                    <li>Verify Patient Identity – Confirm the patient’s full name and birthdate.</li>
+                                    <li>Scan the Patient’s Wristband – Open the correct patient profile in the BCMA system.</li>
+                                    <li>Scan the Medication Barcode - Verify the medication with the eMAR.</li>
+                                </ul>
+                            </div>
+
+                            <div class="rounded-xl border border-zinc-200 bg-white px-4 py-3">
+                                <p class="font-bold text-zinc-900 mb-2">SYSTEM VERIFICATION PHASE</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Observe the BCMA System Response – Proceed if verified; Stop and recheck if alerts appear.</li>
+                                </ul>
+                            </div>
+
+                            <div class="rounded-xl border border-zinc-200 bg-white px-4 py-3">
+                                <p class="font-bold text-zinc-900 mb-2">MEDICATION ADMINISTRATION PHASE</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Administer the Medication - Give the medication using the prescribed route and proper technique.</li>
+                                    <li>Ensure Patient Safety and Comfort - Stay with the patient if needed and provide comfort.</li>
+                                </ul>
+                            </div>
+
+                            <div class="rounded-xl border border-zinc-200 bg-white px-4 py-3">
+                                <p class="font-bold text-zinc-900 mb-2">DOCUMENTATION AND EVALUATION PHASE</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Document Medication Administration - Record medication details in the BCMA system.</li>
+                                    <li>Monitor and Evaluate the Patient - Observe for therapeutic effects or adverse reactions.</li>
+                                    <li>Dispose of Materials Properly - Follow infection control protocols.</li>
+                                    <li>Perform Hand Hygiene Again - Wash hands after the procedure.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-2xl border border-amber-200 bg-amber-50/80 px-5 py-4">
+                        <p class="text-[11px] uppercase tracking-[0.2em] text-amber-700 font-bold mb-2">Important Nursing Responsibilities</p>
+                        <ul class="list-disc pl-5 space-y-1">
+                            <li>Never administer medication without scanning when BCMA is available.</li>
+                                    <li>Ensure the patient’s barcode wristband is readable.</li>
+                            <li>Report damaged or unreadable barcodes immediately.</li>
+                            <li>Follow BCMA policies and maintain patient confidentiality.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white text-black p-6 rounded-2xl shadow-md">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+                <div>
+                    <h3 class="font-bold text-xs uppercase tracking-widest text-zinc-400 font-space">Frequently Asked Questions</h3>
+                    <p class="text-zinc-500 text-xs font-sans mt-1">Showing 3 questions per page across BCMA, CDSS, and medication profile topics.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="changeFaqPage(-1)" class="w-10 h-10 rounded-full border border-zinc-200 text-zinc-700 hover:border-emerald-500 hover:text-emerald-600 transition-all">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button onclick="changeFaqPage(1)" class="w-10 h-10 rounded-full border border-zinc-200 text-zinc-700 hover:border-emerald-500 hover:text-emerald-600 transition-all">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs font-sans">
+                <div id="faq-page-1" class="faq-page active space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-1')">
+                        <p class="font-bold text-zinc-900">Q1: What does BCMA stand for?</p>
+                        <p class="text-zinc-500 mt-1">A: Barcode Medication Administration - a digital safety system that uses barcodes to verify medications before giving them to patients. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-2')">
+                        <p class="font-bold text-zinc-900">Q2: What is its main purpose?</p>
+                        <p class="text-zinc-500 mt-1">A: To prevent medication errors, ensure patient safety, and strictly follow the 5 Rights of Medication Administration. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-3')">
+                        <p class="font-bold text-zinc-900">Q3: What are the 5 Rights BCMA checks?</p>
+                        <p class="text-zinc-500 mt-1">A: Right Patient, Right Drug, Right Dose, Right Route, and Right Time. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-2" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-4')">
+                        <p class="font-bold text-zinc-900">Q4: Why is BCMA important in nursing practice?</p>
+                        <p class="text-zinc-500 mt-1">A: Peer-reviewed studies show it reduces errors, improves documentation, and aligns with SDG 3. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-5')">
+                        <p class="font-bold text-zinc-900">Q5: Who is this BCMA website made for?</p>
+                        <p class="text-zinc-500 mt-1">A: Nursing students, clinical instructors, and hospital staff for learning and practice. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-6')">
+                        <p class="font-bold text-zinc-900">Q6: How many steps are in your BCMA procedure?</p>
+                        <p class="text-zinc-500 mt-1">A: Exactly 10 steps, from doctor's order to documentation. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-3" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-7')">
+                        <p class="font-bold text-zinc-900">Q7: What system does the physician use?</p>
+                        <p class="text-zinc-500 mt-1">A: CPOE or EMR is used to enter medication orders digitally. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-8')">
+                        <p class="font-bold text-zinc-900">Q8: What happens if you scan the wrong patient?</p>
+                        <p class="text-zinc-500 mt-1">A: The system alerts, shows a mismatch error, and blocks medication administration. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-9')">
+                        <p class="font-bold text-zinc-900">Q9: What happens if the medication does not match the order?</p>
+                        <p class="text-zinc-500 mt-1">A: The system rejects it, shows a warning, and will not allow administration. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-4" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-10')">
+                        <p class="font-bold text-zinc-900">Q10: Does BCMA replace the nurse's clinical judgment?</p>
+                        <p class="text-zinc-500 mt-1">A: No. The nurse still performs the final assessment before giving medication. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-11')">
+                        <p class="font-bold text-zinc-900">Q: What is CDSS?</p>
+                        <p class="text-zinc-500 mt-1">A: CDSS is an integrated computerized system that analyzes patient-specific clinical data for safer medication decisions. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-12')">
+                        <p class="font-bold text-zinc-900">Q: How is CDSS connected to BCMA?</p>
+                        <p class="text-zinc-500 mt-1">A: CDSS works with BCMA by continuously analyzing patient information and sending real-time alerts. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-5" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-13')">
+                        <p class="font-bold text-zinc-900">Q: What information does the CDSS analyze?</p>
+                        <p class="text-zinc-500 mt-1">A: It reviews allergies, medications, interactions, labs, history, vital signs, contraindications, and duplicate therapies. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-14')">
+                        <p class="font-bold text-zinc-900">Q: How does the CDSS send alerts to the BCMA system?</p>
+                        <p class="text-zinc-500 mt-1">A: It automatically sends real-time electronic alerts to the BCMA interface. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-15')">
+                        <p class="font-bold text-zinc-900">Q: What kinds of problems can trigger a CDSS alert?</p>
+                        <p class="text-zinc-500 mt-1">A: Allergy conflicts, drug interactions, unsafe doses, duplicate therapy, and other clinical risks. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-6" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-16')">
+                        <p class="font-bold text-zinc-900">Q: Can nurses ignore the CDSS alert?</p>
+                        <p class="text-zinc-500 mt-1">A: It depends on hospital policy and alert severity; some alerts block administration while others allow override with confirmation. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-17')">
+                        <p class="font-bold text-zinc-900">Q: Why is CDSS important in medication administration?</p>
+                        <p class="text-zinc-500 mt-1">A: It identifies medication-related risks before the drug reaches the patient. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-18')">
+                        <p class="font-bold text-zinc-900">Q: What information can we see under medication?</p>
+                        <p class="text-zinc-500 mt-1">A: The medication profile includes drug identity, classification, dosage, use, risks, and nursing responsibilities. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+
+                <div id="faq-page-7" class="faq-page space-y-3">
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-19')">
+                        <p class="font-bold text-zinc-900">Q: Are all medications available in the BCMA website?</p>
+                        <p class="text-zinc-500 mt-1">A: No. The site only includes the Top 20 most common drugs used in selected wards. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="border-b border-zinc-100 pb-3 cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-20')">
+                        <p class="font-bold text-zinc-900">Q: Which medications are included?</p>
+                        <p class="text-zinc-500 mt-1">A: The Top 20 most common drugs in the Medical, Pediatric, Surgical, and OB-GYN wards. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                    <div class="cursor-pointer hover:bg-zinc-50 p-3 rounded-xl transition-colors" onclick="openContentModal('faq-21')">
+                        <p class="font-bold text-zinc-900">Q: Is all information of the included drugs complete in the website?</p>
+                        <p class="text-zinc-500 mt-1">A: Yes. All listed medication profile details are fully provided on the website. <span class="text-emerald-600 font-semibold">(Read details)</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-3">
+                <p id="faq-page-label" class="text-[11px] uppercase tracking-wider text-zinc-400 font-bold">Page 1 of 7</p>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="setFaqPage(1)" id="faq-dot-1" class="w-8 h-8 rounded-full bg-emerald-500 text-white text-[11px] font-bold transition-all">1</button>
+                    <button onclick="setFaqPage(2)" id="faq-dot-2" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">2</button>
+                    <button onclick="setFaqPage(3)" id="faq-dot-3" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">3</button>
+                    <button onclick="setFaqPage(4)" id="faq-dot-4" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">4</button>
+                    <button onclick="setFaqPage(5)" id="faq-dot-5" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">5</button>
+                    <button onclick="setFaqPage(6)" id="faq-dot-6" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">6</button>
+                    <button onclick="setFaqPage(7)" id="faq-dot-7" class="w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all">7</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="troubleshooting" class="reveal py-16 px-6 max-w-5xl mx-auto border-b border-emerald-900/40">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">D. Troubleshooting Page</h2>
+            <p class="text-zinc-300 text-xs mt-1">Common ways on how to trouble shoot BCMA during errors</p>
+        </div>
+
+        <div class="mb-2">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Auto-Loop Troubleshooting Guide</p>
+                    <p class="text-zinc-300 text-xs mt-1 max-w-2xl">This carousel moves to the right every 2 seconds, loops continuously, and can still be controlled manually using the left and right buttons.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="scrollTroubleshooting(-1, true)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button onclick="scrollTroubleshooting(1, true)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="troubleshooting-carousel" class="flex gap-4 overflow-x-auto step-scrollbar-hidden snap-x snap-mandatory scroll-smooth pb-2">
+                <div data-troubleshooting-card onclick="openContentModal('trouble-1')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">SCANNER</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">01</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Scanner won’t turn on</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Check battery, confirm the power switch is ON, and inspect the charging cable or port.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-2')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">SCANNER</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">02</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Can’t scan barcodes / no reading</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Clean the scan window, adjust scanning distance, and make sure the barcode is not torn or faded.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-3')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">SCANNER</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">03</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Scans but no data appears</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Check the system connection, reload the connection, and remember that only selected common drugs are included.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-4')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">SCANNER</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">04</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Glare or reflection blocked scanning</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Move away from direct light, tilt the scanner slightly, and use soft lighting for better readability.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-5')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">SCANNER</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">05</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Scanner did not function properly</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Check the power and connection, then clean the scanner lens again.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-6')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">01</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Page did not load / blank screen</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Reload the page, clear cache and cookies, test another browser, and check the web address.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-7')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">02</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Error messages appeared</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Check links, fix permissions, inspect server logs, and restore the last working backup if needed.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-8')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">03</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Content displayed incorrectly</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Use developer tools, fix broken HTML, replace missing images, and adjust styling for all devices.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-9')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">04</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Page loaded too slowly</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Reduce file sizes, remove unnecessary code, fix slow links, and verify external resources.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-10')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">05</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Buttons or links did not work</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Check clickable targets, remove blocking code, fix form or menu actions, and test each button.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-11')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">06</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Text or information was wrong / outdated</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Correct the content, replace old details, update dates and numbers, and review before publishing again.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-12')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-white text-black p-5 rounded-3xl shadow-md border border-zinc-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-emerald-600 font-space">WEBSITE</span>
+                            <span class="text-[10px] uppercase tracking-wider text-zinc-400">07</span>
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">Website showed security or connection warnings</h3>
+                        <p class="text-zinc-600 font-sans text-xs leading-relaxed">Remove unsafe files, check security settings, and verify that all files pass security checks.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div data-troubleshooting-card onclick="openContentModal('trouble-13')" class="min-w-[280px] md:min-w-[320px] xl:min-w-[340px] snap-start bg-gradient-to-br from-white to-zinc-50 text-black p-5 rounded-3xl shadow-md border border-zinc-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/70 cursor-pointer flex flex-col justify-between">
+                    <div class="space-y-3 text-center py-2">
+                        <div class="inline-block mx-auto bg-zinc-900/5 border border-zinc-200 p-2 rounded-xl">
+                            <img src="qr_code.jpg" alt="QR Code for hotline to call manufacturer" class="w-24 h-24 object-contain rounded-lg mx-auto">
+                        </div>
+                        <h3 class="font-bold text-sm font-space text-zinc-900">QR Code for hotline to call manufacturer</h3>
+                        <p class="text-zinc-500 font-sans text-[11px] leading-tight">Click this card to open the QR code in the same guided modal design.</p>
+                    </div>
+                    <div class="mt-5 pt-4 border-t border-zinc-100 text-[11px] font-bold text-emerald-600 flex items-center justify-between">
+                        <span>Open Troubleshooting Details</span><i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="common-drugs" class="reveal py-16 px-6 max-w-5xl mx-auto border-b border-emerald-900/40">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">E. Common Drugs Page</h2>
+            <p class="text-zinc-300 text-xs mt-1">Drug studies spanning the top 20 most frequent cross-matched clinical ward medications.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div onclick="openContentModal('ward-medical')" class="p-5 bg-white text-black rounded-2xl shadow-md flex justify-between items-center hover:scale-[1.02] transition-all duration-300 hover:shadow-lg border border-transparent hover:border-green-400/30 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 text-base"><i class="fa-solid fa-stethoscope"></i></div>
+                    <div>
+                        <h4 class="text-sm font-bold font-space text-zinc-900">1. Medical Ward</h4>
+                        <p class="text-zinc-500 text-xs">Top 20 medications: Antibiotics, Antihypertensives, etc.</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-zinc-400 text-xs"></i>
+            </div>
+
+            <div onclick="openContentModal('ward-pediatric')" class="p-5 bg-white text-black rounded-2xl shadow-md flex justify-between items-center hover:scale-[1.02] transition-all duration-300 hover:shadow-lg border border-transparent hover:border-green-400/30 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 text-base"><i class="fa-solid fa-baby"></i></div>
+                    <div>
+                        <h4 class="text-sm font-bold font-space text-zinc-900">2. Pediatric Ward</h4>
+                        <p class="text-zinc-500 text-xs">Top 20 medications: Precise pediatric weight-dosed syrups.</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-zinc-400 text-xs"></i>
+            </div>
+
+            <div onclick="openContentModal('ward-surgical')" class="p-5 bg-white text-black rounded-2xl shadow-md flex justify-between items-center hover:scale-[1.02] transition-all duration-300 hover:shadow-lg border border-transparent hover:border-green-400/30 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-sky-600 text-base"><i class="fa-solid fa-scalpel"></i></div>
+                    <div>
+                        <h4 class="text-sm font-bold font-space text-zinc-900">3. Surgical Ward</h4>
+                        <p class="text-zinc-500 text-xs">Top 20 medications: Post-op analgesics, anesthesia blocks.</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-zinc-400 text-xs"></i>
+            </div>
+
+            <div onclick="openContentModal('ward-obgyne')" class="p-5 bg-white text-black rounded-2xl shadow-md flex justify-between items-center hover:scale-[1.02] transition-all duration-300 hover:shadow-lg border border-transparent hover:border-green-400/30 cursor-pointer">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 text-base"><i class="fa-solid fa-person-pregnant"></i></div>
+                    <div>
+                        <h4 class="text-sm font-bold font-space text-zinc-900">4. OB-GYNE Ward</h4>
+                        <p class="text-zinc-500 text-xs">Top 20 medications: Uteronic agents, lactation compounds.</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-zinc-400 text-xs"></i>
+            </div>
+        </div>
+    </section>
+
+    <section id="simulation-portal" class="reveal py-16 px-6 max-w-5xl mx-auto border-b border-emerald-900/40">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">F. Simulation Page (Main Feature)</h2>
+            <p class="text-zinc-300 text-xs mt-1">Multi-branch clinical scenario testing playground for medication matching routines.</p>
+        </div>
+
+        <div class="bg-[#121214] border border-zinc-800 rounded-3xl p-6 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-bold text-base font-space">Interactive Simulation Console</h3>
+                    <span class="text-[10px] font-mono bg-zinc-800 text-green-400 px-2 py-0.5 rounded border border-zinc-700">STATUS: PROTOTYPE ON-LINE</span>
+                </div>
+                
+                <div class="grid grid-cols-5 text-center gap-2 relative border border-zinc-800 p-4 rounded-xl bg-zinc-900/40">
+                    <div class="space-y-2 cursor-pointer hover:bg-zinc-800/50 p-1 rounded transition-colors" onclick="openContentModal('sim-path-1')">
+                        <div class="text-xs text-green-400"><i class="fa-solid fa-hospital-user text-lg"></i></div>
+                        <p class="text-[9px] text-zinc-400 font-medium font-sans leading-tight">1. Verify Patient Branch</p>
+                    </div>
+                    <div class="space-y-2 cursor-pointer hover:bg-zinc-800/50 p-1 rounded transition-colors" onclick="openContentModal('sim-path-2')">
+                        <div class="text-xs text-zinc-500"><i class="fa-solid fa-barcode text-lg"></i></div>
+                        <p class="text-[9px] text-zinc-500 font-medium font-sans leading-tight">2. Scan Med Logic</p>
+                    </div>
+                    <div class="space-y-2 cursor-pointer hover:bg-zinc-800/50 p-1 rounded transition-colors" onclick="openContentModal('sim-path-3')">
+                        <div class="text-xs text-amber-500 animate-pulse"><i class="fa-solid fa-triangle-exclamation text-lg"></i></div>
+                        <p class="text-[9px] text-zinc-400 font-medium font-sans leading-tight">3. Handle Exception Alert</p>
+                    </div>
+                    <div class="space-y-2 cursor-pointer hover:bg-zinc-800/50 p-1 rounded transition-colors" onclick="openContentModal('sim-path-4')">
+                        <div class="text-xs text-zinc-500"><i class="fa-solid fa-syringe text-lg"></i></div>
+                        <p class="text-[9px] text-zinc-500 font-medium font-sans length-tight">4. Execution Path</p>
+                    </div>
+                    <div class="space-y-2 cursor-pointer hover:bg-zinc-800/50 p-1 rounded transition-colors" onclick="openContentModal('sim-path-5')">
+                        <div class="text-xs text-zinc-500"><i class="fa-solid fa-file-signature text-lg"></i></div>
+                        <p class="text-[9px] text-zinc-500 font-medium font-sans leading-tight">5. Writeback Database</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 space-y-4">
+                <!-- TODO_SIMULATION_LINK: Paste the deployed simulation website URL later -->
+                <button onclick="openSimulationLink(event)" class="w-full bg-green-400 text-black text-xs font-bold py-3.5 rounded-xl hover:bg-green-500 transition-all uppercase tracking-widest font-space shadow-md hover:shadow-green-400/20">
+                    Plug-In / Initialize Simulation Sandbox →
+                </button>
+                <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                    <p class="text-[10px] md:text-[11px] font-sans leading-relaxed text-amber-100">
+                        <span class="font-bold uppercase tracking-wider text-amber-300">Disclaimer:</span>
+                        This stimulation is a work of fiction. Any names, characters, events, or incidents portrayed are purely fiction. Any similarity to the stimulation are purely coincidental and do not represent real life individuals or situations. Viewer discretion is advised.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-us-sdg" class="reveal py-16 px-6 max-w-5xl mx-auto">
+        <div class="border-l-4 border-emerald-400 pl-3 mb-8">
+            <h2 class="text-xl md:text-2xl font-bold font-space uppercase tracking-wider text-white">G. About Us Page / SDG Alignment</h2>
+            <p class="text-zinc-300 text-xs mt-1">Connecting digital health verification engineering with planetary sustainability objectives.</p>
+        </div>
+
+        <div onclick="openContentModal('sdg-goal')" class="bg-white text-black p-8 rounded-3xl shadow-md border border-zinc-100 flex flex-col md:flex-row gap-8 items-center transition-all duration-300 hover:shadow-xl cursor-pointer">
+            <div class="w-20 h-20 shrink-0 bg-emerald-600 rounded-2xl flex items-center justify-center text-white text-4xl shadow-inner font-space font-bold animate-pulse">
+                3
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-bold text-lg font-space text-zinc-900">Global SDG Goal 3: Good Health and Well-being</h3>
+                <p class="text-zinc-600 font-sans text-xs leading-relaxed">
+                    The Scan2BSafe engine explicitly links up with **UN Sustainable Development Goal 3 (Target 3.8)**. By training next-generation healthcare providers inside an error-proofed, risk-free digital platform, we proactively contribute to eliminating systemic clinical error chains, raising public hospital care quality, and guaranteeing continuous patient safety parameters.
+                </p>
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 pt-2 hover:underline">
+                    <span>Explore Institutional Impact Frameworks</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quick-access" class="reveal py-16 bg-black/40 border-t border-zinc-900 px-6">
+        <div class="max-w-5xl mx-auto space-y-8">
+            <div class="flex justify-between items-center border-l-4 border-emerald-400 pl-3">
+                <div>
+                    <h2 class="text-sm font-bold font-space uppercase tracking-wider text-white">System Index Quick Access</h2>
+                    <p class="text-zinc-400 text-[11px]">3 pages with 6 cards each page placeholder grid</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="changePage(1)" id="dot-1" class="w-3 h-3 rounded-full bg-[#10b981] transition-all"></button>
+                    <button onclick="changePage(2)" id="dot-2" class="w-3 h-2 rounded-full bg-zinc-600/70 hover:bg-zinc-400 transition-all"></button>
+                    <button onclick="changePage(3)" id="dot-3" class="w-3 h-2 rounded-full bg-zinc-600/70 hover:bg-zinc-400 transition-all"></button>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div id="page-1" class="carousel-page active grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600"><i class="fa-solid fa-shield-heart text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">About BCMA Index</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to the main peer-reviewed verification literature section.</p>
+                        </div>
+                        <a href="#about-bcma" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600"><i class="fa-solid fa-clipboard-list text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">Demo Flow Index</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to return-demonstration guides and tracking metrics.</p>
+                        </div>
+                        <a href="#how-it-works" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600"><i class="fa-solid fa-screwdriver-wrench text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">System Exceptions</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to localized laser gun hardware override steps.</p>
+                        </div>
+                        <a href="#troubleshooting" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-600"><i class="fa-solid fa-capsules text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">Ward Drug Study</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to the 4 key clinical hospital ward lists.</p>
+                        </div>
+                        <a href="#common-drugs" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center text-sky-600"><i class="fa-solid fa-display text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">App Simulator</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to launch active branch simulation modules.</p>
+                        </div>
+                        <a href="#simulation-portal" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent">
+                        <div class="space-y-3">
+                            <div class="w-9 h-9 rounded-xl bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-600"><i class="fa-solid fa-globe text-sm"></i></div>
+                            <h3 class="font-bold text-sm font-space text-zinc-900">SDG Alignment</h3>
+                            <p class="text-zinc-600 font-sans text-xs leading-relaxed">Direct jump gateway to global healthcare safety targets.</p>
+                        </div>
+                        <a href="#about-us-sdg" class="text-[11px] font-bold text-emerald-600 hover:underline flex items-center gap-1 mt-4">View Section <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+                    </div>
+                </div>
+
+                <div id="page-2" class="carousel-page grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Advanced Modules</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 7</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Clinical Tracking</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 8</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Ward Analytics</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 9</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Error Logging</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 10</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Scanner Sync</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 11</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Reports Module</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 12</p></div>
+                </div>
+
+                <div id="page-3" class="carousel-page grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Student Performance</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 13</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Instructor Panel</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 14</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Database Settings</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 15</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Backup logs</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 16</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Hardware Setup</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 17</p></div>
+                    <div class="bg-white text-black p-5 rounded-2xl shadow-md space-y-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 border border-transparent"><h3 class="font-bold text-sm">Archived Exams</h3><p class="text-zinc-500 text-xs">Dynamic Content Slot 18</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="reveal py-12 px-6 max-w-5xl mx-auto border-t border-zinc-900 grid grid-cols-2 md:grid-cols-4 gap-6 text-zinc-400">
+        <div class="flex gap-3 items-start">
+            <i class="fa-solid fa-shield-halved text-green-400 text-base mt-0.5"></i>
+            <div>
+                <h5 class="text-xs font-bold text-white font-space">Patient Safety First</h5>
+                <p class="text-[10px] font-sans mt-1 leading-normal text-white">Prevent medication administration errors through automated verification loops.</p>
+            </div>
+        </div>
+        <div class="flex gap-3 items-start">
+            <i class="fa-solid fa-graduation-cap text-green-400 text-base mt-0.5"></i>
+            <div>
+                <h5 class="text-xs font-bold text-white font-space">Builds Confidence</h5>
+                <p class="text-[10px] font-sans mt-1 leading-normal text-white">Practice point-of-care clinical workflows in a risk-free environment.</p>
+            </div>
+        </div>
+        <div class="flex gap-3 items-start">
+            <i class="fa-solid fa-book-medical text-green-400 text-base mt-0.5"></i>
+            <div>
+                <h5 class="text-xs font-bold text-white font-space">Evidence-Based</h5>
+                <p class="text-[10px] font-sans mt-1 leading-normal text-white">All interactive content is fully supported by peer-reviewed research.</p>
+            </div>
+        </div>
+        <div class="flex gap-3 items-start">
+            <i class="fa-solid fa-user-nurse text-green-400 text-base mt-0.5"></i>
+            <div>
+                <h5 class="text-xs font-bold text-white font-space">For Nursing Students</h5>
+                <p class="text-[10px] font-sans mt-1 leading-normal text-white">Enhance clinical operational skills and improve outcomes.</p>
+            </div>
+        </div>
+        <div class="col-span-2 md:col-span-4 mt-2">
+            <div class="rounded-[32px] border border-zinc-800 bg-[#121214]/80 p-6 md:p-8 shadow-xl">
+                <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+                    <div class="lg:max-w-sm space-y-5">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-emerald-300 font-bold">Team A</p>
+                            <h4 class="text-lg md:text-xl font-bold text-white font-space mt-2">2nd Year UC Nursing Students</h4>
+                            <p class="text-[11px] font-sans text-zinc-400 mt-2 leading-relaxed">Integrated BCMA learning project team under the Scan2BSafe platform.</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <button onclick="openLogoModal('logo.jpg', 'Scan2BSafe Logo')" class="bg-zinc-900 border border-zinc-700 rounded-2xl p-3 hover:border-emerald-400/50 transition-all">
+                                <img src="logo.jpg" alt="Scan2BSafe Logo" class="h-14 w-auto object-contain rounded-lg">
+                            </button>
+                            <button onclick="openLogoModal('UC.jpg', 'University of the Cordilleras Logo')" class="bg-zinc-900 border border-zinc-700 rounded-2xl p-3 hover:border-emerald-400/50 transition-all">
+                                <img src="UC.jpg" alt="University of the Cordilleras Logo" class="h-14 w-auto object-contain rounded-lg">
+                            </button>
+                            <button onclick="openLogoModal('UCN.jpg', 'UC Nursing Logo')" class="bg-zinc-900 border border-zinc-700 rounded-2xl p-3 hover:border-emerald-400/50 transition-all">
+                                <img src="UCN.jpg" alt="UC Nursing Logo" class="h-14 w-auto object-contain rounded-lg">
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-2 text-[11px] font-sans text-zinc-300">
+                            <p>ABLOG, ALLYSHA KATE F.</p>
+                            <p>ALMONTE, REXSON DAVE V.</p>
+                            <p>AQUINO, LISSA MAE D.</p>
+                            <p>AQUINO, TRISHA GLAIZEE I.</p>
+                            <p>ARTEMIO, RACHELLE ANN G.</p>
+                            <p>BAUN, JUVY PEARL B.</p>
+                            <p>CAMPOS, KRISTINE MAE M.</p>
+                            <p>CARINO, ADELIE YESHA M.</p>
+                            <p>DIMAS, PRUDENCIO JR. S</p>
+                            <p>DRUGA, KATE G.</p>
+                            <p>FERNANDEZ, SHAYNE D.</p>
+                            <p>GAYADEN, RAQUELE K.</p>
+                            <p>MACAWARIS, ISABEL DAINE D.</p>
+                            <p>MIGUEL, ANNA MARIE A.</p>
+                            <p>ODSEY, TAULEE</p>
+                            <p>OLIVIA, AZALEA</p>
+                            <p>ONG-ONGAWAN, DANIEL D.</p>
+                            <p>REALUBIN, ROY DOMINIQUE</p>
+                            <p>TEBIA, KASHMIR M.</p>
+                            <p>URBAN, VISHA MAY M.</p>
+                            <p>VALDEZ, ANGIE P.</p>
+                            <p>VELASCO, RECHELLE BREN</p>
+                            <p>VILLARITO, CHRISTINE</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="logo-popup-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-[#121214] border border-zinc-800 p-6 rounded-3xl max-w-sm w-[90%] text-center relative transform scale-95 transition-all duration-300" id="modal-card">
+            <button onclick="closeLogoModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <h4 id="modal-logo-title" class="text-sm font-bold font-space tracking-wide mb-4 text-zinc-300 uppercase">Logo View</h4>
+            <div class="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl flex items-center justify-center aspect-square mb-2">
+                <img id="modal-logo-target" src="" alt="Active Logo" class="max-w-full max-h-48 object-contain rounded-lg shadow-md">
+            </div>
+        </div>
+    </div>
+
+    <div id="content-detailed-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 px-4">
+        <div class="bg-[#121214] border border-zinc-800 p-6 md:p-8 rounded-3xl max-w-2xl w-full text-left relative transform scale-95 transition-all duration-300 max-h-[85vh] overflow-y-auto" id="content-modal-card">
+            <button onclick="closeContentModal()" class="absolute top-5 right-5 text-zinc-400 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div id="content-modal-badge" class="inline-block bg-emerald-500/10 border border-emerald-500/30 text-green-400 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">
+                SYSTEM DOCUMENTATION
+            </div>
+            <h2 id="content-modal-title" class="text-xl md:text-2xl font-bold font-space tracking-tight text-white mb-4">
+                Detailed View
+            </h2>
+            <div id="content-modal-body" class="text-zinc-300 font-sans text-xs md:text-sm leading-relaxed space-y-4 border-t border-zinc-800 pt-4">
+                </div>
+        </div>
+    </div>
+
+    <div id="sonner-toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script>
+        // --- DATA STORE FOR FULL DOCX CONTENTS ---
+        const docxContentEngine = {
+            'uc-vision': {
+                title: 'University of the Cordilleras Vision (SIPAT)',
+                badge: 'Institutional Mandate',
+                body: `<p class="font-bold text-white">The Full Strategic Framework:</p>
+                       <p>UC envisions itself as a community of SCHOLARS aggressively INVOLVED in the pursuit of knowledge who help PRESERVE Filipino culture and values to ACT positively by training them to THINK critically and creatively.</p>
+                       <p><strong>Strategic Objectives:</strong> Higher institutional academic parameters, heritage cultivation networks, and creative logic output integration models across the engineering and healthcare sciences.</p>`
+            },
+            'uc-mission': {
+                title: 'University of the Cordilleras Mission (FILL)',
+                badge: 'Institutional Mandate',
+                body: `<p class="font-bold text-white">The Core Values Engine:</p>
+                       <p>UC's mission is to provide FUNCTIONAL knowledge and skills, dynamic INTERACTION, and LEADERSHIP in various disciplines for a better quality of LIFE.</p>
+                       <p>This mission drives our digital interface deployment, making sure all academic technical systems serve a real-world clinical security framework.</p>`
+            },
+            'scan2bsafe-vision': {
+                title: 'Scan2BSafe System Vision',
+                badge: 'Project Framework',
+                body: `<p>Where every nurse and student nurse is equipped with the right BCMA information, reducing preventable medication errors and building a healthcare system grounded in safety, innovation, accessibility, and a culture of lifelong learning.</p>
+                       <p><strong>System Evolution Strategy:</strong> To eliminate completely the reliance on error-prone traditional double-sign sheets by establishing absolute terminal scanning compliance at every modern medical base point.</p>`
+            },
+            'scan2bsafe-mission': {
+                title: 'Scan2BSafe System Mission',
+                badge: 'Medication Safety Mandate',
+                body: `<p>We aim to provide nurses and student nurses with an accessible, interactive platform that supports the development of their BCMA skills in accurate medication administration and ward-based drug knowledge, promoting efficiency, accuracy, and safety at every point of care.</p>
+                       <p>Through this interface deployment, the transition from classroom mock drills to live operational environments is systematically bridged with absolute verification guarantees.</p>`
+            },
+            'nursing-vision': {
+                title: 'Nursing Department Vision',
+                badge: 'College of Nursing Mandate',
+                body: `<p>To build premier healthcare educators producing globally responsive, scientifically advanced, ethical, and highly collaborative nursing leaders dedicated to compassionate patient safety, community wellness, and pioneering dynamic nursing research.</p>
+                       <p>This alignment ensures that all technical prototypes constructed by IT modules directly service the precise professional rigor demanded by real-world clinical standards.</p>`
+            },
+            'nursing-mission': {
+                title: 'Nursing Department Mission',
+                badge: 'Clinical Competency Mandate',
+                body: `<p>The nursing program is fully committed to delivering modern experiential clinical competencies, robust evidence-based healthcare integration, interactive virtual simulations, and intensive field community practice parameters to nurture top-tier clinical intelligence.</p>
+                       <p><strong>Action Blueprint:</strong> Deploying cross-department software solutions like BCMA Simulators to enforce flawless "5 Rights" synchronization loops into the routine behavioral reflexes of junior clinicians.</p>`
+            },
+            'literature-review': {
+                title: 'B. ABOUT BCMA PAGE',
+                badge: 'Literature Review',
+                wide: true,
+                body: `<div class="space-y-5">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Overview</p>
+                               <p>Barcode Medication Administration (BCMA) is a healthcare information technology system that improves <span class="text-emerald-300 font-semibold">patient safety</span> by ensuring accurate medication administration at the bedside. It uses barcode scanning technology integrated with <span class="text-white font-semibold">electronic health records</span> and the <span class="text-white font-semibold">electronic medication administration record (eMAR)</span> to support the <span class="text-emerald-300 font-semibold">five rights of medication administration</span>: right patient, right medication, right dose, right route, and right time. By scanning the patient's identification wristband and the medication barcode, the system performs real-time verification before administration, helping reduce medication errors and preventable adverse events in hospitals (World Health Organization, 2021; Westbrook et al., 2021).</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Closed-Loop Workflow</p>
+                               <p>BCMA is part of a <span class="text-white font-semibold">closed-loop medication management system</span> that connects prescribing, dispensing, and administration into one digital workflow. Physicians enter medication orders electronically, pharmacists verify and dispense medications with barcode labels, and nurses administer medications using barcode scanners linked to the patient's electronic record. This continuous verification at every stage of medication use reduces human error, improves communication among healthcare professionals, and significantly lowers wrong-patient errors, incorrect dosing, and missed medication administrations in hospitals with established digital systems (Poon et al., 2015).</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">How Safety Is Improved</p>
+                               <p>BCMA improves patient safety by addressing <span class="text-white font-semibold">medication administration</span>, one of the most error-prone stages in healthcare. Unlike traditional methods that rely on manual checks and human memory, BCMA uses automated barcode verification. Once the patient's wristband and medication barcode are scanned, the system instantly compares the medication against the prescribed order in the eMAR. If a mismatch is detected, a <span class="text-rose-300 font-semibold">real-time alert</span> is triggered, helping prevent medication errors before they reach the patient.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Evidence From Studies</p>
+                               <p>Peer-reviewed studies consistently show that BCMA significantly reduces medication administration errors in hospital settings. Research reports lower rates of <span class="text-white font-semibold">wrong-patient</span>, <span class="text-white font-semibold">wrong-dose</span>, and <span class="text-white font-semibold">wrong-time</span> errors following BCMA implementation, mainly because it improves adherence to medication safety protocols. However, studies also highlight challenges such as scanning workarounds, workflow interruptions, equipment limitations, and staff resistance. Even with these issues, BCMA remains highly effective when properly implemented and supported by training and infrastructure (Grailey et al., 2023).</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Philippine Context</p>
+                               <p>Although BCMA has demonstrated significant improvements in reducing medication errors internationally, its adoption in developing countries, including the Philippines, remains limited. A Philippine-authored integrative review identified barcode scanning in medication administration as a strategy to improve patient safety and reduce medication errors in healthcare settings (Tiu et al., 2025). Still, local implementation remains limited because of <span class="text-amber-300 font-semibold">insufficient infrastructure</span> and limited hospital-wide integration, so most available evidence continues to come from international studies showing better safety outcomes and workflow efficiency.</p>
+                           </div>
+                           <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Core Components</p>
+                               <p>A fully functioning BCMA system usually combines several integrated components in one coordinated setup: <span class="text-white font-semibold">barcode technology</span> that encodes patient and medication information, <span class="text-white font-semibold">patient identification wristbands</span> linked to electronic records, <span class="text-white font-semibold">medication barcodes</span> for correct drug identification, <span class="text-white font-semibold">scanning devices</span> used by nurses at the bedside, the <span class="text-white font-semibold">electronic medication administration record (eMAR)</span> that stores real-time medication data, and <span class="text-white font-semibold">hospital information system integration</span> that connects all clinical workflows. According to the Agency for Healthcare Research and Quality (AHRQ), these components form a coordinated system that ensures verification at every stage of medication administration, improving accuracy and reducing preventable errors.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">BCMA Process</p>
+                               <p>The BCMA process starts when a physician enters a medication order electronically. Pharmacists then verify and dispense the medication with a barcode label, while nurses scan the patient's wristband and medication before administration. The system checks the information against the eMAR and alerts staff if errors are detected, creating a safer and more traceable medication administration workflow (Poon et al., 2010).</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">CDSS Integration</p>
+                               <p>Another important component commonly integrated with BCMA is the <span class="text-white font-semibold">Clinical Decision Support System (CDSS)</span>. CDSS provides healthcare professionals with real-time alerts, reminders, and evidence-based recommendations during medication administration. When connected with BCMA and the eMAR, CDSS can identify potential medication-related problems such as <span class="text-rose-300 font-semibold">drug allergies</span>, duplicate therapies, incorrect dosages, and harmful drug interactions before the medication is given to the patient. This additional layer of verification strengthens medication safety and supports clinical decision-making among nurses, pharmacists, and physicians. According to the Agency for Healthcare Research and Quality (AHQR), integrating CDSS into medication administration systems helps reduce preventable adverse drug events and improve overall quality of care.</p>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Implementation Challenges</p>
+                               <p>Despite the benefits of Barcode Medication Administration in improving medication safety, implementation still faces several challenges in clinical practice. These include <span class="text-amber-300 font-semibold">workflow inefficiencies</span>, equipment and barcode-scanning failures, staff resistance and adaptation difficulties, and alert fatigue caused by frequent system notifications. In many developing healthcare systems, limited technological infrastructure further constrains the consistent and effective use of BCMA. From a human factors perspective, healthcare workers may develop unsafe workarounds or even bypass scanning processes, which can compromise patient safety. This shows that while BCMA is an effective tool for reducing medication errors, its success still depends on <span class="text-white font-semibold">proper system design</span>, <span class="text-white font-semibold">adequate training</span>, and <span class="text-white font-semibold">strong institutional support</span> (Svandova & Smutny, 2026).</p>
+                           </div>
+                       </div>`
+            },
+            'journal-quote': {
+                title: 'Journal of Clinical Nursing Care Quality Citations',
+                badge: 'Verified Verification Index',
+                body: `<p><strong>Citation Log #2026-B9:</strong></p>
+                       <blockquote>"Barcode medication administration systems significantly reduce medication administration errors and improve overall point-of-care patient safety parameters within secondary medical wards."</blockquote>
+                       <p><strong>Cross References:</strong> American Journal of Health-System Pharmacy (Vol. 67), and International Journal of Medical Informatics (2024 Framework Logs).</p>`
+            },
+            'step-1': {
+                title: 'Step 1: Medication Order Entry',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Main Process</p>
+                               <p>The process begins when the physician enters the medication order into the hospital's <span class="text-white font-semibold">CPOE or EMR system</span>, including the drug name, dose, route, frequency, and duration. Once entered, the system automatically forwards the order to the pharmacy for validation.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">CDSS Immediate Analysis</p>
+                               <p>At this stage, the integrated <span class="text-white font-semibold">Clinical Decision Support System (CDSS)</span> immediately analyzes the order using patient-specific clinical data stored in the EMR.</p>
+                               <ul class="list-disc pl-5 mt-3 space-y-1 text-zinc-300">
+                                   <li>Documented allergies</li>
+                                   <li>Current medications</li>
+                                   <li>Laboratory results</li>
+                                   <li>Existing medical conditions</li>
+                                   <li>Drug interactions and contraindications</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p>If a potential problem is detected, such as an allergy conflict or a dangerous drug interaction, the CDSS automatically generates an <span class="text-amber-300 font-semibold">electronic alert or warning message</span> before the medication proceeds to the next stage.</p>
+                           </div>
+                       </div>`
+            },
+            'step-2': {
+                title: 'Step 2: Pharmacy Verification and Processing',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>The pharmacist reviews the medication order for safety, accuracy, and appropriateness before approval.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Verification Checklist</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Correct drug selection</li>
+                                   <li>Appropriate dosage based on patient condition</li>
+                                   <li>Drug interactions and contraindications</li>
+                                   <li>Allergies documented in the EMR</li>
+                                   <li>Duplicate therapies or unsafe combinations</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p>The pharmacist also evaluates any <span class="text-white font-semibold">CDSS-generated alerts or recommendations</span> before approving the order. Once verified, the medication is prepared in a <span class="text-white font-semibold">unit-dose format</span>, and each dose is labeled with a unique barcode linked directly to the patient's medication profile in the BCMA system.</p>
+                           </div>
+                       </div>`
+            },
+            'step-3': {
+                title: 'Step 3: Medication Dispensing and Barcode Labeling',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>After verification, the pharmacy dispenses the medication to the nursing unit or automated dispensing cabinet. Each package barcode contains traceable medication data.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Barcode Information</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Medication name</li>
+                                   <li>Dose strength</li>
+                                   <li>Expiration date</li>
+                                   <li>Lot number</li>
+                                   <li>Manufacturer information</li>
+                                   <li>Digitally linked patient prescription information</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-sky-500/20 bg-sky-500/5 px-5 py-4">
+                               <p>This barcode enables <span class="text-sky-300 font-semibold">accurate tracking, traceability, and accountability</span> of every medication dose administered within the hospital system.</p>
+                           </div>
+                       </div>`
+            },
+            'step-4': {
+                title: 'Step 4: Nurse Login and System Access',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>Before administration, the nurse logs into the BCMA system using secure credentials.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Access Methods</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Personal username and password</li>
+                                   <li>ID badge or barcode scanner</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p>This step ensures <span class="text-white font-semibold">accountability</span>, protects patient information, and prevents unauthorized access to the medication administration system.</p>
+                           </div>
+                       </div>`
+            },
+            'step-5': {
+                title: 'Step 5: Patient Identification (Barcode Wristband Scanning)',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>At the patient's bedside, the nurse scans the <span class="text-white font-semibold">barcode wristband</span>. The BCMA system then displays the patient's eMAR, scheduled medications, allergies, and administration instructions.</p>
+                           </div>
+                           <div class="rounded-2xl border border-rose-500/20 bg-rose-500/5 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-rose-300 font-bold mb-2">If There Is No Match</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Displays a warning or error message</li>
+                                   <li>Activates a visual and/or audible alert</li>
+                                   <li>Prevents continuation of administration until the issue is corrected</li>
+                               </ul>
+                           </div>
+                       </div>`
+            },
+            'step-6': {
+                title: 'Step 6: Medication Scanning and CDSS Alert Processing',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>The nurse scans the medication package barcode before administration. The BCMA system automatically reads and verifies key medication information.</p>
+                               <ul class="list-disc pl-5 mt-3 space-y-1 text-zinc-300">
+                                   <li>Medication name</li>
+                                   <li>Dose</li>
+                                   <li>Route of administration</li>
+                                   <li>Expiration date</li>
+                                   <li>Match with the physician's order</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Real-Time CDSS Checks</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Allergy history</li>
+                                   <li>Laboratory results</li>
+                                   <li>Current medications</li>
+                                   <li>Diagnoses and medical conditions</li>
+                                   <li>Vital signs and clinical status</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p>The CDSS uses built-in clinical rules and drug databases to identify risks such as <span class="text-amber-300 font-semibold">allergy conflict</span>, drug-to-drug interaction, contraindicated medication, duplicate therapy, abnormal laboratory result, or incorrect dosage range.</p>
+                           </div>
+                           <div class="rounded-2xl border border-rose-500/20 bg-rose-500/5 px-5 py-4">
+                               <p>If an issue is detected, the BCMA system may show a pop-up warning, color-coded alert, or audible alarm. Depending on severity, it may <span class="text-rose-300 font-semibold">block administration completely</span> or require nurse confirmation plus physician or pharmacist verification.</p>
+                           </div>
+                       </div>`
+            },
+            'step-7': {
+                title: 'Step 7: Five Rights Verification (System Safety Check)',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>The BCMA system performs an automated verification based on the <span class="text-emerald-300 font-semibold">Five Rights of Medication Administration</span>.</p>
+                               <ul class="list-disc pl-5 mt-3 space-y-1 text-zinc-300">
+                                   <li>Right Patient</li>
+                                   <li>Right Medication</li>
+                                   <li>Right Dose</li>
+                                   <li>Right Route</li>
+                                   <li>Right Time</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p>If all information matches the physician's order and patient profile, the system displays a <span class="text-emerald-300 font-semibold">green light or approved message</span>, allowing the nurse to continue.</p>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p>The CDSS also checks for additional clinical risks. If everything matches, administration is approved. If not, warnings are displayed and administration may be delayed or stopped.</p>
+                           </div>
+                       </div>`
+            },
+            'step-8': {
+                title: 'Step 8: Clinical Decision and Nurse Confirmation',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>After receiving system approval, the nurse performs a final clinical assessment before administering the medication.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Final Nursing Assessment</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Patient condition and vital signs</li>
+                                   <li>Level of consciousness</li>
+                                   <li>Allergies or contraindications not yet documented</li>
+                                   <li>Patient refusal or concerns</li>
+                                   <li>Readiness to receive medication</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-sky-500/20 bg-sky-500/5 px-5 py-4">
+                               <p>This step emphasizes that <span class="text-white font-semibold">BCMA and CDSS assist clinical practice</span>, but they do not replace nursing judgment and critical thinking.</p>
+                           </div>
+                       </div>`
+            },
+            'step-9': {
+                title: 'Step 9: Medication Administration',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>The nurse administers the medication through the prescribed route such as <span class="text-white font-semibold">oral, intravenous, intramuscular, or subcutaneous</span>.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Safety Measures During Administration</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Hand hygiene</li>
+                                   <li>Aseptic technique</li>
+                                   <li>Safe medication handling procedures</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                               <p>The nurse also monitors the patient for <span class="text-amber-300 font-semibold">immediate adverse reactions or complications</span> following administration.</p>
+                           </div>
+                       </div>`
+            },
+            'step-10': {
+                title: 'Step 10: Automatic Documentation (eMAR Recording)',
+                badge: 'Clinical Workflow Protocol',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p>Once the medication has been administered, the BCMA system automatically records the event in the <span class="text-white font-semibold">eMAR</span>.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Recorded Information</p>
+                               <ul class="list-disc pl-5 space-y-1 text-zinc-300">
+                                   <li>Time of administration</li>
+                                   <li>Nurse identifier</li>
+                                   <li>Medication details</li>
+                                   <li>Dose and route administered</li>
+                                   <li>Remarks or patient responses if necessary</li>
+                               </ul>
+                           </div>
+                           <div class="rounded-2xl border border-sky-500/20 bg-sky-500/5 px-5 py-4">
+                               <p>Automatic documentation reduces <span class="text-sky-300 font-semibold">charting errors</span>, improves accuracy, and provides real-time patient record updates.</p>
+                           </div>
+                       </div>`
+            },
+            'faq-1': {
+                title: 'Q1: What does BCMA stand for?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Barcode Medication Administration — a digital safety system that uses barcodes to verify medications before giving them to patients.</p></div>`
+            },
+            'faq-2': {
+                title: 'Q2: What is its main purpose?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: To prevent medication errors, ensure patient safety, and strictly follow the 5 Rights of Medication Administration.</p></div>`
+            },
+            'faq-3': {
+                title: 'Q3: What are the 5 Rights BCMA checks?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Right Patient, Right Drug, Right Dose, Right Route,Right Time</p></div>`
+            },
+            'faq-4': {
+                title: 'Q4: Why is BCMA important in nursing practice?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Proven by peer-reviewed studies</p><p>:Reduces medication errors by ~50–80%</p><p>:Makes documentation faster & accurate</p><p>:Aligns with SDG 3: Good Health & Well-being</p></div>`
+            },
+            'faq-5': {
+                title: 'Q5: Who is this BCMA website made for?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Nursing students, clinical instructors, and hospital staff for learning & practice.</p></div>`
+            },
+            'faq-6': {
+                title: 'Q6: How many steps are in your BCMA procedure?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Exactly 10 steps, from doctor’s order to documentation.</p></div>`
+            },
+            'faq-7': {
+                title: 'Q7: What system does the physician use?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: CPOE (Computerized Physician Order Entry) or EMR (Electronic Medical Record) to enter orders digitally.</p></div>`
+            },
+            'faq-8': {
+                title: 'Q8: What happens if you scan the wrong patient?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: The system gives visual + audible alert, shows mismatch error, and blocks medication administration.</p></div>`
+            },
+            'faq-9': {
+                title: 'Q9: What happens if the medication does not match the order?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: The system rejects it, shows a warning, and will not allow administration.</p></div>`
+            },
+            'faq-10': {
+                title: 'Q10: Does BCMA replace the nurse’s clinical judgment?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: NO — the nurse still does final assessment before giving medication.</p></div>`
+            },
+            'faq-11': {
+                title: 'Q. What is CDSS?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: CDSS stands for Clinical Decision Support System. It is an integrated computerized system that analyzes patient-specific clinical data and helps healthcare professionals make safer medication decisions.</p></div>`
+            },
+            'faq-12': {
+                title: 'Q: How is CDSS connected to BCMA',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: CDSS works together with BCMA by continuously analyzing patient information from the EMR while medications are being verified and scanned.</p><p>:The CDSS sends real-time alerts to the BCMA system whenever a potential safety issue is detected.</p></div>`
+            },
+            'faq-13': {
+                title: 'Q: What information does the CDSS analyze?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: The CDSS reviews:</p><p>• Patient allergies</p><p>• Current medications</p><p>• Drug interactions</p><p>• Laboratory results</p><p>• Medical history</p><p>• Vital signs</p><p>• Contraindications</p><p>• Duplicate therapies</p></div>`
+            },
+            'faq-14': {
+                title: 'Q: How does the CDSS send alerts to the BCMA system?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: When the CDSS detects a medication-related risk, it automatically sends an electronic alert to the BCMA interface. The alert may appear as:</p><p>• Pop-up warning message</p><p>• Red or yellow notification</p><p>• Audible alarm or warning tone</p><p>• Administration block or override request</p><p>These alerts occur in real time during medication scanning and verification.</p></div>`
+            },
+            'faq-15': {
+                title: 'Q: What kinds of problems can trigger a CDSS alert?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: CDSS may generate alerts for:</p><p>• Allergy conflicts</p><p>• Drug-to-drug interactions</p><p>• Incorrect dosage</p><p>• Duplicate medication therapy</p><p>• Contraindicated medications</p><p>• Abnormal laboratory values</p><p>• Unsafe administration timing</p></div>`
+            },
+            'faq-16': {
+                title: 'Q: Can nurses ignore the CDSS alert?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: : Depending on hospital policy and alert severity:</p><p>• Some alerts completely block administration</p><p>• Others may allow override with physician/pharmacist confirmation and documentation</p></div>`
+            },
+            'faq-17': {
+                title: 'Q: Why is CDSS important in medication administration?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: CDSS helps identify medication-related risks before the drug reaches the patient, improving patient safety and reducing preventable adverse drug events.</p></div>`
+            },
+            'faq-18': {
+                title: 'Q: What information can we see under medication?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A:</p><p>• Generic Name, Brand Name</p><p>• Therapeutic & Pharmaceutical Drug Class</p><p>• Drug Form & Route of Administration</p><p>• Dosage, Frequency, Duration of Treatment</p><p>• Mechanism of Action</p><p>• Indications & Contraindications</p><p>• Side Effects & Adverse Effects</p><p>• Nursing Responsibilities: Assessment, Administration, Monitoring, Patient Education</p></div>`
+            },
+            'faq-19': {
+                title: 'Q: Are all medications available in the BCMA website?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: NO — NOT ALL MEDICATIONS ARE THERE.</p><p>What we have included:</p><p>• Only the Top 20 most common drugs used in these wards</p></div>`
+            },
+            'faq-20': {
+                title: 'Q: Which medications are included?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: Only the Top 20 most common drugs used in:</p><p>• Medical Ward</p><p>• Pediatric Ward</p><p>• Surgical Ward</p><p>• OB-GYN Ward</p></div>`
+            },
+            'faq-21': {
+                title: 'Q: Is all information of the included drugs complete in the website?',
+                badge: '',
+                body: `<div class="space-y-3"><p>A: YES — all details listed in the medication profile are fully provided</p></div>`
+            },
+            'trouble-1': {
+                title: '1. Scanner won’t turn on',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Check battery: Ensure it’s charged or properly inserted; replace if old/damaged.</p><p>• Check power switch: Make sure it’s set to ON.</p><p>• Inspect charging cable/port: Clean dirt or debris, try a different cable or power source.</p></div>`
+            },
+            'trouble-2': {
+                title: '2. Can’t scan barcodes / no reading',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Clean the scan window: Wipe gently with a soft, dry clothdust or smudges block the laser/light.</p><p>• Adjust distance: Hold the scanner away from the barcode (too close or too far won’t work).</p><p>• Check barcode quality: Ensure it’s not torn, faded, or covered; reprint if needed.</p></div>`
+            },
+            'trouble-3': {
+                title: '3. Scans but no data appears',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Note: System only included selected common drugs</p><p>• Check connection</p><p>• Refreshed connection to load data properly</p></div>`
+            },
+            'trouble-4': {
+                title: '4. Glare or reflection blocked scanning',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Moved away from direct lamps or sunlight</p><p>• Tilted the scanner slightly to reduce reflection</p><p>• Used even, soft lighting for better readability</p></div>`
+            },
+            'trouble-5': {
+                title: '5. Scanner did not function properly',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Checked power and connection</p><p>• Cleaned the scanner lens again</p></div>`
+            },
+            'trouble-6': {
+                title: '1. PAGE DID NOT LOAD / BLANK SCREEN',
+                badge: '',
+                body: `<div class="space-y-3"><p> Reloaded the page to check if it was just a temporary connection issue</p><p> Cleared the browser cache and cookies to remove stored corrupted data</p><p> Opened the page in a different web browser to test if the problem was only in one browser</p><p> Checked if the web address was typed correctly with no spelling mistakes</p></div>`
+            },
+            'trouble-7': {
+                title: '2.ERROR MESSAGES APPEARED (404, 500, 403 ETC.)',
+                badge: '',
+                body: `<div class="space-y-3"><p> Checked that all links inside the website pointed to correct and existing pages</p><p> Updated broken links or replaced them with working addresses</p><p> Adjusted file and folder permission settings to allow proper access</p><p> Checked server logs to find the exact cause of the error</p><p> Restored the website from the last working backup if files were damaged</p></div>`
+            },
+            'trouble-8': {
+                title: '3.CONTENT DISPLAYED INCORRECTLY',
+                badge: '',
+                body: `<div class="space-y-3"><p>• Opened the browser developer tools to check for coding errors</p><p>• Fixed broken HTML tags, missing closing codes or wrong formatting</p><p>• Replaced images that were missing, corrupted or had wrong file paths</p><p>• Adjusted styling codes to make sure content aligned correctly</p><p>• Tested on different screen sizes to make sure layout worked for all devices</p></div>`
+            },
+            'trouble-9': {
+                title: '4.PAGE LOADED TOO SLOWLY',
+                badge: '',
+                body: `<div class="space-y-3"><p> Reduced the size of large images and files to speed up loading</p><p> Removed unnecessary codes, plugins or features that used too much resources</p><p> Checked and fixed links to files that were stored on slow or unavailable servers</p><p> Verified that all external resources loaded properly without delays</p><p> Switched to a faster hosting service if the connection was too weak</p></div>`
+            },
+            'trouble-10': {
+                title: '5.BUTTONS OR LINKS DID NOT WORK',
+                badge: '',
+                body: `<div class="space-y-3"><p> Checked that all clickable elements were linked to the correct target</p><p> Removed codes that blocked or disabled click actions</p><p> Fixed broken action codes in forms, menus or navigation bars</p><p> Tested every link and button one by one to make sure they worked</p><p> Updated codes that caused conflicts with browser settings</p></div>`
+            },
+            'trouble-11': {
+                title: '6.TEXT OR INFORMATION WAS WRONG / OUTDATED',
+                badge: '',
+                body: `<div class="space-y-3"><p> Corrected all spelling, grammar and factual errors</p><p> Replaced old information with the latest correct details</p><p> Updated dates, numbers and descriptions to show current data</p><p> Checked that all sections had the right content and no missing details</p><p> Reviewed and approved all changes before publishing again</p></div>`
+            },
+            'trouble-12': {
+                title: '7.WEBSITE SHOWED SECURITY OR CONNECTION WARNINGS',
+                badge: '',
+                body: `<div class="space-y-3"><p> Removed blocked or unsafe files and codes from the website</p><p> Checked and adjusted security settings to allow safe browsing</p><p> Verified that all files and data passed security check</p></div>`
+            },
+            'trouble-13': {
+                title: 'QR Code for hotline to call manufacturer',
+                badge: '',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-5">
+                               <div class="flex flex-col items-center gap-4">
+                                   <img src="qr_code.jpg" alt="QR Code for hotline to call manufacturer" class="w-full max-w-[320px] rounded-2xl border border-zinc-700 bg-white p-3 shadow-lg">
+                                   <p class="text-center">QR Code for hotline to call manufacturer</p>
+                               </div>
+                           </div>
+                       </div>`
+            },
+            'ward-medical': {
+                title: 'Medical Ward Drug Profiles',
+                badge: '',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                   <div>
+                                       <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">MEDICAL WARD</p>
+                                       <p class="text-zinc-300 mt-2">Drug profile navigation with page-by-page viewing. One page shows one drug profile only.</p>
+                                   </div>
+                                   <div id="ward-medical-page-status" class="inline-flex items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-emerald-200">Page 1 of 20</div>
+                               </div>
+                           </div>
+                           <div id="ward-medical-page-content" class="space-y-4"></div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-4">
+                               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                                   <div class="flex items-center gap-3">
+                                       <button onclick="changeWardDrugPage('ward-medical', -1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                                           <i class="fa-solid fa-chevron-left"></i>
+                                       </button>
+                                       <button onclick="changeWardDrugPage('ward-medical', 1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-emerald-400 hover:text-emerald-300 transition-all">
+                                           <i class="fa-solid fa-chevron-right"></i>
+                                       </button>
+                                   </div>
+                                   <div class="flex flex-col sm:flex-row gap-3 sm:items-center">
+                                       <input id="ward-medical-page-input" type="number" min="1" max="20" value="1" onkeydown="handleWardDrugPageJump(event, 'ward-medical')" class="w-full sm:w-24 rounded-xl border border-zinc-700 bg-[#121214] px-3 py-2 text-sm text-white outline-none focus:border-emerald-400" placeholder="Page">
+                                       <button onclick="jumpWardDrugPage('ward-medical')" class="rounded-xl bg-emerald-500/20 border border-emerald-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-emerald-200 hover:bg-emerald-500/30 transition-all">Jump To Page</button>
+                                   </div>
+                               </div>
+                               <div id="ward-medical-page-buttons" class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800"></div>
+                           </div>
+                       </div>`
+            },
+            'ward-pediatric': {
+                title: 'Pediatric Ward Drug Profiles',
+                badge: '',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                   <div>
+                                       <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold">PEDIATRIC WARD</p>
+                                       <p class="text-zinc-300 mt-2">Drug profile navigation with page-by-page viewing. One page shows one drug profile only.</p>
+                                   </div>
+                                   <div id="ward-pediatric-page-status" class="inline-flex items-center justify-center rounded-full border border-amber-400/30 bg-amber-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-amber-200">Page 1 of 20</div>
+                               </div>
+                           </div>
+                           <div id="ward-pediatric-page-content" class="space-y-4"></div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-4">
+                               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                                   <div class="flex items-center gap-2">
+                                       <button onclick="changeWardDrugPage('ward-pediatric', -1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-amber-400 hover:text-amber-300 transition-all">
+                                           <i class="fa-solid fa-arrow-left"></i>
+                                       </button>
+                                       <button onclick="changeWardDrugPage('ward-pediatric', 1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-amber-400 hover:text-amber-300 transition-all">
+                                           <i class="fa-solid fa-arrow-right"></i>
+                                       </button>
+                                   </div>
+                                   <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                       <input id="ward-pediatric-page-input" type="number" min="1" max="20" value="1" onkeydown="handleWardDrugPageJump(event, 'ward-pediatric')" class="w-full sm:w-24 rounded-xl border border-zinc-700 bg-[#121214] px-3 py-2 text-sm text-white outline-none focus:border-amber-400" placeholder="Page">
+                                       <button onclick="jumpWardDrugPage('ward-pediatric')" class="rounded-xl bg-amber-500/20 border border-amber-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-amber-200 hover:bg-amber-500/30 transition-all">Jump To Page</button>
+                                   </div>
+                               </div>
+                               <div id="ward-pediatric-page-buttons" class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800"></div>
+                           </div>
+                       </div>`
+            },
+            'ward-surgical': {
+                title: 'Surgical Ward Drug Profiles',
+                badge: '',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                   <div>
+                                       <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold">SURGICAL WARD</p>
+                                       <p class="text-zinc-300 mt-2">Drug profile navigation with page-by-page viewing. One page shows one drug profile only.</p>
+                                   </div>
+                                   <div id="ward-surgical-page-status" class="inline-flex items-center justify-center rounded-full border border-sky-400/30 bg-sky-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-sky-200">Page 1 of 20</div>
+                               </div>
+                           </div>
+                           <div id="ward-surgical-page-content" class="space-y-4"></div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-4">
+                               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                                   <div class="flex items-center gap-2">
+                                       <button onclick="changeWardDrugPage('ward-surgical', -1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-sky-400 hover:text-sky-300 transition-all">
+                                           <i class="fa-solid fa-arrow-left"></i>
+                                       </button>
+                                       <button onclick="changeWardDrugPage('ward-surgical', 1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-sky-400 hover:text-sky-300 transition-all">
+                                           <i class="fa-solid fa-arrow-right"></i>
+                                       </button>
+                                   </div>
+                                   <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                       <input id="ward-surgical-page-input" type="number" min="1" max="20" value="1" onkeydown="handleWardDrugPageJump(event, 'ward-surgical')" class="w-full sm:w-24 rounded-xl border border-zinc-700 bg-[#121214] px-3 py-2 text-sm text-white outline-none focus:border-sky-400" placeholder="Page">
+                                       <button onclick="jumpWardDrugPage('ward-surgical')" class="rounded-xl bg-sky-500/20 border border-sky-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-sky-200 hover:bg-sky-500/30 transition-all">Jump To Page</button>
+                                   </div>
+                               </div>
+                               <div id="ward-surgical-page-buttons" class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800"></div>
+                           </div>
+                       </div>`
+            },
+            'ward-obgyne': {
+                title: 'OB-GYNE Ward Drug Profiles',
+                badge: '',
+                wide: true,
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                                   <div>
+                                       <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold">OBGYNE WARD</p>
+                                       <p class="text-zinc-300 mt-2">Drug profile navigation with page-by-page viewing. One page shows one drug profile only.</p>
+                                   </div>
+                                   <div id="ward-obgyne-page-status" class="inline-flex items-center justify-center rounded-full border border-purple-400/30 bg-purple-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-purple-200">Page 1 of 20</div>
+                               </div>
+                           </div>
+                           <div id="ward-obgyne-page-content" class="space-y-4"></div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-4">
+                               <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+                                   <div class="flex items-center gap-2">
+                                       <button onclick="changeWardDrugPage('ward-obgyne', -1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-purple-400 hover:text-purple-300 transition-all">
+                                           <i class="fa-solid fa-arrow-left"></i>
+                                       </button>
+                                       <button onclick="changeWardDrugPage('ward-obgyne', 1)" class="w-11 h-11 rounded-full border border-zinc-700 bg-[#121214] text-white hover:border-purple-400 hover:text-purple-300 transition-all">
+                                           <i class="fa-solid fa-arrow-right"></i>
+                                       </button>
+                                   </div>
+                                   <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                                       <input id="ward-obgyne-page-input" type="number" min="1" max="20" value="1" onkeydown="handleWardDrugPageJump(event, 'ward-obgyne')" class="w-full sm:w-24 rounded-xl border border-zinc-700 bg-[#121214] px-3 py-2 text-sm text-white outline-none focus:border-purple-400" placeholder="Page">
+                                       <button onclick="jumpWardDrugPage('ward-obgyne')" class="rounded-xl bg-purple-500/20 border border-purple-400/30 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-purple-200 hover:bg-purple-500/30 transition-all">Jump To Page</button>
+                                   </div>
+                               </div>
+                               <div id="ward-obgyne-page-buttons" class="flex flex-wrap gap-2 pt-3 border-t border-zinc-800"></div>
+                           </div>
+                       </div>`
+            },
+            'sim-path-1': {
+                title: 'Simulation Sandbox: Patient Validation Engine',
+                badge: 'Interactive Console Logic',
+                body: `<p>This node initializes the mock database environment. The simulator reads fake incoming barcode strings from a virtual patient array. Students must check the screen data match against the patient name on the simulated chart file before advancing logic blocks.</p>`
+            },
+            'sim-path-2': {
+                title: 'Simulation Sandbox: Scanner Tracking Algorithms',
+                badge: 'Interactive Console Logic',
+                body: `<p>Processes active drug wrapper scanning telemetry. Generates mock failure anomalies randomly (e.g., expired dates or misread codes) to train immediate cognitive error recognition behaviors.</p>`
+            },
+            'sim-path-3': {
+                title: 'Simulation Sandbox: Exception Management Logic',
+                badge: 'Interactive Console Logic',
+                body: `<p>Forces the student nurse to lock out the administration pipeline when an error screen loads. Tracks if the student correctly accesses secondary verification subroutines instead of clicking through blindly.</p>`
+            },
+            'sim-path-4': {
+                title: 'Simulation Sandbox: Administration Execution Path',
+                badge: 'Interactive Console Logic',
+                body: `<p>Simulates the successful entry of data vectors into physical patient systems. Calculates physiological tracking records post-administration to showcase correct timing parameters.</p>`
+            },
+            'sim-path-5': {
+                title: 'Simulation Sandbox: SQL MariaDB Writeback Hooks',
+                badge: 'Interactive Console Logic',
+                body: `<p>Executes safe simulation rollbacks. Simulates secure logging writebacks to prevent charts from being edited after submission, matching Nginx-hosted secure server parameters.</p>`
+            },
+            'sdg-goal': {
+                title: 'G. ABOUT US PAGE',
+                badge: '',
+                wide: true,
+                body: `<p>In the Philippines, Barcode Medication Administration (BCMA) remains an emerging technology with limited full-scale hospital implementation. While research confirms its potential to reduce medication errors, most nurses and students still lack foundational BCMA knowledge. Our website closes that gap.</p>
+                       <p>Our work directly supports two United Nations Sustainable Development Goals (SDGs):</p>
+                       <p>SDG 3: Good Health and Well-being– Medication errors are among the most common preventable adverse events in hospitals worldwide. By equipping nurses and student nurses with BCMA knowledge, we directly contribute to safer medication administration, reduced preventable harm, and improved patient outcomes.</p>
+                       <p>SDG 9: Industry, Innovation, and Infrastructure– BCMA integrates barcode scanning with electronic health records, yet adoption in the Philippines remains limited due to infrastructure gaps. Our QR-code-enabled educational website serves as a digital infrastructure innovation, providing accessible, low-cost, and scalable BCMA training that prepares Filipino healthcare workers for future hospital-wide integration.</p>
+                       <p>WHY THIS MATTERS?</p>
+                       <p>Without proper training, even the best technology fails. Workarounds, scanning interruptions, and staff resistance are well-documented challenges. Our platform transforms complex BCMA research into practical, interactive learning — so when hospitals adopt BCMA at scale, nurses will be ready.</p>
+                       <p>WHY WE MADE THIS SITE</p>
+                       <p>As nursing students, we saw how easily medication errors can happen during busy clinical rotations. In medical, surgical, pediatric, and OB-GYN wards, even basic drug information was hard to access quickly at the bedside. The World Health Organization (2021) states that medication errors remain a leading cause of preventable harm worldwide.</p>
+                       <p>We also learned that Barcode Medication Administration (BCMA) significantly reduces errors, but most Philippine hospitals and training institutions do not yet have it. A Philippine review confirmed that while barcode systems improved safety, local implementation is limited due to infrastructure and funding gaps (Tiu et. al., 2025).</p>
+                       <p>That gap led to our question, How do we prepare future nurses for a BCMA equipped future before the technology reaches their hospitals?</p>
+                       <p>HOW WE BUILT THIS SITE</p>
+                       <p>We started by listing the top 20 most common drugs from the wards where we trained. We realized that quick, reliable drug information was missing at the point of care.</p>
+                       <p>So we built a free, simulation based learning tool that mimics how BCMA works while teaching real ward drugs. We researched peer reviewed BCMA literature, designed a 10 step simulation, wrote a complete medication profiles, and added real troubleshooting guides.</p>
+                       <p>Every feature was created so students or even a nurse preparing for digital health transformation can practice BCMA thinking before they ever touch a real scanner.</p>
+                       <p>JOIN US</p>
+                       <p>Whether you are a student nurse encountering BCMA for the first time or a registered nurse preparing for digital health transformation, this website is for you. Scan. Learn. Protect.</p>
+                       <p>“One scan at a time, we are building a safer, smarter healthcare system.”</p>`
+            }
+        };
+
+        const pagedDrugLibraries = {
+            'ward-medical': [
+                {
+                    title: 'Page 1: Paracetamol (Acetaminophen)',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Paracetamol (Acetaminophen)</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Tylenol, Calpol, Panadol</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Analgesic, Antipyretic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Para-aminophenol derivative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, capsule, oral suspension, IV, suppository</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, PR, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10-15 mg/kg/dose (children); 325-650 mg (adults)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4-6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As needed, max 3 days for fever without medical supervision</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits cyclooxygenase (COX) enzymes centrally, reducing prostaglandin synthesis in the hypothalamus, leading to analgesia and antipyresis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Mallet, C., Eschalier, A., &amp; Daulhac, L. (2017). Paracetamol: Update on its Analgesic Mechanism of Action. In Pain Relief - From Analgesics to Alternative Therapies. InTech. <code>https://doi.org/10.5772/66649</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Mild to moderate pain</p>
+                                   <p>• Pain</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to paracetamol</p>
+                                   <p>• Fever</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, rash, headache</p>
+                                   <p>Adverse Effects: Hepatotoxicity (with overdose), Stevens-Johnson syndrome (rare)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline liver function and history of alcohol use.</p>
+                                       <p>2. Check for the presence of fever or pain level before administration.</p>
+                                       <p>3. Verify patient weight for accurate pediatric dosing.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Do not exceed maximum daily dose (4 g adults, 75 mg/kg/day children).</p>
+                                       <p>3. Shake oral suspension well before use.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor liver enzymes with prolonged use.</p>
+                                       <p>2. Monitor temperature and pain score 30-60 minutes after administration.</p>
+                                       <p>3. Watch for signs of overdose (nausea, vomiting, abdominal pain).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct patient/watcher not to take other products containing paracetamol.</p>
+                                       <p>2. Advise to report yellowing of skin/eyes or abdominal pain.</p>
+                                       <p>3. Teach proper dose measurement for oral suspension.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 2: Omeprazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Omeprazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Prilosec, Losec, Zegerid</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiulcer agent, Proton pump inhibitor</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Substituted benzimidazole</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, tablet, oral suspension, powder for IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20-40 mg/day (adults); 10-20 mg/day (children)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>4-8 weeks (gastric ulcers); up to 12 months for maintenance</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Irreversibly inhibits the gastric H+/K+ ATPase (proton pump) in gastric parietal cells, blocking final step of acid production.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Lindberg, P., Brändström, A., &amp; Wallmark, B. (1987). Structure-activity relationships of omeprazole analogues and their mechanism of action. Trends in Pharmacological Sciences, 8(10), 399-402. <code>https://doi.org/10.1016/0165-6147(87)90107-6</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• GERD</p>
+                                   <p>• Peptic ulcer disease</p>
+                                   <p>• Erosive esophagitis</p>
+                                   <p>• Zollinger-Ellison syndrome</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to Omeprazole or Benzimidazoles</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Headache,nausea, flatulence, diarrhea</p>
+                                   <p>Adverse Effects: Long-term use: hypomagnesemia, vitamin B12 deficiency, increased risk of C. difficile infection</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess for GERD symptoms (heartburn, regurgitation).</p>
+                                       <p>2. Check baseline magnesium and B12 levels for long-term therapy.</p>
+                                       <p>3. Rule out gastric malignancy before starting treatment.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Give 30-60 minutes before meals (preferably breakfast).</p>
+                                       <p>3. Do not crush or chew delayed-release capsules.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for resolution of dyspepsia or ulcer symptoms.</p>
+                                       <p>2. Monitor serum magnesium levels with long-term use.</p>
+                                       <p>3. Monitor for signs of C. difficile infection (watery diarrhea).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to take before meals consistently.</p>
+                                       <p>2. Advise to report severe watery diarrhea or muscle cramps.</p>
+                                       <p>3. Teach that full effect may take 1-4 days.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 3: Furosemide',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Furosemide</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Lasix, Furoside</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Diuretic, Antihypertensive</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Loop diuretic (sulfonamide derivative)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, oral solution, IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20-80 mg/dose (adults); 1-2 mg/kg/dose (children)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Variable (days to months)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits Na+-K+-2Cl- symporter in the thick ascending loop of Henle, causing marked diuresis and natriuresis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Sierra-Johnson, J. (2002). Inhaled furosemide: A whole new mechanism of action. Medical Hypotheses, 58(6), 529-530. <code>https://doi.org/10.1054/mehy.2001.1512</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Pulmonary edema</p>
+                                   <p>• Heart failure</p>
+                                   <p>• Edema from renal/hepatic disease</p>
+                                   <p>• Hypertension (adjunct)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to furosemide or sulfonamides</p>
+                                   <p>• Anuria</p>
+                                   <p>• Severe hypokalemia or hyponatremia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Dehydration, hypokalemia, hyperuricemia, dizziness</p>
+                                   <p>Adverse Effects: Ototoxicity (dose-related, rapid IV), severe electrolyte imbalance, hypotension</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline electrolyte levels (K+, Na+), renal function (BUN, creatinine).</p>
+                                       <p>2. Check for signs of fluid overload (edema, crackles, JVD).</p>
+                                       <p>3. Monitor daily weight.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer IV furosemide slowly (max 20-40 mg/min) to prevent ototoxicity.</p>
+                                       <p>3. Give early in the day to avoid nocturia.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor urine output and daily weight.</p>
+                                       <p>2. Monitor serum potassium, sodium, and creatinine regularly.</p>
+                                       <p>3. Monitor blood pressure for orthostatic changes.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to eat potassium-rich foods (bananas, potatoes).</p>
+                                       <p>2. Advise to change positions slowly to prevent dizziness.</p>
+                                       <p>3. Teach to report tinnitus or hearing loss immediately.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 4: Metformin hydrochloride',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Metformin hydrochloride</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Glucophage, Glumetza, Fortamet</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antidiabetic, Antihyperglycemic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Biguanide</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Immediate-release tablet, extended-release tablet, oral solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500-2000 mg/day (adults)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily (with meals)</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term chronic therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Decreases hepatic gluconeogenesis, reduces intestinal glucose absorption, and improves peripheral insulin sensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Zhu, H., Jia, Z., Li, Y. R., &amp; Danelisen, I. (2023). Molecular mechanisms of action of metformin: Latest advances and therapeutic implications. Clinical and Experimental Medicine, 23(7), 2941. <code>https://doi.org/10.1007/s10238-023-01051-y</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Type 2 diabetes mellitus</p>
+                                   <p>• Polycystic ovary syndrome (PCOS) - off-label</p>
+                                   <p>• Prediabetes</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Severe renal impairment (eGFR &lt;30 mL/min/1.73m2)</p>
+                                   <p>• Metabolic acidosis (including DKA)</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Acute heart failure requiring medication</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, diarrhea, abdominal bloating, metallic taste</p>
+                                   <p>Adverse Effects: Lactic acidosis (rare but life-threatening), vitamin B12 deficiency with long-term use</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess renal function (eGFR) before starting and annually.</p>
+                                       <p>2. Check baseline blood glucose and HbA1c.</p>
+                                       <p>3. Assess for history of metabolic acidosis or liver disease.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer with meals to reduce GI side effects.</p>
+                                       <p>3. Start with low dose and titrate slowly.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor blood glucose and HbA1c regularly.</p>
+                                       <p>2. Monitor renal function every 3-6 months.</p>
+                                       <p>3. Monitor for signs of lactic acidosis (muscle pain, dyspnea, abdominal distress).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to take with meals to prevent GI upset.</p>
+                                       <p>2. Advise to hold metformin before contrast dye procedures (48 hours).</p>
+                                       <p>3. Teach symptoms of lactic acidosis and when to seek emergency care.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 5: Amlodipine besylate',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Amlodipine besylate</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Norvasc, Istin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive, Anti-anginal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Dihydropyridine calcium channel blocker</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>2.5-10 mg/day (adults)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term chronic therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits calcium ion influx across cell membranes of vascular smooth muscle and cardiac muscle, causing peripheral vasodilation and reduced blood pressure.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Burges, R., &amp; Moisey, D. (1994). Unique pharmacologic properties of amlodipine. The American Journal of Cardiology, 73(3), 2A-9A. <code>https://doi.org/10.1016/0002-9149(94)90268-2</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Hypertension</p>
+                                   <p>• Chronic stable angina</p>
+                                   <p>• Vasospastic angina (Prinzmetal's)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to amlodipine or other dihydropyridines</p>
+                                   <p>• Severe hypotension (systolic BP &lt;90 mmHg)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Peripheral edema (ankle swelling), flushing, headache, dizziness</p>
+                                   <p>Adverse Effects: Gingival hyperplasia, severe hypotension, reflex tachycardia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline blood pressure and heart rate.</p>
+                                       <p>2. Check for presence of peripheral edema before starting.</p>
+                                       <p>3. Assess for liver impairment (hepatic metabolism).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer at same time each day (morning preferred).</p>
+                                       <p>3. Do not crush or split extended-release formulations.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor blood pressure and heart rate regularly.</p>
+                                       <p>2. Monitor for new or worsening pedal edema.</p>
+                                       <p>3. Monitor for signs of gingival hyperplasia.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to take daily at same time even if feeling well.</p>
+                                       <p>2. Advise to avoid grapefruit juice (can increase drug levels).</p>
+                                       <p>3. Teach that leg swelling is common but report if severe.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 6: Ceftriaxone sodium',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ceftriaxone sodium</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Rocephin, Epicephin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective, Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Third-generation cephalosporin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Powder for injection (IV, IM)</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>1-2 g/day (adults); 50-75 mg/kg/day (children)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>5-14 days (depending on infection)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial cell wall synthesis by binding to penicillin-binding proteins (PBPs), leading to cell lysis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>IIezzi, M. E., et al. (2022). Pharmacodynamics of ceftriaxone for the treatment of methicillin-susceptible Staphylococcus aureus: is it a viable treatment option? International Journal of Antimicrobial Agents, 59(4), 106542. <code>https://doi.org/10.1016/j.ijantimicag.2022.106542</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Community-acquired pneumonia</p>
+                                   <p>• Meningitis</p>
+                                   <p>• Gonorrhea</p>
+                                   <p>• Intra-abdominal infections</p>
+                                   <p>• Sepsis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to cephalosporins</p>
+                                   <p>• Neonates with hyperbilirubinemia (IV ceftriaxone displaces bilirubin)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Diarrhea, injection site pain, rash</p>
+                                   <p>Adverse Effects: Biliary pseudolithiasis (sludge), anaphylaxis, hemolytic anemia, Clostridioides difficile colitis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess for history of penicillin/cephalosporin allergy.</p>
+                                       <p>2. Obtain culture specimens before first dose.</p>
+                                       <p>3. Assess baseline liver and renal function</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer IV over 2-4 minutes or infuse over 30 minutes.</p>
+                                       <p>3. For IM injection, dilute with lidocaine (if patient not allergic).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for signs of allergic reaction (rash, wheezing, anaphylaxis).</p>
+                                       <p>2. Monitor for diarrhea (C. difficile risk).</p>
+                                       <p>3. Monitor for biliary sludging in long-term use (RUQ pain).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to report severe diarrhea (watery, bloody) immediately.</p>
+                                       <p>2. Advise to complete full course even if symptoms improve.</p>
+                                       <p>3. Teach to observe for signs of gallbladder pain.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 7: Losartan potassium',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Losartan potassium</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cozaar, Hyzaar (combination)</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive, Cardiovascular agent</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Angiotensin II receptor blocker (ARB)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, oral solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>25-100 mg/day (adults)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term chronic therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Blocks angiotensin II from binding to AT1 receptors in vascular smooth muscle and adrenal gland, causing vasodilation and reduced aldosterone secretion.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>Xu, F., Mao, C., Hu, Y., Rui, C., Xu, Z., &amp; Zhang, L. (2009). Cardiovascular Effects of Losartan and Its Relevant Clinical Application. Current Medicinal Chemistry, 16(29), 3841-3857. <code>https://doi.org/10.2174/092986709789178046</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Hypertension</p>
+                                   <p>• Diabetic nephropathy (Type 2)</p>
+                                   <p>• Heart failure with reduced EF (off-label)</p>
+                                   <p>• Stroke prevention</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to losartan</p>
+                                   <p>• Pregnancy (2nd and 3rd trimesters)</p>
+                                   <p>• Bilateral renal artery stenosis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Dizziness, fatigue, hyperkalemia, upper respiratory infection</p>
+                                   <p>Adverse Effects: Angioedema, fetal toxicity, acute renal failure (in renal stenosis)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline blood pressure, heart rate, and electrolytes (K+).</p>
+                                       <p>2. Check renal function (BUN, creatinine).</p>
+                                       <p>3. Verify pregnancy status in women of childbearing age.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer consistently with or without food.</p>
+                                       <p>3. Monitor first dose for excessive hypotension.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor blood pressure weekly until controlled.</p>
+                                       <p>2. Monitor serum potassium and creatinine after 1-2 weeks.</p>
+                                       <p>3. Monitor for angioedema (facial swelling, difficulty breathing).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct not to use potassium supplements without consulting.</p>
+                                       <p>2. Advise to avoid pregnancy; use contraception.</p>
+                                       <p>3. Teach to report swelling of face/mouth immediately.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 8: Insulin regular (human)',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Insulin regular (human)</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Humulin R, Novolin R</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antidiabetic, Hormone</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Short-acting insulin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injectable solution (vial, pen)</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Subcutaneous, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>Individualized (0.1-0.5 units/kg/dose or per sliding scale)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Multiple times daily (before meals)</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term (lifelong for Type 1)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Binds to insulin receptors on muscle, fat, and liver cells, increasing glucose uptake, decreasing gluconeogenesis, and promoting glycogen synthesis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference</p>
+                                   <p>British Insulin Manufacturers., Young, F. G. (Frank George). (1960). The mechanism of action of insulin: a symposium organized by the British Insulin Manufacturers. Springfield, Ill.: Thomas.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Type 1 diabetes mellitus</p>
+                                   <p>• Type 2 diabetes (uncontrolled on oral agents)</p>
+                                   <p>• Diabetic ketoacidosis (IV)</p>
+                                   <p>• Gestational diabetes</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypoglycemia (active)</p>
+                                   <p>• Hypersensitivity to insulin or excipients</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Hypoglycemia, injection site lipohypertrophy, weight gain</p>
+                                   <p>Adverse Effects: Severe hypoglycemia (seizure, coma), anaphylaxis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline blood glucose and HbA1c.</p>
+                                       <p>2. Assess patient's ability to self-inject and recognize hypoglycemia.</p>
+                                       <p>3. Check for visual or cognitive impairment affecting dosing.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer regular insulin 30 minutes before meals (subcutaneously).</p>
+                                       <p>3. Only regular insulin is given IV (other types not for IV use).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor blood glucose before meals and bedtime.</p>
+                                       <p>2. Monitor for signs of hypoglycemia (sweating, tremor, confusion).</p>
+                                       <p>3. Monitor injection sites for lumps or atrophy.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct on proper rotation of injection sites.</p>
+                                       <p>2. Teach "15-15 rule" for mild hypoglycemia (15g carbs, recheck in 15 min).</p>
+                                       <p>3. Advise to carry medical ID and fast-acting sugar source.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 9: Acetylsalicylic acid (Aspirin)',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Acetylsalicylic acid (Aspirin)</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Bayer Aspirin, Ecotrin, Aspirina</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Analgesic, Antipyretic, Antiplatelet</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Nonsteroidal anti-inflammatory drug (NSAID)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet (plain, enteric-coated), chewable, suppository</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, PR</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>Analgesic: 325–650 mg; Antiplatelet: 75–100 mg daily</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4–6 hours (analgesic); once daily (antiplatelet)</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As needed (analgesic); lifelong (antiplatelet)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Irreversibly inhibits cyclooxygenase (COX-1 and COX-2), reducing prostaglandin and thromboxane A2 synthesis, causing antiplatelet effect.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Hoak, J. C. (1983). Mechanisms of action: Aspirin. Thrombosis Research, 29(Suppl. 1), 47–51. <code>https://doi.org/10.1016/0049-3848(83)90357-2</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Mild pain (headache, dental pain)</p>
+                                   <p>• Fever</p>
+                                   <p>• Myocardial infarction prevention</p>
+                                   <p>• Stroke prevention (ischemic)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Children with viral illness (Reye's syndrome risk)</p>
+                                   <p>• Active GI bleeding</p>
+                                   <p>• Aspirin allergy (including asthma with nasal polyps)</p>
+                                   <p>• Hemophilia or bleeding disorder</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: GI upset, heartburn, nausea</p>
+                                   <p>Adverse Effects: GI bleeding, hemorrhagic stroke, Reye's syndrome (children), tinnitus (toxicity)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess for history of GI bleeding, peptic ulcer, or bleeding disorder.</p>
+                                       <p>2. Check for allergy or asthma exacerbated by NSAIDs.</p>
+                                       <p>3. Assess for signs of stroke or MI.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Give with food or full glass of water to reduce GI irritation.</p>
+                                       <p>3. Do not crush enteric-coated tablets.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for signs of bleeding (petechiae, black tarry stools).</p>
+                                       <p>2. Monitor for tinnitus (salicylate toxicity).</p>
+                                       <p>3. Monitor prothrombin time if on anticoagulants</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct never to give aspirin to children with fever or flu-like symptoms.</p>
+                                       <p>2. Advise to report black stools or easy bruising.</p>
+                                       <p>3. Teach not to double dose if a dose is missed for antiplatelet therapy.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 10: Salbutamol (Albuterol)',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Salbutamol (Albuterol)</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Ventolin, Proventil, Salbulin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Bronchodilator</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Short-acting beta-2 adrenergic agonist (SABA)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Metered-dose inhaler (MDI), nebulizer solution, oral tablet, syrup, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Inhaled, PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>MDI: 1–2 puffs (90–180 mcg) every 4–6 hours; Nebulizer: 2.5 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4–6 hours as needed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As needed for acute symptoms; chronic use indicates need for controller therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Stimulates beta-2 adrenergic receptors in bronchial smooth muscle, activating adenylate cyclase and increasing cAMP, causing bronchodilation.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Phillips, G. D., et al. (1990). Comparative protective effect of the inhaled beta 2-agonist salbutamol (albuterol) on bronchoconstriction provoked by histamine, methacholine, and adenosine 5'-monophosphate in asthma. The Journal of Allergy and Clinical Immunology, 86(4), 755–762. <code>https://doi.org/10.1016/0091-6749(90)90195-a</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Asthma (acute or prevention of bronchospasm)</p>
+                                   <p>• COPD</p>
+                                   <p>• Hyperkalemia (IV route, off-label)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to salbutamol</p>
+                                   <p>• Tachyarrhythmias (e.g., uncontrolled atrial fibrillation)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Tremor, palpitations, headache, nervousness</p>
+                                   <p>Adverse Effects: Tachycardia, hypokalemia, paradoxical bronchospasm, QT prolongation</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline respiratory rate, oxygen saturation, lung auscultation (wheezing).</p>
+                                       <p>2. Check heart rate and rhythm before administration.</p>
+                                       <p>3. Assess history of cardiovascular disease or seizures.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Shake MDI well; use spacer if available. Instruct patient to exhale fully before inhalation.</p>
+                                       <p>3. Wait 1 minute between puffs if two puffs are ordered.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor peak expiratory flow or FEV1 before and after administration.</p>
+                                       <p>2. Monitor heart rate and rhythm (tachycardia risk).</p>
+                                       <p>3. Monitor serum potassium if high doses given (IV or nebulized).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Teach correct inhaler technique (slow deep breath, hold 10 sec).</p>
+                                       <p>2. Instruct to rinse mouth after use to prevent candidiasis (not common for SABA but good practice).</p>
+                                       <p>3. Advise that if salbutamol use increases (more than twice weekly for symptoms), medical evaluation is needed.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 11: Atorvastatin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Atorvastatin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Lipitor</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antilipemic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>HMG-CoA Reductase Inhibitor (Statin)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10–80 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term chronic therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Atorvastatin produces greater plasma LDL-cholesterol reductions than other statins due to its long-lasting action, reflecting longer residence time of atorvastatin and its active metabolites in the liver. The triglyceride reduction stems from limiting VLDL secretion from the liver and increasing clearance of triglyceride-rich lipoprotein via induced LDL receptors from plasma.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Lennernäs, H. (2003). Clinical pharmacokinetics of atorvastatin. Clinical Pharmacokinetics, 42(13), 1141-1160. <code>https://go.drugbank.com/articles/A19474</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Hypercholesterolemia,</p>
+                                   <p>• mixed dyslipidemia,</p>
+                                   <p>• prevention of cardiovascular events (MI, stroke)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Active liver disease,</p>
+                                   <p>• pregnancy/lactation,</p>
+                                   <p>• hypersensitivity to statins</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Myalgia, diarrhea, arthralgia, nasopharyngitis.</p>
+                                   <p>Adverse Effects: Hepatotoxicity, rhabdomyolysis (muscle breakdown), new-onset diabetes mellitus.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline lipid profile (LDL, HDL, triglycerides).</p>
+                                       <p>2. Assess liver function tests (ALT, AST) before starting.</p>
+                                       <p>3. Assess for unexplained muscle pain or weakness.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer once daily without regard to meals (evening dosing preferred for greater LDL reduction).</p>
+                                       <p>3. Do not crush or chew tablets.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor lipid profile after 4-6 weeks of therapy.</p>
+                                       <p>2. Monitor liver enzymes periodically (if ALT/AST &gt;3x normal, hold dose).</p>
+                                       <p>3. Monitor for signs of myopathy (muscle pain, tenderness, dark urine).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to take at same time each day (preferably at bedtime).</p>
+                                       <p>2. Advise to report unexplained muscle pain or weakness immediately.</p>
+                                       <p>3. Teach to avoid grapefruit juice (increases drug levels and toxicity risk).</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 12: Clindamycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Clindamycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cleocin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Lincosamide antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, IV, topical</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>150–450 mg (PO); 600–900 mg (IV)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6–8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on infection severity (usually 7-14 days)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Clindamycin inhibits peptide-bond formation by binding to the 50S ribosomal subunit.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Kouvela, E. C., Petropoulos, A. D., &amp; Kalpaxis, D. L. (2006). Unraveling new features of clindamycin interaction with functional ribosomes and dependence of the drug potency on polyamines. Journal of Biological Chemistry, 281(32), 23103-23110. <code>https://go.drugbank.com/articles/A233799</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Skin/soft tissue infections,</p>
+                                   <p>• bone/joint infections,</p>
+                                   <p>• anaerobic infections,</p>
+                                   <p>• bacterial vaginosis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to clindamycin or lincomycin,</p>
+                                   <p>• history of colitis (C. diff)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Diarrhea, nausea, vomiting, metallic taste (IV rapid infusion).</p>
+                                   <p>Adverse Effects: C. difficile-associated diarrhea (pseudomembranous colitis), severe hypersensitivity (Stevens-Johnson syndrome), hepatotoxicity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess bowel pattern before therapy (baseline).</p>
+                                       <p>2. Inspect skin or wound drainage for healing progress.</p>
+                                       <p>3. Monitor hydration status due to possible fluid loss from diarrhea.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Obtain culture and sensitivity results before starting if available.</p>
+                                       <p>2. Administer oral form with full glass of water.</p>
+                                       <p>3. For IV, infuse slowly (max 30 mg/min) to reduce venous irritation.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor bowel movements closely (report &gt;5 watery stools/day).</p>
+                                       <p>2. Monitor for allergic reactions (rash, urticaria).</p>
+                                       <p>3. Monitor liver enzymes with prolonged therapy.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Teach patient to complete full prescribed course even if symptoms improve.</p>
+                                       <p>2. Instruct to report severe watery diarrhea (even weeks after treatment).</p>
+                                       <p>3. Advise proper hand hygiene to prevent infection spread.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 13: Diclofenac',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Diclofenac</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Voltaren</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Analgesic, Anti-inflammatory</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>NSAID (Acetic acid derivative)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, injection, topical gel</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IM, topical</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>50–75 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term (as needed, usually 5-7 days for acute pain)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Diclofenac inhibits cyclooxygenase (COX)-1 and -2 which are the enzymes responsible for producing prostaglandins (PGs). PGs contribute to inflammation and pain signaling.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>DrugBank Online. (n.d.). Diclofenac. In DrugBank. Retrieved from <code>https://go.drugbank.com/drugs/DB00586</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Mild to moderate acute pain,</p>
+                                   <p>• osteoarthritis,</p>
+                                   <p>• rheumatoid arthritis,</p>
+                                   <p>• dysmenorrhea,</p>
+                                   <p>• migraine</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Active GI bleeding/peptic ulcer disease,</p>
+                                   <p>• severe renal/heart failure,</p>
+                                   <p>• aspirin/NSAID allergy,</p>
+                                   <p>• 3rd trimester of pregnancy</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Dyspepsia, nausea, heartburn, headache, dizziness.</p>
+                                   <p>Adverse Effects: GI bleeding/perforation, acute kidney injury, hepatotoxicity, anaphylaxis, increased cardiovascular risk (MI/stroke).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline pain level using pain scale (0-10).</p>
+                                       <p>2. Assess for history of GI ulcers, bleeding, or renal disease.</p>
+                                       <p>3. Assess for aspirin or NSAID allergy.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Give with food, milk, or full glass of water to reduce GI upset.</p>
+                                       <p>3. Do not crush delayed-release or extended-release tablets.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for black/tarry stools or coffee-ground emesis (GI bleeding).</p>
+                                       <p>2. Monitor urine output for signs of acute kidney injury.</p>
+                                       <p>3. Monitor blood pressure (NSAIDs can raise BP).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to avoid alcohol while taking this medication.</p>
+                                       <p>2. Advise not to take with other NSAIDs (aspirin, ibuprofen, naproxen).</p>
+                                       <p>3. Teach to report black stools or vomiting blood immediately.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 14: Digoxin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Digoxin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Lanoxin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiarrhythmic, Inotropic agent</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Cardiac glycoside</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, oral solution, IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.125–0.25 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term chronic therapy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Digoxin is a drug with a narrow therapeutic index which is a substrate of the ATP-dependent efflux pump P-glycoprotein. It inhibits the Na+/K+-ATPase pump, increasing intracellular calcium and enhancing cardiac contractility.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Pauli-Magnus, C., Murdter, T., Godel, A., Mettang, T., Eichelbaum, M., Klotz, U., &amp; Fromm, M. F. (2001). P-glycoprotein-mediated transport of digitoxin, alpha-methyldigoxin and beta-acetyldigoxin. Naunyn-Schmiedeberg's Archives of Pharmacology, 363(3), 337-343. <code>https://go.drugbank.com/articles/A16437</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Heart failure (HFrEF),</p>
+                                   <p>• atrial fibrillation (rate control),</p>
+                                   <p>• supraventricular tachycardias</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Ventricular fibrillation,</p>
+                                   <p>• hypertrophic cardiomyopathy,</p>
+                                   <p>• WPW syndrome,</p>
+                                   <p>• hypersensitivity,</p>
+                                   <p>• hypokalemia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, vomiting, anorexia, fatigue, headache, visual disturbances (yellow-green halos).</p>
+                                   <p>Adverse Effects: Digoxin toxicity (arrhythmias: bradycardia, heart block, ventricular tachycardia), gynecomastia (long-term).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess apical pulse for 1 full minute before administration (hold if &lt;60 bpm in adults).</p>
+                                       <p>2. Assess serum digoxin level (therapeutic: 0.5-0.8 ng/mL for HF; 0.8-2.0 ng/mL for arrhythmias).</p>
+                                       <p>3. Assess serum electrolytes (potassium, magnesium, calcium - hypokalemia increases toxicity risk).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Verify physician's order and patient identity.</p>
+                                       <p>2. Administer at same time daily (preferably morning).</p>
+                                       <p>3. Do not give with high-fiber meals (decreases absorption).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor heart rate and rhythm continuously.</p>
+                                       <p>2. Monitor serum digoxin levels periodically (especially with renal impairment).</p>
+                                       <p>3. Monitor for signs of toxicity (nausea, visual changes, bradycardia, new arrhythmias).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Teach to take pulse daily before medication and report if &lt;60 bpm or &gt;100 bpm.</p>
+                                       <p>2. Instruct to report nausea, vomiting, blurred vision, or yellow-green halos immediately.</p>
+                                       <p>3. Advise not to skip or double doses; maintain consistent intake of potassium-rich foods (bananas, potatoes).</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 15: Gentamicin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Gentamicin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Garamycin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective (antibiotic)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Aminoglycoside</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection (IV, IM), ophthalmic, topical</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM, ophthalmic, topical</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>3–5 mg/kg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8–24 hours (once daily dosing common)</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Usually 7-14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Gentamicin is an aminoglycoside that binds to the 30S ribosomal subunit, causing misreading of mRNA and production of nonfunctional proteins, leading to bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Dagil, R., O'Shea, C., Nykjaer, A., Bonvin, A. M., &amp; Kragelund, B. B. (2013). Gentamicin binds to the megalin receptor as a competitive inhibitor using the common ligand binding motif of complement type repeats. Journal of Biological Chemistry, 288(6), 4424-4435. <code>https://go.drugbank.com/articles/A233879</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Severe gram-negative infections (Pseudomonas, E. coli, Klebsiella, Enterobacter),</p>
+                                   <p>• sepsis,</p>
+                                   <p>• endocarditis (synergy with penicillin),</p>
+                                   <p>• complicated UTIs.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to aminoglycosides,</p>
+                                   <p>• myasthenia gravis,</p>
+                                   <p>• concurrent use with other nephrotoxic/ototoxic drugs</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, vomiting, injection site pain, rash.</p>
+                                   <p>Adverse Effects: Nephrotoxicity (acute kidney injury), ototoxicity (hearing loss, vestibular damage), neuromuscular blockade (respiratory depression).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline renal function (serum creatinine, BUN, creatinine clearance).</p>
+                                       <p>2. Assess baseline hearing and balance (audiometry if long-term).</p>
+                                       <p>3. Monitor infection signs (WBC, temperature, culture results).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Administer slowly via IV infusion over 30-60 minutes.</p>
+                                       <p>2. Monitor peak and trough levels (draw trough just before dose, peak 30-60 min after IV infusion).</p>
+                                       <p>3. Ensure adequate hydration (increase fluid intake if not contraindicated).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor renal function tests every 2-3 days (serum creatinine).</p>
+                                       <p>2. Observe for hearing changes (tinnitus, high-frequency hearing loss) or balance problems (vertigo, ataxia).</p>
+                                       <p>3. Monitor peak and trough serum drug levels (therapeutic peak: 5-10 mcg/mL; trough: &lt;2 mcg/mL).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct caregiver to report hearing changes (ringing in ears, difficulty hearing) immediately.</p>
+                                       <p>2. Explain importance of follow-up blood tests (renal function, drug levels).</p>
+                                       <p>3. Teach to report decreased urine output or swelling of face/ankles.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 16: Ketorolac',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ketorolac</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Toradol</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>NSAID (Acetic acid derivative)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV injection, IM injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10-30 mg (PO); 15-30 mg (IV/IM)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term only (maximum 5 days)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ketorolac exhibits anti-inflammatory, analgesic, and antipyretic activity. Its effects appear to be associated principally with the inhibition of prostaglandin synthesis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Litvak, K. M., &amp; McEvoy, G. K. (1990). Ketorolac, an injectable nonnarcotic analgesic. Clinical Pharmacy, 9(12), 921-935. <code>https://go.drugbank.com/articles/A176131</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Short-term management of moderate to severe acute pain (postoperative, renal colic, musculoskeletal)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Active GI bleeding/peptic ulcer,</p>
+                                   <p>• severe renal failure,</p>
+                                   <p>• aspirin/NSAID allergy,</p>
+                                   <p>• suspected or confirmed cerebrovascular bleeding,</p>
+                                   <p>• concurrent use with probenecid or pentoxifylline.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, dyspepsia, abdominal pain, headache, dizziness, drowsiness.</p>
+                                   <p>Adverse Effects: GI bleeding/perforation, acute kidney injury, hepatotoxicity, bronchospasm, increased bleeding time (antiplatelet effect).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess pain level before and 30-60 minutes after administration.</p>
+                                       <p>2. Assess for history of GI bleeding, peptic ulcer, or renal disease.</p>
+                                       <p>3. Assess for aspirin or NSAID allergy (cross-sensitivity possible).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Administer with food or milk to reduce GI upset.</p>
+                                       <p>2. Limit therapy to 5 days maximum (do not exceed)</p>
+                                       <p>3. For IV, inject slowly over 15-30 seconds; for IM, inject deeply into large muscle.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for GI bleeding (black tarry stools, coffee-ground emesis, abdominal pain).</p>
+                                       <p>2. Monitor urine output and renal function (serum creatinine).</p>
+                                       <p>3. Monitor for bleeding (petechiae, bruising, prolonged bleeding time).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Teach patient to report black stools, abdominal pain, or vomiting blood immediately.</p>
+                                       <p>2. Advise to avoid alcohol and other NSAIDs (aspirin, ibuprofen, naproxen).</p>
+                                       <p>3. Instruct not to use beyond 5 days due to risk of serious adverse effects.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 17: Metronidazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Metronidazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Flagyl</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective, Antiprotozoal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Nitroimidazole</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV infusion, capsule</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500 mg (PO/IV)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7-14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Metronidazole is a redox-activated prodrug that undergoes reductive activation by bacterial nitroreductases (RdxA and FrxA) and pyruvate oxidoreductase (POR), leading to DNA damage and cell death in susceptible anaerobic bacteria and protozoa.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Sisson, G., Goodwin, A., Raudonikiene, A., Hughes, N. J., Mukhopadhyay, A. K., Berg, D. E., &amp; Hoffman, P. S. (2002). Enzymes associated with reductive activation and action of nitazoxanide, nitrofurans, and metronidazole in Helicobacter pylori. Antimicrobial Agents and Chemotherapy, 46(7), 2116-2123. <code>https://go.drugbank.com/articles/A14008</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Anaerobic bacterial infections (intra-abdominal, pelvic),</p>
+                                   <p>• bacterial vaginosis,</p>
+                                   <p>• C. difficile infection (oral vancomycin alternative),</p>
+                                   <p>• amoebiasis,</p>
+                                   <p>• giardiasis,</p>
+                                   <p>• trichomoniasis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to metronidazole or other nitroimidazoles,</p>
+                                   <p>• use of alcohol during and within 3 days after therapy,</p>
+                                   <p>• concomitant use with disulfiram.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, metallic taste, headache, diarrhea, abdominal discomfort, dark urine.</p>
+                                   <p>Adverse Effects: Peripheral neuropathy (with prolonged use), seizures, Stevens-Johnson syndrome, encephalopathy, pancreatitis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess for signs and symptoms of infection (fever, WBC, culture results).</p>
+                                       <p>2. Assess liver function tests (hepatic metabolism).</p>
+                                       <p>3. Assess history of alcohol intake (recent disulfiram use).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Administer after meals if GI upset occurs.</p>
+                                       <p>2. Infuse IV dose over 30-60 minutes (avoid rapid infusion).</p>
+                                       <p>3. Complete full course of therapy even if symptoms improve.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor WBC count and infection signs (temperature).</p>
+                                       <p>2. Monitor for neurologic changes (numbness/tingling in extremities - peripheral neuropathy).</p>
+                                       <p>3. Monitor response to infection treatment (symptom improvement).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct patient to avoid alcohol during therapy and for 3 days after completion (disulfiram-like reaction: severe nausea, vomiting, flushing).</p>
+                                       <p>2. Teach to complete prescribed antibiotic course.</p>
+                                       <p>3. Advise that metallic taste and dark urine are common harmless effects.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 18: Piperacillin-Tazobactam',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Piperacillin-Tazobactam</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Zosyn</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective (antibiotic)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Penicillin + Beta-lactamase inhibitor</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Powder for injection (IV)</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>3.375 g or 4.5 g</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6-8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7-14 days (depends on infection)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Piperacillin exhibits bactericidal activity by binding to penicillin-binding proteins (PBPs), particularly PBP 3, inhibiting bacterial cell wall synthesis. Tazobactam irreversibly inhibits beta-lactamases, preventing degradation of piperacillin.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>Drugeon, H. B., Caillon, J., Moinard, D., Juvin, M. E., &amp; Pirault, J. L. (1986). Bactericidal effect of piperacillin alone and combined. La Presse Médicale, 15(46), 2297-2302. <code>https://go.drugbank.com/articles/A16712</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Moderate to severe hospital-acquired/pneumonia,</p>
+                                   <p>• complicated intra-abdominal infections,</p>
+                                   <p>• complicated UTIs,</p>
+                                   <p>• skin/soft tissue infections,</p>
+                                   <p>• sepsis (empiric therapy for gram-positive, gram-negative, and anaerobic coverage).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to piperacillin,</p>
+                                   <p>• tazobactam,</p>
+                                   <p>• penicillins,</p>
+                                   <p>• cephalosporins,</p>
+                                   <p>• or beta-lactamase inhibitors.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Diarrhea, nausea, vomiting, headache, insomnia, injection site pain/phlebitis.</p>
+                                   <p>Adverse Effects: Anaphylaxis, C. difficile-associated diarrhea (CDAD), nephrotoxicity (especially with vancomycin), hepatotoxicity, bleeding (prolonged bleeding time - platelet dysfunction), hypokalemia.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess for history of penicillin/cephalosporin allergy (cross-sensitivity 5-10%).</p>
+                                       <p>2. Assess baseline renal function (CrCl) for dose adjustment.</p>
+                                       <p>3. Obtain culture specimens before first dose if possible.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Reconstitute properly and administer IV over 30 minutes (slow infusion).</p>
+                                       <p>2. Administer at prescribed intervals (every 6-8 hours).</p>
+                                       <p>3. For patients with renal impairment, adjust dose based on CrCl.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor for signs of allergic reaction (rash, wheezing, anaphylaxis - have epinephrine ready).</p>
+                                       <p>2. Monitor for diarrhea (C. difficile risk - report &gt;5 watery stools/day).</p>
+                                       <p>3. Monitor renal function and electrolytes (potassium can drop).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Instruct to report severe watery diarrhea immediately (even after antibiotics finished).</p>
+                                       <p>2. Advise to complete full course even if symptoms improve.</p>
+                                       <p>3. Teach to report rash, difficulty breathing, or unusual bleeding/bruising.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 19: Potassium Chloride',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Potassium Chloride</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>K-Dur, Klor-Con, Micro-K</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Electrolyte replacement</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Mineral/Electrolyte</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet (extended-release), capsule, powder, IV solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10-40 mEq (oral); 10-20 mEq/hour (IV - max 40 mEq/hour with cardiac monitoring)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once to 4 times daily (oral); continuous or intermittent infusion (IV)</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until serum potassium normalizes (usually 3.5-5.0 mEq/L)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>The potassium ion is the principal intracellular cation of most body tissues. Potassium ions participate in essential physiological processes including maintenance of intracellular tonicity, transmission of nerve impulses, contraction of cardiac, skeletal and smooth muscle, and maintenance of normal renal function. Supplemental potassium in the form of potassium chloride may restore normal potassium levels.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>DrugBank Online. (2005). Potassium chloride. In DrugBank. <code>https://go.drugbank.com/drugs/DB00761</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• Prevention and treatment of hypokalemia (low serum potassium), especially in patients on diuretics (loop diuretics, thiazides),</p>
+                                   <p>• digoxin therapy,</p>
+                                   <p>• vomiting/diarrhea,</p>
+                                   <p>• or poor intake.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Severe renal impairment (CrCl &lt;10 mL/min),</p>
+                                   <p>• hyperkalemia (already high K+ &gt;5.2 mEq/L),</p>
+                                   <p>• Addison's disease,</p>
+                                   <p>• untreated heart block,</p>
+                                   <p>• use of potassium-sparing diuretics.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Nausea, vomiting, diarrhea, abdominal discomfort (oral), phlebitis (IV).</p>
+                                   <p>Adverse Effects: Hyperkalemia (cardiac arrhythmias, cardiac arrest), severe GI irritation/ulceration (oral tablets), IV extravasation (tissue necrosis).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline serum potassium level (normal: 3.5-5.0 mEq/L).</p>
+                                       <p>2. Assess renal function (BUN, creatinine, urine output - at least 0.5 mL/kg/hour).</p>
+                                       <p>3. Assess ECG for signs of hypokalemia (flat T waves, U waves, ST depression) or hyperkalemia (peaked T waves, wide QRS, loss of P wave).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. For IV: Dilute properly (max concentration 40 mEq/L for peripheral, 80 mEq/L for central line).</p>
+                                       <p>2. For IV: Administer at safe rate (max 10 mEq/hour without cardiac monitoring, 20-40 mEq/hour with cardiac monitor).</p>
+                                       <p>3. For oral: Give with food and full glass of water; do not crush or chew extended-release tablets.</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor serum potassium levels regularly (repeat 2-4 hours after IV dose).</p>
+                                       <p>2. Monitor ECG continuously during IV administration (risk of fatal arrhythmias).</p>
+                                       <p>3. Monitor urine output (at least 10-15 mL/hour before giving IV potassium).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Teach to take with food and full glass of water to prevent GI upset.</p>
+                                       <p>2. Advise not to crush or chew extended-release tablets (risk of sudden high K+ release).</p>
+                                       <p>3. Instruct to report muscle weakness, tingling, or irregular heartbeat immediately.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 20: Vancomycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Vancomycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Vancocin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective (antibiotic)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Glycopeptide</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, powder for IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO (for C. diff only), IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500 mg - 1 g (IV); 125-250 mg (PO for C. diff)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6-12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on infection (usually 7-14 days)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Vancomycin inhibits bacterial cell wall synthesis by binding with high affinity to the D-alanyl-D-alanine terminus of cell wall precursor units, preventing cross-linking and causing bacterial cell lysis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Reference:</p>
+                                   <p>DrugBank Online. (n.d.). Vancomycin. In DrugBank. Retrieved from <code>https://go.drugbank.com/drugs/DB00912</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Indications</p>
+                                   <p>• MRSA infections (pneumonia, bacteremia, endocarditis, skin/soft tissue),</p>
+                                   <p>• C. difficile infection (oral vancomycin only),</p>
+                                   <p>• serious gram-positive infections in penicillin-allergic patients,</p>
+                                   <p>• empiric coverage for sepsis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Contraindications</p>
+                                   <p>• Hypersensitivity to vancomycin.</p>
+                                   <p>• (PO form has no systemic absorption - no other contraindications)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-3">Side Effects and Adverse Effects</p>
+                                   <p>Side Effects: Fever, chills, phlebitis (injection site), nausea (PO), flushing/redness of upper body (Red Man Syndrome with rapid IV infusion).</p>
+                                   <p>Adverse Effects: Nephrotoxicity (acute kidney injury), ototoxicity (hearing loss, tinnitus), severe thrombocytopenia, anaphylaxis, Stevens-Johnson syndrome.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4 space-y-3">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Nursing Responsibilities</p>
+                                   <div>
+                                       <p class="font-semibold text-white">Assessment (Dx)</p>
+                                       <p>1. Assess baseline renal function (serum creatinine, CrCl, urine output).</p>
+                                       <p>2. Assess baseline hearing (audiometry if long-term therapy).</p>
+                                       <p>3. Monitor infection signs (WBC, temperature, culture results).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Administration (Tx)</p>
+                                       <p>1. Administer IV slowly over at least 60 minutes (max rate 10 mg/min) to prevent Red Man Syndrome.</p>
+                                       <p>2. Monitor vancomycin trough levels (draw 30 minutes before 3rd or 4th dose; therapeutic: 10-20 mcg/mL for most infections; 15-20 mcg/mL for serious MRSA infections).</p>
+                                       <p>3. Ensure adequate hydration (encourage fluids if not contraindicated).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Monitoring</p>
+                                       <p>1. Monitor renal function tests (serum creatinine every 2-3 days).</p>
+                                       <p>2. Monitor vancomycin trough levels regularly (especially with renal impairment).</p>
+                                       <p>3. Monitor for hearing changes (tinnitus, hearing loss - report immediately) and Red Man Syndrome (flushing, rash, hypotension).</p>
+                                   </div>
+                                   <div>
+                                       <p class="font-semibold text-white">Patient Education (Edx)</p>
+                                       <p>1. Educate patient about the need for regular blood monitoring (renal function, drug levels).</p>
+                                       <p>2. Instruct to report hearing problems (ringing in ears, hearing loss) immediately.</p>
+                                       <p>3. Advise to maintain adequate hydration and report decreased urine output or swelling.</p>
+                                   </div>
+                               </div>
+                           </div>`
+                }
+            ],
+            'ward-pediatric': [
+                {
+                    title: 'Page 1: Azithromycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Azithromycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Zithromax</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Macrolide antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, capsule, oral suspension, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250–500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Usually 3–5 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial protein synthesis by binding to the 50S ribosomal subunit.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Quiring, C. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Respiratory tract infections, skin infections, otitis media, sexually transmitted infections.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to macrolides, severe liver disease.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Nausea, vomiting, diarrhea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• QT prolongation, hepatotoxicity, allergic reaction</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess history of allergy to macrolides before administration.</p>
+                                   <p>2. Observe sputum color and consistency for respiratory improvement.</p>
+                                   <p>3. Review culture and sensitivity results for antibiotic effectiveness</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician’s order and patient identity.</p>
+                                   <p>2. Give oral medication 1 hour before or 2 hours after meals.</p>
+                                   <p>3. Shake oral suspension well before use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor bowel pattern for diarrhea.</p>
+                                   <p>2. Monitor liver enzymes if prolonged use.</p>
+                                   <p>3.Monitor ECG in patients at risk for arrhythmias.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Instruct the patient/ watcher to finish the full course of antibiotics.</p>
+                                   <p>2. Advise to report severe diarrhea or palpitations.</p>
+                                   <p>3. Teach patient to avoid antacids within 2 hours of taking the drug</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 2: Clindamycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Clindamycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cleocin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Lincosamide antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, IV, topical</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, topical</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>150–450 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6–8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on infection severity</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial protein synthesis by binding to the 50S ribosome.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Quiring, C. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Skin infections, bone infections, anaerobic infections.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity, history of colitis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Diarrhea, nausea, rash</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Pseudomembranous colitis, severe hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess bowel pattern before therapy.</p>
+                                   <p>2. Inspect skin or wound drainage for healing progress.</p>
+                                   <p>3. Monitor hydration status due to possible fluid loss.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Obtain culture and sensitivity results if available.</p>
+                                   <p>2. Check IV site for patency before infusion.</p>
+                                   <p>3. Administer oral form with full glass of water.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor CBC and liver function tests.</p>
+                                   <p>2. Monitor bowel movements closely.</p>
+                                   <p>3. Monitor for allergic reactions.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Teach patient to complete prescribed therapy.</p>
+                                   <p>2. Instruct to report severe diarrhea immediately.</p>
+                                   <p>3. Advise proper hand hygiene to prevent infection spread.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 3: Cephalexin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Cephalexin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Keflex</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>First-generation cephalosporin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, suspension</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250–500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7–14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial cell wall synthesis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Skidmore-Roth, L. (2024). Mosby’s drug guide for nursing students (16th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Skin infections, respiratory infections, UTIs.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Allergy to cephalosporins or penicillins.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Nausea, vomiting, diarrhea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Anaphylaxis, C. difficile-associated diarrhea</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess infection signs and temperature.</p>
+                                   <p>2. Monitor redness, swelling, or wound drainage.</p>
+                                   <p>3. Check body temperature for response to therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration(Tx)</p>
+                                   <p>1. Verify medication order.</p>
+                                   <p>2. Shake suspension before use.</p>
+                                   <p>3. Administer with food if GI upset occurs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor renal function tests.</p>
+                                   <p>2. Monitor CBC if prolonged therapy.</p>
+                                   <p>3. Monitor for superinfection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Teach patient to complete therapy.</p>
+                                   <p>2. Instruct to report rash or difficulty breathing.</p>
+                                   <p>3. Advise proper medication schedule compliance.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 4: Clarithromycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Clarithromycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Biaxin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Macrolide antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, suspension</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250–500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7–14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial protein synthesis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Quiring, C. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Respiratory tract infections, H. pylori infection.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity, severe liver disease</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Metallic taste, nausea, diarrhea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• QT prolongation, hepatotoxicity</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed respiratory status and breath sounds.</p>
+                                   <p>2. Monitored appetite and nutritional intake.</p>
+                                   <p>3. Observed for jaundice or liver dysfunction signs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered clarithromycin as ordered.</p>
+                                   <p>2. Ensured adequate hydration during therapy.</p>
+                                   <p>3. Provided comfort measures for GI discomfort.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor liver enzymes.</p>
+                                   <p>2. Monitor ECG if indicated.</p>
+                                   <p>3. Monitor signs of superinfection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient to complete antibiotic therapy.</p>
+                                   <p>2. Instructed patient to avoid missing doses.</p>
+                                   <p>3. Explained possible side effects such as metallic taste.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 5: Vancomycin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Vancomycin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Vancocin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Glycopeptide antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>IV, capsule</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500 mg–1 g</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6–12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on infection</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits bacterial cell wall synthesis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Skidmore-Roth, L. (2024). Mosby’s drug guide for nursing students (16th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• MRSA infections, severe gram-positive infections.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Fever, chills, phlebitis</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Nephrotoxicity, ototoxicity, Red Man Syndrome</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Monitored urine output and renal function.</p>
+                                   <p>2. Observed IV site for redness or swelling.</p>
+                                   <p>3. Evaluated hearing changes during therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered vancomycin slowly as prescribed.</p>
+                                   <p>2. Ensured proper IV dilution before infusion.</p>
+                                   <p>3. Provided monitoring during infusion for adverse reactions.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor vancomycin trough levels.</p>
+                                   <p>2. Monitor BUN and creatinine.</p>
+                                   <p>3. Monitor hearing changes.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient about the need for blood monitoring.</p>
+                                   <p>2. Instructed patient to report hearing problems immediately.</p>
+                                   <p>3. Advised patient to maintain adequate hydration.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 6: Diazepam',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Diazepam</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Valium</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antianxiety</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Benzodiazepine</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV, rectal gel</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, rectal</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>2–10 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>2–4 times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Enhances inhibitory action of GABA in the CNS</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Quiring, C. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Anxiety, seizures, muscle spasms.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Respiratory depression, severe liver disease.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Drowsiness, dizziness, weakness</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Respiratory depression, dependence</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed level of consciousness and orientation.</p>
+                                   <p>2. Monitored respiratory status and sedation level.</p>
+                                   <p>3. Observed gait and motor coordination.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered diazepam slowly as prescribed.</p>
+                                   <p>2. Ensured safety precautions to prevent falls.</p>
+                                   <p>3. Provided calm and quiet environment for patient comfort.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor vital signs.</p>
+                                   <p>2. Monitor sedation level.</p>
+                                   <p>3. Monitor for dependency signs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education ((Edx)</p>
+                                   <p>4. Educated patient to avoid alcohol intake.</p>
+                                   <p>5. Instructed patient not to operate machinery while medicated.</p>
+                                   <p>6. Explained the importance of not stopping medication abruptly.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 7: Epinephrine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Epinephrine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>EpiPen</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Adrenergic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Sympathomimetic catecholamine</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IM, IV, SC</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.3–0.5 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>As needed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Emergency use</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Stimulates alpha and beta adrenergic receptors causing bronchodilation and vasoconstriction.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Kee, J. L., Hayes, E. R., & McCuistion, L. E. (2021). Pharmacology: A patient-centered nursing process approach (10th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Anaphylaxis, cardiac arrest, severe asthma.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• None in emergency situations.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Tremors, palpitations, anxiety</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Hypertension, arrhythmias</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed airway patency and breathing pattern.</p>
+                                   <p>2. Monitored blood pressure and heart rate.</p>
+                                   <p>3. Observed skin for swelling or hives.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered epinephrine immediately during emergency situations.</p>
+                                   <p>2. Ensured availability of emergency equipment.</p>
+                                   <p>3. Provided oxygen support as ordered.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor ECG and blood pressure.</p>
+                                   <p>2. Monitor respiratory status.</p>
+                                   <p>3. Monitor oxygen saturation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient on proper EpiPen usage.</p>
+                                   <p>2. Instructed patient to seek emergency care after administration.</p>
+                                   <p>3. Advised patient to carry emergency medication at all times.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 8: Nystatin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Nystatin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Mycostatin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antifungal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Polyene antifungal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Suspension, cream, powder</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, topical</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>100,000 units/mL</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>4 times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until infection resolves</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Binds to fungal cell membrane causing leakage of contents.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Skidmore-Roth, L. (2024). Mosby’s drug guide for nursing students (16th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Candidiasis, oral thrush.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Mild irritation, nausea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Severe allergic reaction</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed oral cavity for white patches or lesions.</p>
+                                   <p>2. Monitored swallowing comfort and oral pain.</p>
+                                   <p>3. Observed affected skin areas for irritation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered nystatin as prescribed.</p>
+                                   <p>2. Ensured proper oral hygiene during therapy.</p>
+                                   <p>3. Provided clean application technique for topical use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor improvement of lesions.</p>
+                                   <p>2. Monitor for allergic reactions.</p>
+                                   <p>3. Monitor nutritional intake if oral thrush present.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient about proper oral hygiene practices.</p>
+                                   <p>2. Instructed patient to continue medication as prescribed.</p>
+                                   <p>3. Encouraged avoidance of irritating foods and smoking.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 9: Furosemide',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Furosemide</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Lasix</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Diuretic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Loop diuretic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20–80 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on condition</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits sodium and chloride reabsorption in the loop of Henle.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Quiring, C. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Edema, hypertension, heart failure.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Anuria, severe electrolyte depletion</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Increased urination, dizziness</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Hypokalemia, dehydration, ototoxicity</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed edema and fluid retention status.</p>
+                                   <p>2. Monitored intake and output balance.</p>
+                                   <p>3. Observed blood pressure and electrolyte imbalance signs</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered furosemide as ordered.</p>
+                                   <p>2. Ensured daily weight monitoring.</p>
+                                   <p>3. Provided assistance during ambulation to prevent falls.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor electrolytes.</p>
+                                   <p>2. Monitor renal function.</p>
+                                   <p>3. Monitor hearing changes with IV use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient to change positions slowly.</p>
+                                   <p>2. Instructed patient to eat potassium-rich foods if allowed.</p>
+                                   <p>3. Advised patient to report muscle cramps or weakness.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 10: Hydrocortisone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Hydrocortisone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cortef, Solu-Cortef</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-inflammatory</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Corticosteroid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, cream, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, topical, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>Varies according to condition</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>As prescribed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on disease condition</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Suppresses inflammation and immune response.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Kee, J. L., Hayes, E. R., & McCuistion, L. E. (2021). Pharmacology: A patient-centered nursing process approach (10th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Allergic reactions, adrenal insufficiency, inflammation.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Systemic fungal infection, hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Increased appetite, weight gain, insomnia</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Adrenal suppression, hyperglycemia, infection risk</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assessed inflammation and swelling severity.</p>
+                                   <p>2. Monitored blood glucose and weight changes.</p>
+                                   <p>3. Observed for signs of infection or delayed healing.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Administered hydrocortisone as prescribed.</p>
+                                   <p>2. Ensured medication was taken with food if oral.</p>
+                                   <p>3. Provided aseptic technique during IV administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor blood glucose and electrolytes.</p>
+                                   <p>2. Monitor weight and edema.</p>
+                                   <p>3. Monitor signs of adrenal suppression.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Educated patient not to stop medication abruptly.</p>
+                                   <p>2. Instructed patient to report fever or infection signs.</p>
+                                   <p>3. Explained the importance of taking medication with food.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 11: Paracetamol',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Paracetamol</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Biogesic, Tempra, Calpol</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Analgesic, Antipyretic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Para-aminophenol derivative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Syrup, tablet, suppository, IV solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV, Rectal</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10–15 mg/kg/dose</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4–6 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Paracetamol inhibits prostaglandin synthesis in the CNS and acts on the hypothalamic heat-regulating center to reduce fever and pain.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Deglin, J. H. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Fever</p>
+                                   <p>• Mild to moderate pain</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Severe liver disease</p>
+                                   <p>• Hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Nausea</p>
+                                   <p>• Rash</p>
+                                   <p>• Hepatotoxicity</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess pain and temperature before giving medication.</p>
+                                   <p>2. Assess liver function history.</p>
+                                   <p>3. Check for allergy to the drug.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer exact dose based on weight.</p>
+                                   <p>2. Use proper measuring device for syrup.</p>
+                                   <p>3. Observe correct dosing interval.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor temperature and pain relief after administration.</p>
+                                   <p>2.Observe signs of hepatotoxicity such as jaundice or dark urine.</p>
+                                   <p>3.Monitor for allergic reactions like rash or swelling.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach caregiver not to overdose the child.</p>
+                                   <p>2. Encourage adequate fluid intake.</p>
+                                   <p>3. Advise to report yellowing of skin or eyes.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 12: Amoxicillin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Amoxicillin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Amoxil</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Penicillin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, suspension</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20–40 mg/kg/day divided doses</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8–12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7–14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Amoxicillin inhibits bacterial cell wall synthesis causing bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Skidmore-Roth, L. (2024). Mosby’s 2024 nursing drug reference. Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Respiratory tract infections</p>
+                                   <p>• Otitis media</p>
+                                   <p>• Skin infections</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Penicillin allergy</p>
+                                   <p>• Infectious mononucleosis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Nausea</p>
+                                   <p>• Rash</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess for signs of infection.</p>
+                                   <p>2. Monitor temperature and WBC count.</p>
+                                   <p>3. Check allergy history.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Shake suspension well before use.</p>
+                                   <p>2. Administer at evenly spaced intervals.</p>
+                                   <p>3. Complete full prescribed dose.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor for improvement of infection signs and symptoms.</p>
+                                   <p>2.Observe diarrhea or superinfection.</p>
+                                   <p>3.Monitor for allergic reactions such as rash or difficulty breathing.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach caregiver to finish antibiotic therapy.</p>
+                                   <p>2. Encourage increased fluid intake.</p>
+                                   <p>3. Advise to report severe diarrhea or rash.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 13: Ampicillin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ampicillin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Omnipen</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Penicillin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, vial</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>100–200 mg/kg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ampicillin interferes with bacterial cell wall synthesis leading to bacterial destruction.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Karch, A. M. (2021). Focus on nursing pharmacology (8th ed.). Wolters Kluwer.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Pneumonia</p>
+                                   <p>• GI infections</p>
+                                   <p>• Meningitis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Penicillin hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Rash</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Superinfection</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess infection signs and symptoms.</p>
+                                   <p>2. Monitor temperature regularly.</p>
+                                   <p>3. Assess allergy history.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer IV slowly as prescribed.</p>
+                                   <p>2. Use aseptic technique.</p>
+                                   <p>3. Rotate IM injection sites if needed.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor temperature, WBC count, and infection status.</p>
+                                   <p>2.Observe for signs of hypersensitivity reaction.</p>
+                                   <p>3.Monitor bowel function for diarrhea or superinfection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">patient education (edx)</p>
+                                   <p>1. Explain importance of completing therapy.</p>
+                                   <p>2. Encourage hydration.</p>
+                                   <p>3. Advise caregiver to report diarrhea or rash.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 14: Ceftriaxone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ceftriaxone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Rocephin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Cephalosporin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Powder for injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>50–100 mg/kg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 12–24 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ceftriaxone inhibits bacterial cell wall synthesis causing bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Wolters Kluwer. (2024). Nursing2024 drug handbook (44th ed.). Wolters Kluwer.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Pneumonia</p>
+                                   <p>• Sepsis</p>
+                                   <p>• Meningitis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Cephalosporin allergy</p>
+                                   <p>• Hyperbilirubinemic neonates</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Injection site pain</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Allergic reaction</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess infection signs and symptoms.</p>
+                                   <p>2. Monitor CBC and renal function.</p>
+                                   <p>3. Check for cephalosporin allergy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Dilute properly before administration.</p>
+                                   <p>2. Administer over recommended time.</p>
+                                   <p>3. Monitor IV site for phlebitis.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor CBC, renal function, and liver function if prolonged therapy.</p>
+                                   <p>2.Observe IV site for redness or phlebitis.</p>
+                                   <p>3.Monitor for allergic reactions and diarrhea.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach importance of completing antibiotics.</p>
+                                   <p>2. Encourage hydration.</p>
+                                   <p>3. Advise to report severe diarrhea.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 15: Salbutamol',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Salbutamol</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Ventolin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Bronchodilator</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Beta2-adrenergic agonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Nebule, syrup, inhaler</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Inhalation, Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>As prescribed</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4–6 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As ordered</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Salbutamol stimulates beta2 receptors in the lungs causing bronchodilation and improved airflow.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Lehne, R. A. (2022). Lehne’s pharmacology for nursing care (11th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Asthma</p>
+                                   <p>• Bronchospasm</p>
+                                   <p>• Wheezing</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Severe tachycardia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Tremors</p>
+                                   <p>• Tachycardia</p>
+                                   <p>• Nervousness</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess respiratory status before treatment.</p>
+                                   <p>2. Monitor oxygen saturation.</p>
+                                   <p>3. Assess breath sounds and wheezing.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer nebulization properly.</p>
+                                   <p>2. Encourage slow deep breathing.</p>
+                                   <p>3. Monitor heart rate during therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor respiratory rate, breath sounds, and oxygen saturation.</p>
+                                   <p>2.Observe for tachycardia and tremors.</p>
+                                   <p>3.Monitor effectiveness of bronchodilation after treatment.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach proper inhalation technique.</p>
+                                   <p>2. Explain possible shakiness after use.</p>
+                                   <p>3. Advise to seek help if breathing worsens.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 16: Oral Rehydration Solution',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Oral Rehydration Solution</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Hydrite, Pedialyte</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Fluid and electrolyte replacement</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Oral electrolyte solution</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Powder, liquid</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>Based on dehydration severity</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Frequent small amounts</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until rehydrated</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>ORS replaces fluids and electrolytes lost through diarrhea and vomiting through glucose-assisted sodium absorption.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>World Health Organization. (2005). The treatment of diarrhoea: A manual for physicians and other senior health workers (4th rev.). World Health Organization.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Mild dehydration</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Vomiting</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Severe dehydration requiring IV fluids</p>
+                                   <p>• Intestinal obstruction</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Vomiting</p>
+                                   <p>• Hypernatremia if improperly mixed</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess signs of dehydration.</p>
+                                   <p>2. Monitor intake and output.</p>
+                                   <p>3. Assess skin turgor and mucous membranes.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Prepare solution correctly.</p>
+                                   <p>2. Give small frequent sips.</p>
+                                   <p>3. Continue feeding if tolerated.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor intake and output accurately.</p>
+                                   <p>2.Observe improvement in hydration status.</p>
+                                   <p>3.Monitor for persistent vomiting or worsening dehydration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach proper ORS preparation.</p>
+                                   <p>2. Encourage continued hydration.</p>
+                                   <p>3. Advise caregiver to seek medical help if child becomes lethargic.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 17: Metronidazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Metronidazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Flagyl</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Nitroimidazole</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20–30 mg/kg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Metronidazole disrupts DNA synthesis of anaerobic bacteria and protozoa resulting in cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Vallerand, A. H., Sanoski, C. A., & Deglin, J. H. (2023). Davis’s drug guide for nurses (18th ed.). F.A. Davis Company.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Anaerobic infections</p>
+                                   <p>• Amoebiasis</p>
+                                   <p>• GI infections</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Severe liver disease</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Metallic taste</p>
+                                   <p>• Nausea</p>
+                                   <p>• Dark urine</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess infection symptoms.</p>
+                                   <p>2. Monitor liver function tests.</p>
+                                   <p>3. Observe bowel pattern.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer after meals if GI upset occurs.</p>
+                                   <p>2. Infuse IV slowly if ordered.</p>
+                                   <p>3. Monitor for adverse reactions.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor bowel pattern and infection symptoms.</p>
+                                   <p>2.Observe for nausea, vomiting, or abdominal discomfort.</p>
+                                   <p>3.Monitor liver function during prolonged therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Explain the importance of completing treatment.</p>
+                                   <p>2. Inform caregiver about dark urine discoloration.</p>
+                                   <p>3. Advise to report persistent vomiting.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 18: Omeprazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Omeprazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Losec, Prilosec</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiulcer agent</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Proton pump inhibitor</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>As prescribed</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As ordered</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Omeprazole suppresses gastric acid secretion by inhibiting the proton pump in gastric parietal cells.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Kee, J. L., Hayes, E. R., & McCuistion, L. E. (2021). Pharmacology: A patient-centered nursing process approach (10th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• GERD</p>
+                                   <p>• Gastritis</p>
+                                   <p>• Peptic ulcer disease</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to PPIs</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Headache</p>
+                                   <p>• Abdominal pain</p>
+                                   <p>• Diarrhea</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess abdominal pain and GI symptoms.</p>
+                                   <p>2. Monitor bowel movement.</p>
+                                   <p>3. Assess for GI bleeding signs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer before meals.</p>
+                                   <p>2. Do not crush delayed-release forms.</p>
+                                   <p>3. Give IV slowly as prescribed.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor relief of gastric symptoms.</p>
+                                   <p>2.Observe for diarrhea or abdominal pain.</p>
+                                   <p>3.Monitor for signs of GI bleeding such as black stools.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach proper medication timing.</p>
+                                   <p>2. Encourage avoidance of gastric irritants.</p>
+                                   <p>3. Advise to report black stools or vomiting blood.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 19: Gentamicin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Gentamicin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Garamycin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Aminoglycoside</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>2–7.5 mg/kg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8–24 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Gentamicin inhibits bacterial protein synthesis resulting in bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Skidmore-Roth, L. (2024). Mosby’s 2024 nursing drug reference. Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Severe bacterial infections</p>
+                                   <p>• Sepsis</p>
+                                   <p>• Pneumonia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to aminoglycosides</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Nephrotoxicity</p>
+                                   <p>• Ototoxicity</p>
+                                   <p>• Rash</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Monitor renal function tests.</p>
+                                   <p>2. Assess hearing changes.</p>
+                                   <p>3. Monitor infection signs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer slowly via IV infusion.</p>
+                                   <p>2. Monitor peak and trough levels if ordered.</p>
+                                   <p>3. Ensure adequate hydration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor renal function tests regularly.</p>
+                                   <p>2.Observe hearing changes or balance problems.</p>
+                                   <p>3.Monitor peak and trough serum drug levels if ordered.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Instruct caregiver to report hearing changes.</p>
+                                   <p>2. Explain importance of follow-up tests.</p>
+                                   <p>3. Teach to complete prescribed therapy.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 20: Budesonide',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Budesonide</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Pulmicort</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Corticosteroid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Glucocorticoid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Nebule, inhaler</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Inhalation</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>As prescribed</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>1–2 times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As ordered</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Budesonide decreases airway inflammation by inhibiting inflammatory mediator release in the respiratory tract.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Reference:</p>
+                                   <p>Lehne, R. A. (2022). Lehne’s pharmacology for nursing care (11th ed.). Elsevier.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Indications</p>
+                                   <p>• Asthma maintenance</p>
+                                   <p>• Airway inflammation</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Untreated respiratory infection</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Oral thrush</p>
+                                   <p>• Hoarseness</p>
+                                   <p>• Cough</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (DX)</p>
+                                   <p>1. Assess respiratory status and breath sounds.</p>
+                                   <p>2. Monitor oxygen saturation.</p>
+                                   <p>3. Observe for signs of infection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (TX)</p>
+                                   <p>1. Administer via nebulizer properly.</p>
+                                   <p>2. Encourage mouth rinsing after use.</p>
+                                   <p>3. Monitor response to therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1.Monitor respiratory status and oxygen saturation.</p>
+                                   <p>2.Observe for oral thrush or hoarseness.</p>
+                                   <p>3.Monitor effectiveness in reducing wheezing and airway inflammation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (EDX)</p>
+                                   <p>1. Teach proper nebulization technique.</p>
+                                   <p>2. Instruct caregiver to rinse mouth after use.</p>
+                                   <p>3. Explain that medication prevents attacks and is not for emergency relief.</p>
+                               </div>
+                           </div>`
+                }
+            ],
+            'ward-surgical': [
+                {
+                    title: 'Page 1: Tramadol',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Tramadol</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Ultram</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Opioid analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Centrally acting synthetic opioid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Capsule, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>50 to 100 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4 to 6 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Tramadol binds to mu-opioid receptors and inhibits the reuptake of norepinephrine and serotonin, altering pain perception and response.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Grond, S., & Sablotzki, A. (2023). Clinical pharmacology of tramadol. Clinical Pharmacokinetics, 43(13), 879–923. <code>\`https://doi.org/10.2165/00003088-200443130-00004\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Management of moderate to severe pain</p>
+                                   <p>• Acute Pain</p>
+                                   <p>• Chronic pain requiring opioid analgesics treatment</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Acute intoxication with alcohol or CNS depression</p>
+                                   <p>• Hypersensitivity to tramadol or opioids</p>
+                                   <p>• Children below 12 years old</p>
+                                   <p>• Concurrent MAOI use or within 14 days</p>
+                                   <p>• Uncontrolled epilepsy or seizure distress</p>
+                                   <p>• Post–tonsillectomy/adenoidectomy pain in patients below 18 years old</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Nausea</p>
+                                   <p>• Constipation</p>
+                                   <p>• Drowsiness</p>
+                                   <p>• Dry mouth</p>
+                                   <p>• Headache</p>
+                                   <p>• Sweating</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Seizures</p>
+                                   <p>• Serotonin syndrome</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Dependence and addiction</p>
+                                   <p>• Severe CNS depression</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess pain level and characteristics before and after administration.</p>
+                                   <p>• Assess respiratory rate and level of consciousness.</p>
+                                   <p>• Assess history of seizures or substance abuse.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer with food if GI upset occurs.</p>
+                                   <p>• Avoid crushing extended-release tablets.</p>
+                                   <p>• Use caution when giving with other CNS depressants.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for respiratory depression.</p>
+                                   <p>• Monitor for signs of serotonin syndrome.</p>
+                                   <p>• Monitor bowel function for constipation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Instruct patient to avoid alcohol while taking the drug.</p>
+                                   <p>• Teach patient to change positions slowly to avoid dizziness.</p>
+                                   <p>• Advise patient not to drive until effects are known.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 2: Fentanyl',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Fentanyl</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Sublimaze</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Opioid Analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Synthetic Opioid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection, Patch</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, Transdermal</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>25 to 100 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>As ordered</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term or chronic pain management</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Fentanyl is a potent opioid analgesic that primarily binds to and activates mu-opioid receptors in the central nervous system. Activation of these receptors inhibits ascending pain pathways, alters pain perception and response, and produces analgesia, sedation, and respiratory depression.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Schiller, E. Y., Goyal, A., & Mechanic, O. J. (2023). Opioid analgesics. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK459161/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Severe pain</p>
+                                   <p>• Anesthesia adjunct</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Paralytic ileus</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Drowsiness</p>
+                                   <p>• Sedation</p>
+                                   <p>• Nausea and Vomiting</p>
+                                   <p>• Constipation</p>
+                                   <p>• Dry mouth</p>
+                                   <p>• Urinary Retention</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Apnea</p>
+                                   <p>• Bradycardia</p>
+                                   <p>• Severe hypotension</p>
+                                   <p>• Coma</p>
+                                   <p>• Dependence and Addiction</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess respiratory status before administration.</p>
+                                   <p>• Assess pain intensity and sedation level.</p>
+                                   <p>• Assess patch site for irritation if transdermal.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Apply a transdermal patch to clean, dry skin.</p>
+                                   <p>• Remove the old patch before applying a new one.</p>
+                                   <p>• Administer IV fentanyl slowly as ordered.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor oxygen saturation and respiratory rate.</p>
+                                   <p>• Monitor for excessive sedation.</p>
+                                   <p>• Monitor blood pressure and pulse.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient not to expose patch to heat.</p>
+                                   <p>• Instruct proper disposal of used patches.</p>
+                                   <p>• Advise patient to avoid alcohol and sedatives.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 3: Morphine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Morphine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>MS Contin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Opioid Analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Opioid Agonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>2.5 to 10 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Morphine is an opioid analgesic that binds primarily to mu-opioid receptors in the central nervous system. This binding inhibits the transmission of pain impulses, alters pain perception and emotional response to pain, and produces analgesia, sedation, and respiratory depression.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Schiller, E. Y., Goyal, A., & Mechanic, O. J. (2023). Opioid analgesics. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK459161/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Relief of moderate to severe pain</p>
+                                   <p>• Chronic pain requiring continuous opioid therapy</p>
+                                   <p>• Cancer pain</p>
+                                   <p>• Pain associated with myocardial infarction</p>
+                                   <p>• Pulmonary edema associated with acute left ventricular failure</p>
+                                   <p>• Palliative and end-of-life care for pain and dyspnea management</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity or allergy to morphine or other opioid analgesics</p>
+                                   <p>• Significant respiratory distress</p>
+                                   <p>• Acute or severe bronchial asthma in an unmonitored setting</p>
+                                   <p>• Paralytic ileus</p>
+                                   <p>• Increased intracranial pressure or head injury</p>
+                                   <p>• Coma or severe CNS depression</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Sedation</p>
+                                   <p>• Nausea and vomiting</p>
+                                   <p>• Flushing</p>
+                                   <p>• Urinary retention</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECT</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Severe hypotension</p>
+                                   <p>• Confusion or hallucinations</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess pain level and respiratory rate.</p>
+                                   <p>• Assess bowel sounds and bowel pattern.</p>
+                                   <p>• Assess blood pressure before IV administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer IV morphine slowly.</p>
+                                   <p>• Ensure naloxone is available during administration.</p>
+                                   <p>• Encourage fluid intake if not contraindicated.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for respiratory depression.</p>
+                                   <p>• Monitor level of sedation.</p>
+                                   <p>• Monitor for hypotension after IV use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to report breathing difficulty.</p>
+                                   <p>• Advise patient to increase fiber intake.</p>
+                                   <p>• Instruct patient to avoid sudden position changes.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 4: Oxycodone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Oxycodone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>OxyContin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Opioid analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Semi-synthetic opioid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Capsule</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>5 to 15 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4 to 6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Oxycodone is an opioid analgesic that primarily binds to mu-opioid receptors in the central nervous system. Activation of these receptors inhibits ascending pain pathways, alters the perception and response to pain, and produces analgesia, sedation, and respiratory depression.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">References:</p>
+                                   <p>Schiller, E. Y., Goyal, A., & Mechanic, O. J. (2023). Opioid analgesics. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK459161/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Management of moderate to severe pain</p>
+                                   <p>• Cancer-related pain</p>
+                                   <p>• Severe musculoskeletal pain</p>
+                                   <p>• Pain not adequately relieved by non-opioid analgesics</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to oxycodone or other opioid analgesics</p>
+                                   <p>• Significant respiratory distress</p>
+                                   <p>• Acute intoxication with alcohol, sedatives. Hypnotics, or other CNS depressants</p>
+                                   <p>• Known or suspected gastrointestinal obstruction</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Drowsiness</p>
+                                   <p>• Sedation</p>
+                                   <p>• Constipation</p>
+                                   <p>• Pruritus</p>
+                                   <p>• Sweating</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Bradycardia</p>
+                                   <p>• Dependence and addiction</p>
+                                   <p>• Anaphylaxis</p>
+                                   <p>• Coma</p>
+                                   <p>• Confusion or Hallucinations</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess pain severity before administration.</p>
+                                   <p>• Assess respiratory status.</p>
+                                   <p>• Assess for history of opioid dependence.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Edx</p>
+                                   <p>• Administer with food to reduce nausea.</p>
+                                   <p>• Do not crush extended-release tablets.</p>
+                                   <p>• Give exact prescribed dose to prevent overdose.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for constipation.</p>
+                                   <p>• Monitor respiratory function.</p>
+                                   <p>• Monitor for signs of misuse or dependence.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to avoid alcohol.</p>
+                                   <p>• Advise patient to store medication safely.</p>
+                                   <p>• Teach patient not to stop medication abruptly.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 5: Ketorolac',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ketorolac</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Toradol</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>NSAID Analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>NSAID</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10 to  30 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Maximum of 5 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ketorolac is a nonsteroidal anti-inflammatory drug (NSAID) that works by inhibiting the activity of cyclooxygenase (COX-1 and COX-2) enzymes, thereby decreasing the synthesis of prostaglandins responsible for pain, inflammation, and fever.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">References:</p>
+                                   <p>Torres, D., & Parrinello, C. M. (2023). Ketorolac. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK545172/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Short-term management of moderate to severe acute pain</p>
+                                   <p>• Postoperative pain management</p>
+                                   <p>• Renal colic pain</p>
+                                   <p>• Pain requiring analgesia at opioid level but where opioid use is limited</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to ketorolac, aspirin, or other NSAIDS</p>
+                                   <p>• Active peptic ulcer disease</p>
+                                   <p>• Recent gastrointestinal bleeding or perforation</p>
+                                   <p>• History of NSAID-induced asthma or allergic reactions</p>
+                                   <p>• Severe renal impairment or risk of renal failure</p>
+                                   <p>• Hemorrhagic diathesis or bleeding disorders</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Nausea</p>
+                                   <p>• Dyspepsia</p>
+                                   <p>• Abdominal pain</p>
+                                   <p>• Injection site pain</p>
+                                   <p>• Edema</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Gastrointestinal bleeding</p>
+                                   <p>• Peptic ulceration</p>
+                                   <p>• Brochospasm</p>
+                                   <p>• Hepatotoxicity</p>
+                                   <p>• Renal failure</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess pain level before administration.</p>
+                                   <p>• Assess for history of GI bleeding.</p>
+                                   <p>• Assess renal function tests.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer with food or milk.</p>
+                                   <p>• Limit therapy to 5 days only.</p>
+                                   <p>• Avoid concurrent use with other NSAIDs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for GI bleeding.</p>
+                                   <p>• Monitor urine output and renal function.</p>
+                                   <p>• Monitor pain relief response.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to report black stools.</p>
+                                   <p>• Advise patient to avoid alcohol.</p>
+                                   <p>• Instruct patient not to take OTC NSAIDs.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 6: Ondansetron',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ondansetron</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Zofran</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiemetic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>5-HT3 receptor antagonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>4 to 8 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ondansetron selectively blocks serotonin (5-HT3) receptors in the gastrointestinal tract and chemoreceptor trigger zone (CTZ), preventing nausea and vomiting.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Griddine, A., & Bush, J. S. (2023). Ondansetron. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK499839/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Prevention and treatment of nausea and vomiting caused by:</p>
+                                   <p>• Chemotherapy</p>
+                                   <p>• Radiation therapy</p>
+                                   <p>• Postoperative procedures</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity or allergy to ondansetron or other 5-HT3 receptor antagonists</p>
+                                   <p>• Concomitant use with apomorphine</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">ADVERSE EFFECTS</p>
+                                   <p>• QT interval prolongation</p>
+                                   <p>• Serotonin syndrome</p>
+                                   <p>• Severe hypersensitivity reactions</p>
+                                   <p>• Arrhythmias</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">SIDE EFFECTS</p>
+                                   <p>• Headache</p>
+                                   <p>• Constipation</p>
+                                   <p>• Dizziness</p>
+                                   <p>• Fatigue</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess severity of nausea and vomiting.</p>
+                                   <p>• Assess hydration status.</p>
+                                   <p>• Assess ECG history for QT prolongation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer before chemotherapy or surgery if ordered.</p>
+                                   <p>• Dilute IV dose properly before infusion.</p>
+                                   <p>• Give slowly via IV to reduce cardiac effects.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor bowel function.</p>
+                                   <p>• Monitor ECG in high-risk patients.</p>
+                                   <p>• Monitor effectiveness in reducing nausea.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to report irregular heartbeat.</p>
+                                   <p>• Encourage adequate fluid intake.</p>
+                                   <p>• Advise patient to avoid activities requiring alertness if dizzy.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 7: Metronidazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Metronidazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Flagyl</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anti-infective</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Nitroimidazole antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7 to 14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Metronidazole disrupts DNA synthesis in susceptible anaerobic bacteria and protozoa, leading to cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">REFERENCE:</p>
+                                   <p>Patel, K., & Goldman, J. L. (2023). Metronidazole. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK539728/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Treatment of anaerobic bacterial infections</p>
+                                   <p>• Protozoal infections</p>
+                                   <p>• Clostridioides difficile infection</p>
+                                   <p>• Bacterial vaginosis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to metronidazole or other nitroimidazoles</p>
+                                   <p>• Use of alcohol during therapy and within 3 days after treatment</p>
+                                   <p>• Concomitant use with disulfiram within the previous 2 weeks</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Nausea</p>
+                                   <p>• Metallic Taste</p>
+                                   <p>• Headache</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Abdominal Discomfort</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Peripheral neuropathy</p>
+                                   <p>• Seizures</p>
+                                   <p>• Stevens–Johnson syndrome</p>
+                                   <p>• Encephalopathy</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess signs and symptoms of infection.</p>
+                                   <p>• Assess liver function tests.</p>
+                                   <p>• Assess for history of alcohol intake.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer after meals if GI upset occurs.</p>
+                                   <p>• Infuse IV dose over recommended time.</p>
+                                   <p>• Complete full course of therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor WBC count.</p>
+                                   <p>• Monitor for neurologic changes.</p>
+                                   <p>• Monitor response to infection treatment.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Instruct patient to avoid alcohol during therapy.</p>
+                                   <p>• Teach patient to complete prescribed antibiotics.</p>
+                                   <p>• Advise patient about metallic taste as a common effect.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 8: Pantropazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Pantropazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Protonix</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiulcer agent</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Proton Pump Inhibitor</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>40 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Pantoprazole suppresses gastric acid secretion by irreversibly inhibiting the hydrogen-potassium ATPase enzyme in the gastric parietal cells.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Ward, R. M., & Kearns, G. L. (2023). Pantoprazole. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK499945/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Gastroesophageal reflux disease (GERD)</p>
+                                   <p>• Erosive esophagitis</p>
+                                   <p>• Peptic ulcer disease</p>
+                                   <p>• Zollinger–Ellison syndrome</p>
+                                   <p>• Prevention of stress ulcers</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to pantoprazole or other proton pump inhibitors (PPIs)</p>
+                                   <p>• Concomitant use with rilpivirine-containing products</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Headache</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Nausea</p>
+                                   <p>• Abdominal Pain</p>
+                                   <p>• Flatulence</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Clostridioides difficile–associated diarrhea</p>
+                                   <p>• Hypomagnesemia</p>
+                                   <p>• Vitamin B12 deficiency</p>
+                                   <p>• Acute interstitial nephritis</p>
+                                   <p>• Bone fractures with long-term use</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess for signs of GI bleeding.</p>
+                                   <p>• Assess abdominal pain and GI symptoms.</p>
+                                   <p>• Assess magnesium levels if long-term use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer before meals.</p>
+                                   <p>• Do not crush or chew delayed-release tablets.</p>
+                                   <p>• Dilute IV preparation correctly.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor relief of GERD symptoms.</p>
+                                   <p>• Monitor bowel pattern.</p>
+                                   <p>• Monitor magnesium levels during long-term use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to avoid irritating foods.</p>
+                                   <p>• Advise patient to take medication before meals.</p>
+                                   <p>• Encourage lifestyle changes to reduce reflux.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 9: Cefuroxime',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Cefuroxime</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Ceftin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>2nd generation cephalosporin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250 to 750 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7 to 10 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Cefuroxime inhibits bacterial cell wall synthesis by binding to penicillin-binding proteins (PBPs), leading to bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Behzadi, P., & Behzadi, E. (2023). Cefuroxime. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK599503/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Respiratory tract infections</p>
+                                   <p>• Urinary tract infections</p>
+                                   <p>• Skin and soft tissue infections</p>
+                                   <p>• Otitis media</p>
+                                   <p>• Sinusitis</p>
+                                   <p>• Gonorrhea</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to cefuroxime, cephalosporins, or beta-lactam antibiotics</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Nausea</p>
+                                   <p>• Vomiting</p>
+                                   <p>• Rash</p>
+                                   <p>• Injection site reactions</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Anaphylaxis</p>
+                                   <p>• Clostridioides difficile–associated diarrhea</p>
+                                   <p>• Stevens–Johnson syndrome</p>
+                                   <p>• Hemolytic anemia</p>
+                                   <p>• Seizures</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess signs of infection.</p>
+                                   <p>• Assess allergy history to penicillins or cephalosporins.</p>
+                                   <p>• Assess culture and sensitivity results.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer oral form with food.</p>
+                                   <p>• Reconstitute IV medication properly.</p>
+                                   <p>• Complete full prescribed therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for allergic reactions.</p>
+                                   <p>• Monitor bowel function for diarrhea.</p>
+                                   <p>• Monitor temperature and WBC count.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient to complete antibiotic therapy.</p>
+                                   <p>• Advise patient to report rash or breathing difficulty.</p>
+                                   <p>• Encourage adequate hydration.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 10: Enoxaparin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Enoxaparin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Lovenox</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anticoagulant</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Low molecular weight heparin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>SC</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>40 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Enoxaparin enhances the activity of antithrombin III, primarily inhibiting factor Xa and preventing formation of blood clots.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Shaikh, N., & Regal, R. E. (2023). Enoxaparin. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK539865/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Prevention and treatment of deep vein thrombosis (DVT)</p>
+                                   <p>• Pulmonary embolism (PE)</p>
+                                   <p>• Acute coronary syndrome</p>
+                                   <p>• Prevention of thromboembolic complications</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active major bleeding</p>
+                                   <p>• History of heparin-induced thrombocytopenia (HIT)</p>
+                                   <p>• Hypersensitivity to enoxaparin, heparin, or pork products</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">SIDE EFFECTS</p>
+                                   <p>• Injection site pain or hematoma</p>
+                                   <p>• Mild bleeding</p>
+                                   <p>• Anemia</p>
+                                   <p>• Elevated liver enzymes</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">ADVERSE EFFECTS</p>
+                                   <p>• Hemorrhage</p>
+                                   <p>• Heparin-induced thrombocytopenia</p>
+                                   <p>• Spinal/epidural hematoma</p>
+                                   <p>• Anaphylactic reactions</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>• Assess for signs of bleeding.</p>
+                                   <p>• Assess platelet count and coagulation results.</p>
+                                   <p>• Assess history of heparin-induced thrombocytopenia.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>• Administer subcutaneously in the abdomen.</p>
+                                   <p>• Do not expel air bubble from prefilled syringe.</p>
+                                   <p>• Do not massage injection site after administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for bleeding gums or bruising.</p>
+                                   <p>• Monitor platelet count.</p>
+                                   <p>• Monitor hemoglobin and hematocrit.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>• Teach patient proper injection technique.</p>
+                                   <p>• Advise patient to avoid injury-prone activities.</p>
+                                   <p>• Instruct patient to report unusual bleeding.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 11: Naloxone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Naloxone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Narvan</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antidote</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Opioid Antagonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection, nasal spray</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM, intranasal</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.4–2 mg, may repeat</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 2–3 minutes PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As needed for reversal</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Competitively blocks opioid receptors (mu, delta, kappa) in the central nervous system, reversing respiratory depression, sedation, and analgesic effects caused by opioid agonists.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">References:</p>
+                                   <p>Kiyatkin, E. A., Limiac, F. G., Noya, M. R., Gomez, J. L., Michaelides, M., & Shaham, Y. (2026). The role of central versus peripheral opioid receptors in fentanyl-induced brain hypoxia. Journal of Neurophysiology, 135(1), 130–141. <code>\`https://doi.org/10.1152/jn.00504.2025\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Opioid overdose</p>
+                                   <p>• respiratory depression from opioids.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• opioid-dependent patients (precipitates withdrawal).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Nausea</p>
+                                   <p>• vomiting</p>
+                                   <p>• sweating</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Acute opioid withdrawal</p>
+                                   <p>• tachycardia</p>
+                                   <p>• pulmonary edema</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess respiratory rate, depth, and pattern before administration.</p>
+                                   <p>2. Assess level of consciousness and pupillary size.</p>
+                                   <p>3. Assess history of opioid dependence (risk for withdrawal).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Administer IV push rapidly in emergency setting.</p>
+                                   <p>3. Prepare repeat doses as effect may wear off before opioid.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor respiratory status every 5–15 minutes after administration.</p>
+                                   <p>2. Monitor for signs of acute opioid withdrawal (agitation, vomiting).</p>
+                                   <p>3. Monitor for recurrent sedation or respiratory depression.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct watcher to call emergency immediately if patient becomes unresponsive again.</p>
+                                   <p>2. Advise that patient may experience sudden withdrawal symptoms.</p>
+                                   <p>3. Teach watcher to keep naloxone available if opioids are in the home.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 12: Gabapentin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Gabapentin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Neurontin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anticonvulsant, analgesic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>GABA analog</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, tablet, oral solution</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>300–600 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>3 times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term as prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Binds to the α2δ-1 subunit of voltage-gated calcium channels in presynaptic neurons, reducing calcium influx and excitatory neurotransmitter release (including glutamate, norepinephrine, and substance P).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Center for Pharmacometrics and Systems Pharmacology, University of Florida. (2026). Gabapentin CNS exposure and analgesic response are modulated by OCT2 genotype in patients with chronic neuropathic pain. Frontiers in Pharmacology. Advance online publication. <code>\`https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2026.1760901\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Neuropathic pain</p>
+                                   <p>• postherpetic neuralgia</p>
+                                   <p>• partial seizures.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Drowsiness</p>
+                                   <p>• dizziness</p>
+                                   <p>• peripheral edema</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Respiratory depression (especially with CNS depressants)</p>
+                                   <p>• anaphylaxis</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess pain level using numeric or faces pain scale.</p>
+                                   <p>2. Assess seizure frequency and type if applicable.</p>
+                                   <p>3. Assess renal function (creatinine clearance) before starting.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give orally without regard to meals; do not crush tablets.</p>
+                                   <p>3. Do not administer antacids within 2 hours of gabapentin.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor for excessive drowsiness or dizziness.</p>
+                                   <p>2. Monitor for signs of respiratory depression (especially with CNS depressants).</p>
+                                   <p>3. Monitor mood or behavior changes (rare neuropsychiatric effects).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Instruct not to stop medication abruptly (risk of seizure).</p>
+                                   <p>2. Advise to avoid driving until effects are known.</p>
+                                   <p>3. Teach to report unusual swelling or difficulty breathing.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 13: Ibuprofen',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ibuprofen</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Advil, Motrin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>NSAID, analgesic, antipyretic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Propionic acid derivative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, capsule, oral suspension</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>200–400 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6–8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term (3–5 days)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits cyclooxygenase (COX-1 and COX-2) enzymes, blocking the conversion of arachidonic acid to prostaglandin H2 (PGH2), thereby reducing pro-inflammatory prostanoids like PGE2 and PGI2.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>ScienceDirect. (2025). Ibuprofen: A review on its synthesis, mechanism of action, pharmacological properties, and environmental impact. ScienceDirect. Advance online publication. <code>\`https://www.sciencedirect.com/science/article/abs/pii/S2950200425000400\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Pain</p>
+                                   <p>• Fever</p>
+                                   <p>• Inflammation.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active GI bleeding</p>
+                                   <p>• severe renal failure</p>
+                                   <p>• aspirin allergy</p>
+                                   <p>• third trimester of pregnancy.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Dyspepsia</p>
+                                   <p>• nausea</p>
+                                   <p>• heartburn</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• GI bleed</p>
+                                   <p>• acute kidney injury</p>
+                                   <p>• bronchospasm</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess for history of GI ulcers, bleeding, or renal disease.</p>
+                                   <p>2. Assess for aspirin or NSAID allergy.</p>
+                                   <p>3. Assess pain and fever level before administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give with food or milk to reduce GI upset.</p>
+                                   <p>3. Shake oral suspension well before use.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor for black, tarry stools or abdominal pain.</p>
+                                   <p>2. Monitor urine output for signs of acute kidney injury.</p>
+                                   <p>3. Monitor for wheezing or rash (allergic reaction).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct to avoid alcohol while taking this medication.</p>
+                                   <p>2. Advise not to take with other NSAIDs (aspirin, naproxen).</p>
+                                   <p>3. Teach to report black stools or vomiting blood immediately.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 14: Tranexamic acid',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Tranexamic acid</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cyklokapron, Lysteda</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antifibrinolytic, hemostatic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Lysine derivative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>1000–1300 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>3 times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Up to 5 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>A synthetic, reversible competitive inhibitor of the lysine receptor on plasminogen. It inhibits plasmin from binding to and degrading the fibrin matrix, thereby preventing fibrin clot breakdown and stabilizing clot formation.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>ScienceDirect. (2025). The impacts of tranexamic acid on immune system during trauma. ScienceDirect, 255, Article 109458. <code>\`https://www.sciencedirect.com/science/article/abs/pii/S0049384825002087\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Heavy menstrual bleeding</p>
+                                   <p>• hemophilia</p>
+                                   <p>• post-surgical bleeding</p>
+                                   <p>• trauma.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active thromboembolic disease</p>
+                                   <p>• subarachnoid hemorrhage</p>
+                                   <p>• hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Nausea</p>
+                                   <p>• diarrhea</p>
+                                   <p>• headache</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Venous thromboembolism</p>
+                                   <p>• seizure (with high IV doses)</p>
+                                   <p>• visual disturbances</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess history of deep vein thrombosis, PE, or stroke.</p>
+                                   <p>2. Assess for history of seizure disorder.</p>
+                                   <p>3. Assess bleeding severity and vital signs.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give oral dose with a full glass of water.</p>
+                                   <p>3. Administer IV slowly over at least 10 minutes.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor for unilateral leg pain, swelling, or redness (DVT sign)</p>
+                                   <p>2. Monitor for sudden chest pain or difficulty breathing (PE sign).</p>
+                                   <p>3. Monitor for visual disturbances or headache (thrombosis risk).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct to report leg swelling or chest pain immediately.</p>
+                                   <p>2. Advise to avoid prolonged bed rest; ambulate as tolerated.</p>
+                                   <p>3. Teach to report any sudden change in vision or speech.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 15: Bisacodyl',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Bisacodyl</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Dulcolax</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Drug Class Laxative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Diphenylmethane stimulant laxative</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, suppository</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, PR</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>5–10 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term (max 7 days)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Its active metabolite deacetyl bisacodyl directly target and activate the Transient Receptor Potential Melatatin 4 (TRPM4) channel in intestinal epithelial cells, which governs ion homeostasis and intestinal fluid secretion.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Nature Communications. (2026). Noncanonical calcium-independent TRPM4 activation governs intestinal fluid homeostasis. Nature Communications, 17, Article 1253. <code>\`https://www.nature.com/articles/s41467-025-68014-7\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Constipation</p>
+                                   <p>• bowel prep for procedures.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Ileus</p>
+                                   <p>• intestinal obstruction</p>
+                                   <p>• severe abdominal pain</p>
+                                   <p>• appendicitis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Abdominal cramps</p>
+                                   <p>• nausea</p>
+                                   <p>• diarrhea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Electrolyte imbalance (hypokalemia)</p>
+                                   <p>• dehydration</p>
+                                   <p>• rectal burning</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess bowel pattern (frequency, consistency, last bowel movement).</p>
+                                   <p>2. Assess for abdominal pain, distension, or suspected obstruction.</p>
+                                   <p>3. Assess hydration and electrolyte status (especially elderly).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give oral tablet at bedtime; do not crush or chew.</p>
+                                   <p>3. Insert suppository rectally as ordered; retain 15–20 minutes.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor frequency and consistency of stools.</p>
+                                   <p>2. Monitor for severe abdominal cramps or diarrhea.</p>
+                                   <p>3. Monitor for signs of dehydration (dry mucous membranes, decreased urine).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct to increase fluid intake while taking this medication.</p>
+                                   <p>2. Advise not to use daily for more than 1 week without prescriber.</p>
+                                   <p>3. Teach to report severe cramping or inability to have bowel movement.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 16: Fluconazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Fluconazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Diflucan</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antifungal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Triazole antifungal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, oral suspension, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>100–400 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7–14 days or longer</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Inhibits ergosterol biosynthesis by targeting the lanosterol 14α-demethylase enzyme encoded by the ERG11 gene, resulting in the accumulation of toxic sterol intermediates that compromise plasma membrane integrity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>ScienceDirect. (2026). Acetylation-mediated fluconazole inactivation: A novel antifungal resistance mechanism. ScienceDirect. Advance online publication. <code>\`https://www.sciencedirect.com/science/article/pii/S1368764626000105\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Candidiasis (oral, esophageal, vaginal)</p>
+                                   <p>• cryptococcal meningitis</p>
+                                   <p>• fungal prophylaxis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to azoles</p>
+                                   <p>• concurrent use of cisapride or terfenadine (QT prolongation).</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Nausea</p>
+                                   <p>• headache</p>
+                                   <p>• abdominal pain</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Hepatotoxicity</p>
+                                   <p>• QT prolongation</p>
+                                   <p>• Stevens-Johnson syndrome</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess for history of liver disease or hepatitis.</p>
+                                   <p>2. Assess for pregnancy status (teratogenic risk).</p>
+                                   <p>3. Assess for allergy to azole antifungals.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give orally with or without food; shake oral suspension well.</p>
+                                   <p>3. Administer IV infusion slowly as prescribed.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor liver enzyme levels (AST, ALT) at baseline and during therapy.</p>
+                                   <p>2. Monitor for signs of hepatotoxicity (dark urine, jaundice, fatigue).</p>
+                                   <p>3. Monitor for QT prolongation in patients at risk.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct to complete full course even if symptoms improve.</p>
+                                   <p>2. Advise to report yellowing of skin or eyes immediately.</p>
+                                   <p>3. Teach to avoid pregnancy during treatment and for 1 week after.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 17: Dexamethasone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Dexamethasone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Decadron</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Corticosteroid, anti-inflammatory</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Glucocorticoid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, oral solution, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.5–10 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once or twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Varies (days to weeks)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Binds to glucocorticoid receptors in the cytoplasm. The receptor-ligand complex translocates to the nucleus, where it regulates gene transcription, reducing expression of DNA methyltransferases and increasing thrombospondin-1 expression.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Choy, K. Y., et al. (2025). Hypomethylation of thrombospondin-1 promoter region is associated with reduced aqueous humor flow. Communications Biology. Advance online publication. <code>\`https://pubmed.ncbi.nlm.nih.gov/41053513/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Allergic reactions</p>
+                                   <p>• asthma,</p>
+                                   <p>• cerebral edema</p>
+                                   <p>• COPD exacerbation</p>
+                                   <p>• COVID-19</p>
+                                   <p>• adrenal insufficiency.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Systemic fungal infection</p>
+                                   <p>• live vaccine administration</p>
+                                   <p>• hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Insomnia</p>
+                                   <p>• increased appetite</p>
+                                   <p>• mood changes</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Hyperglycemia</p>
+                                   <p>• GI bleeding</p>
+                                   <p>• immunosuppression</p>
+                                   <p>• adrenal suppression</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess for history of diabetes mellitus (may increase blood glucose).</p>
+                                   <p>2. Assess for active infection or tuberculosis.</p>
+                                   <p>3. Assess for history of GI bleeding or peptic ulcer.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Txl</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Give with food or milk to reduce GI irritation.</p>
+                                   <p>3. Administer IV push slowly over recommended time.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor blood glucose levels regularly.</p>
+                                   <p>2. Monitor for signs of GI bleeding (black stools, abdominal pain).</p>
+                                   <p>3. Monitor for mood changes, insomnia, or agitation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct not to stop abruptly (risk of adrenal insufficiency).</p>
+                                   <p>2. Advise to report unusual weight gain or swelling.</p>
+                                   <p>3. Teach to watch for signs of infection (fever, sore throat).</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 18: Ephedrine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ephedrine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Akovaz, Corphedra</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Bronchodilator, vasopressor</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Sympathomimetic (direct and indirect acting)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection, tablet, capsule</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM, PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>5–25 mg (IV), 25–50 mg (PO)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 3–4 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term as needed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Acts primarily as a substrate of the norepinephrine transporter (NET), causing carrier-mediated release of norepinephrine. Pharmacological effects are mediated by indirect release of norepinephrine rather than direct receptor agonism.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Hypotension during anesthesia</p>
+                                   <p>• asthma (historically)</p>
+                                   <p>• nasal congestion.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Angle-closure glaucoma</p>
+                                   <p>• pheochromocytoma</p>
+                                   <p>• tachyarrhythmias</p>
+                                   <p>• hypersensitivity.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Restlessness</p>
+                                   <p>• tremor</p>
+                                   <p>• tachycardia</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Hypertensive crisis</p>
+                                   <p>• arrhythmias</p>
+                                   <p>• myocardial infarction</p>
+                                   <p>• stroke</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess blood pressure and heart rate before administration.</p>
+                                   <p>2. Assess for history of hypertension, heart disease, or arrhythmias.</p>
+                                   <p>3. Assess for history of hyperthyroidism or glaucoma.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Administer IV push slowly with continuous monitoring.</p>
+                                   <p>3. Have emergency equipment ready (hypertensive crisis risk).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor blood pressure and heart rate every 5–15 minutes.</p>
+                                   <p>2. Monitor for chest pain, palpitations, or headache.</p>
+                                   <p>3. Monitor for signs of CNS stimulation (anxiety, tremor, insomnia).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Instruct to report rapid heartbeat or chest pain immediately.</p>
+                                   <p>2. Advise to avoid other stimulants (caffeine, decongestants).</p>
+                                   <p>3. Teach to monitor blood pressure at home if prescribed for chronic use.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 19: Ketamine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ketamine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Ketalar</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>General anesthetic, dissociative anesthetic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>NMDA receptor antagonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>IV solution, IM injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>1–4.5 mg/kg (induction), 0.5–1 mg/kg (maintenance), 0.1–0.5 mg/kg (analgesia)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>As needed during procedure</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Single or repeated doses during anesthesia</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>A phencyclidine derivative that functions primarily as an antagonist of the N-methyl-D-aspartate (NMDA) receptor. The S(+)-enantiomer is four times more potent as an anesthetic and analgesic than the R(-)-enantiomer.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Peltoniemi, M. A., Hagelberg, N. M., Olkkola, K. T., & Saari, T. I. (2016). Ketamine: A review of clinical pharmacokinetics and pharmacodynamics in anesthesia and pain therapy. Clinical Pharmacokinetics, 55(9), 1059–1077. <code>\`https://research.utu.fi/converis/portal/detail/Publication/17193374\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• Induction and maintenance of anesthesia</p>
+                                   <p>• procedural sedation</p>
+                                   <p>• acute pain</p>
+                                   <p>• status epilepticus.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• poorly controlled hypertension</p>
+                                   <p>• increased intracranial pressure</p>
+                                   <p>• psychosis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Emergence reactions (hallucinations, confusion)</p>
+                                   <p>• nystagmus</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Laryngospasm</p>
+                                   <p>• increased intraocular pressure</p>
+                                   <p>• hypertension</p>
+                                   <p>• apnea</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess blood pressure, heart rate, and oxygen saturation.</p>
+                                   <p>2. Assess for history of psychosis, schizophrenia, or seizures.</p>
+                                   <p>3. Assess for history of increased intracranial or intraocular pressure.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Administer IV push slowly as ordered (over 60 seconds).</p>
+                                   <p>3. Ensure emergency airway equipment is readily available.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor vital signs (BP, HR, RR, SpO2) every 5–15 minutes.</p>
+                                   <p>2. Monitor for emergence reactions (agitation, confusion, vivid dreams).</p>
+                                   <p>3. Monitor airway patency and respiratory drive.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>1. Instruct patient that vivid dreams or confusion may occur upon waking.</p>
+                                   <p>2. Advise to remain in bed until sedation fully wears off.</p>
+                                   <p>3. Teach watcher to report difficulty breathing or prolonged confusion.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 20: Fondaparinux',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Fondaparinux</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Arixtra</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anticoagulant</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Factor Xa inhibitor (indirect)</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Subcutaneous injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Subcutaneous (SC)</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>2.5 mg (prophylaxis), 5–10 mg (treatment)</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>5–10 days or longer</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Selectively binds to antithrombin III, causing a conformational change that accelerates antithrombin's neutralization of Factor Xa. This inhibits the coagulation cascade, preventing thrombin generation and fibrin clot formation.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Reference:</p>
+                                   <p>Brunton, L. L., & Knollmann, B. C. (Eds.). (2023). Goodman & Gilman's the pharmacological basis of therapeutics (14th ed.). McGraw-Hill.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Indications</p>
+                                   <p>• DVT prophylaxis (hip/knee surgery, abdominal surgery)</p>
+                                   <p>• DVT/PE treatment</p>
+                                   <p>• ACS.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active bleeding</p>
+                                   <p>• severe renal impairment (CrCl <30 mL/min)</p>
+                                   <p>• thrombocytopenia</p>
+                                   <p>• bacterial endocarditis.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-sky-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Injection site pain</p>
+                                   <p>• rash</p>
+                                   <p>• nausea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Major bleeding (retroperitoneal, intracranial)</p>
+                                   <p>• heparin-induced thrombocytopenia (HIT)</p>
+                                   <p>• anemia</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment (Dx)</p>
+                                   <p>1. Assess for history of bleeding disorders or active bleeding.</p>
+                                   <p>2. Assess renal function (creatinine clearance) before first dose.</p>
+                                   <p>3. Assess platelet count at baseline and during therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration (Tx)</p>
+                                   <p>1. Verify physician's order and patient identity.</p>
+                                   <p>2. Administer deep subcutaneous injection into abdominal fatty tissue.</p>
+                                   <p>3. Do not expel air bubble from prefilled syringe (prevents leakage).</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>1. Monitor for signs of bleeding (hematuria, gum bleeding, bruising).</p>
+                                   <p>2. Monitor platelet count every 2–3 days (risk of HIT).</p>
+                                   <p>3. Monitor for signs of spinal hematoma if recent lumbar puncture.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education (Edx)</p>
+                                   <p>1. Instruct to report unusual bleeding or bruising immediately.</p>
+                                   <p>2. Teach proper injection technique and site rotation.</p>
+                                   <p>3. Advise to avoid NSAIDs and aspirin while on this medication.</p>
+                               </div>
+                           </div>`
+                }
+            ],
+            'ward-obgyne': [
+                {
+                    title: 'Page 1: Ferrous Sulfate',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ferrous Sulfate</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Iberet-Folic, Hemeret FA</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antianemic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Iron Supplement</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Capsule, Syrup</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>325 mg Tablet</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once to Three times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Throughout pregnancy or until anemia resolves</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ferrous sulfate provides elemental iron necessary for hemoglobin synthesis, oxygen transport, and red blood cell production.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Ferrous sulfate. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB13257\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Iron-deficiency anemia during pregnancy</p>
+                                   <p>• Prevention of maternal anemia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hemochromatosis</p>
+                                   <p>• Hemolytic anemia</p>
+                                   <p>• Hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects:</p>
+                                   <p>• Constipation</p>
+                                   <p>• Dark green or black stools</p>
+                                   <p>• Nausea</p>
+                                   <p>• Epigastric discomfort</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects:</p>
+                                   <p>• Iron toxicity</p>
+                                   <p>• Gastric ulceration</p>
+                                   <p>• Anaphylaxis (rare with parenteral forms)</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess hemoglobin, hematocrit, and serum ferritin levels.</p>
+                                   <p>• Assess dietary intake and nutritional status.</p>
+                                   <p>• Monitor for fatigue, pallor, and dizziness.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer with vitamin C-rich juice to improve absorption.</p>
+                                   <p>• Give after meals if GI irritation occurs.</p>
+                                   <p>• Avoid giving with milk, tea, coffee, or antacids.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor CBC and iron studies periodically.</p>
+                                   <p>• Observe for constipation and GI intolerance.</p>
+                                   <p>• Assess improvement in anemia symptoms.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Inform patient that stools may become dark-colored.</p>
+                                   <p>• Encourage intake of iron-rich foods.</p>
+                                   <p>• Stress adherence even after symptoms improve.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 2: Folic Acid',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Folic Acid</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Folart, Obimin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Vitamin Supplement</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Water-soluble B vitamin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>400-800 mcg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Once daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Before conception and throughout pregnancy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Folic acid is converted to tetrahydrofolic acid, which is essential for DNA synthesis, red blood cell formation, and fetal neural tube development.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Folic acid. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00158\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Prevention of neural tube defects</p>
+                                   <p>• Folate deficiency anemia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Untreated pernicious anemia</p>
+                                   <p>• Hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Nausea</p>
+                                   <p>• Loss of appetite</p>
+                                   <p>• Bitter taste</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Allergic reactions</p>
+                                   <p>• Bronchospasm (rare)</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess maternal nutritional status.</p>
+                                   <p>• Monitor CBC and folate levels if ordered.</p>
+                                   <p>• Assess pregnancy trimester and prenatal history.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer consistently at the same time daily.</p>
+                                   <p>• Give with prenatal vitamins if prescribed.</p>
+                                   <p>• Ensure correct dosage during first trimester.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor improvement in anemia symptoms.</p>
+                                   <p>• Assess maternal hemoglobin and hematocrit.</p>
+                                   <p>• Monitor fetal growth and prenatal findings.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain importance in preventing neural tube defects.</p>
+                                   <p>• Encourage intake of green leafy vegetables.</p>
+                                   <p>• Teach adherence before and during pregnancy.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 3: Tranexamic Acid',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Tranexamic Acid</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Hemostan, Transamin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antifibrinolytic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Synthetic lysine analogue</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>1g IV</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>May repeat once after 30 minutes if the bleeding persists</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until postpartum hemorrhage is controlled</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Tranexamic acid competitively inhibits the activation of plasminogen to plasmin, preventing fibrin degradation and stabilizing formed blood clots, thereby reducing excessive bleeding.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Tranexamic acid. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00302\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Postpartum hemorrhage (PPH)</p>
+                                   <p>• Menorrhagia</p>
+                                   <p>• Surgical bleeding</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active intravascular clotting</p>
+                                   <p>• History of thromboembolic disease</p>
+                                   <p>• Hypersensitivity to tranexamic acid</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Nausea</p>
+                                   <p>• Vomiting</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Headache</p>
+                                   <p>• Nasal congestion</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Thromboembolism</p>
+                                   <p>• Seizures</p>
+                                   <p>• Hypotension (rapid IV administration)</p>
+                                   <p>• Visual disturbances</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess amount and character of postpartum bleeding.</p>
+                                   <p>• Monitor blood pressure, pulse, respiratory rate, and oxygen saturation.</p>
+                                   <p>• Review coagulation profile, hemoglobin, and hematocrit levels.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer IV slowly over at least 10 minutes.</p>
+                                   <p>• Ensure patent IV access before infusion.</p>
+                                   <p>• Follow institutional postpartum hemorrhage protocol.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor uterine tone and vaginal bleeding after administration.</p>
+                                   <p>• Observe for signs of thromboembolism such as leg pain or chest pain.</p>
+                                   <p>• Reassess maternal hemodynamic stability regularly.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain that the medication helps control excessive bleeding.</p>
+                                   <p>• Instruct patient to report chest pain or difficulty breathing immediately.</p>
+                                   <p>• Encourage follow-up CBC monitoring if ordered.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 4: Calcium Carbonate',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Calcium Carbonate</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Caltrate Plus, Keltican Calcium</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Mineral Supplement</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Calcium salt</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, chewable tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500-1500 mg/day</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Divided Doses</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Throughout pregnancy as prescribed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Calcium carbonate provides elemental calcium necessary for bone mineralization, nerve transmission, muscle contraction, and fetal skeletal development.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Calcium carbonate. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB06724\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Calcium deficiency during pregnancy</p>
+                                   <p>• Prevention of hypertensive disorders in pregnancy</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypercalcemia</p>
+                                   <p>• Renal calculi</p>
+                                   <p>• Severe renal impairment</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Constipation</p>
+                                   <p>• Bloating</p>
+                                   <p>• Flatulence</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Hypercalcemia</p>
+                                   <p>• Kidney stones</p>
+                                   <p>• Cardiac dysrhythmias</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess dietary calcium intake.</p>
+                                   <p>• Monitor serum calcium if ordered.</p>
+                                   <p>• Assess for muscle cramps or weakness.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer with meals to improve absorption.</p>
+                                   <p>• Separate administration from iron supplements by at least 2 hours.</p>
+                                   <p>• Encourage increased fluid intake.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor bowel elimination pattern.</p>
+                                   <p>• Assess for signs of hypercalcemia.</p>
+                                   <p>• Monitor maternal bone and muscle health.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Encourage calcium-rich foods.</p>
+                                   <p>• Explain importance for fetal bone development.</p>
+                                   <p>• Teach proper timing with iron supplements.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 5: Cefuroxime',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Cefuroxime</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Zinnat, Zinacef</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>2nd-generation cephalosporin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>PO, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>750 mg-1.5g</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>7-14 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Cefuroxime inhibits bacterial cell wall synthesis by binding to penicillin-binding proteins, causing bacterial cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Cefuroxime. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB01112\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Post-cesarean prophylaxis</p>
+                                   <p>• Pelvic infections</p>
+                                   <p>• Endometritis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Cephalosporin allergy</p>
+                                   <p>• Severe penicillin hypersensitivity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Nausea</p>
+                                   <p>• Vomiting</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Injection site pain</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Anaphylaxis</p>
+                                   <p>• Stevens-Johnson syndrome</p>
+                                   <p>• Clostridioides difficile-associated diarrhea</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess temperature and infection signs.</p>
+                                   <p>• Obtain cultures before starting therapy if ordered.</p>
+                                   <p>• Assess allergy history to penicillins or cephalosporins.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer at prescribed intervals.</p>
+                                   <p>• Use aseptic technique during IV administration.</p>
+                                   <p>• Complete full prescribed antibiotic course.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor WBC count and temperature trends.</p>
+                                   <p>• Observe for allergic reactions.</p>
+                                   <p>• Monitor for diarrhea or superinfection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach importance of completing antibiotic therapy.</p>
+                                   <p>• Advise patient to report rash or diarrhea.</p>
+                                   <p>• Encourage adequate hydration.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 6: Ampicillin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ampicillin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Penbritin, Ampicilin</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibitotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Penicillin antibiotic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>1-2 g</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4-6 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Depends on infection</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Ampicillin inhibits bacterial cell wall synthesis causing bacterial lysis and death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Ampicillin. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00415\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Premature rupture of membranes prophylaxis</p>
+                                   <p>• Maternal infections</p>
+                                   <p>• Group B Streptococcal prophylaxis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Penicillin allergy</p>
+                                   <p>• Infectious mononucleosis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Mild rash</p>
+                                   <p>• Nausea</p>
+                                   <p>• Diarrhea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Anaphylaxis</p>
+                                   <p>• Severe hypersensitivity reaction</p>
+                                   <p>• Pseudomembranous colitis</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess maternal temperature and infection symptoms.</p>
+                                   <p>• Check allergy history to penicillin.</p>
+                                   <p>• Review culture and sensitivity results if available.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer on schedule to maintain therapeutic levels.</p>
+                                   <p>• Ensure proper dilution for IV administration.</p>
+                                   <p>• Observe aseptic technique during administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for allergic reactions or anaphylaxis.</p>
+                                   <p>• Assess effectiveness through reduced infection signs.</p>
+                                   <p>• Monitor bowel function for diarrhea.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach patient to complete full antibiotic therapy.</p>
+                                   <p>• Instruct patient to report difficulty breathing or rash.</p>
+                                   <p>• Encourage increased fluid intake.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 7: Metronidazole',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Metronidazole</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Flagyl</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antibiotic/Antiprotozoal</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Nitroimidazole</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>IV infusion</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8–12 hours</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>5–10 days</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Metronidazole enters susceptible organisms and disrupts DNA synthesis, leading to bacterial and protozoal cell death.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Metronidazole. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00916\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Bacterial vaginosis</p>
+                                   <p>• Pelvic inflammatory infections</p>
+                                   <p>• Anaerobic infections</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Alcohol use during therapy</p>
+                                   <p>• Use with caution during first trimester</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Metallic taste</p>
+                                   <p>• Nausea</p>
+                                   <p>• Headache</p>
+                                   <p>• Dark urine</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Seizures</p>
+                                   <p>• Peripheral neuropathy</p>
+                                   <p>• Stevens-Johnson syndrome</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess vaginal discharge, odor, and pelvic pain.</p>
+                                   <p>• Review culture results if available.</p>
+                                   <p>• Assess pregnancy trimester before administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer with food if GI upset occurs.</p>
+                                   <p>• Avoid alcohol-containing products during therapy.</p>
+                                   <p>• Ensure prescribed dose and interval are followed.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor infection signs and symptom improvement.</p>
+                                   <p>• Observe for adverse GI effects.</p>
+                                   <p>• Monitor for superinfection.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Instruct patient to avoid alcohol during and 48 hours after therapy.</p>
+                                   <p>• Teach importance of medication adherence.</p>
+                                   <p>• Encourage proper perineal hygiene.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 8: Ondansetron',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Ondansetron</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Zofran</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antiemetic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>5-HT3 receptor antagonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>IV injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>4–8 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 8 hours PRN</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As needed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Selectively blocks serotonin (5-HT3) receptors in the central nervous system and gastrointestinal tract, suppressing nausea and vomiting reflexes.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Ondansetron. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00904\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Hyperemesis gravidarum</p>
+                                   <p>• Nausea and vomiting during pregnancy</p>
+                                   <p>• Postoperative nausea</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity</p>
+                                   <p>• Congenital long QT syndrome</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Headache</p>
+                                   <p>• Constipation</p>
+                                   <p>• Dizziness</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• QT prolongation</p>
+                                   <p>• Serotonin syndrome</p>
+                                   <p>• Cardiac dysrhythmias</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess severity and frequency of nausea and vomiting.</p>
+                                   <p>• Monitor hydration status and electrolyte balance.</p>
+                                   <p>• Assess fetal well-being if severe vomiting persists.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer before meals or triggering activities.</p>
+                                   <p>• Ensure slow IV administration if applicable.</p>
+                                   <p>• Maintain prescribed dosage intervals.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor hydration and intake/output.</p>
+                                   <p>• Observe for relief of nausea and vomiting.</p>
+                                   <p>• Monitor ECG in high-risk patients.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Encourage small frequent meals.</p>
+                                   <p>• Teach patient to avoid trigger foods.</p>
+                                   <p>• Instruct patient to report palpitations or dizziness.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 9: Rho(D) Immune Globulin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Rho(D) Immune Globulin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>RhoGAM®, Rhophylac®</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Immune serum</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Human immune globulin</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IM, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>300 mcg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>At 28 weeks and within 72 hours postpartum</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>As indicated</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Suppresses maternal immune response against Rh-positive fetal red blood cells, preventing Rh sensitization.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>National Center for Biotechnology Information. (2023). Rho(D) immune globulin. In StatPearls. StatPearls Publishing. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK557884/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Rh incompatibility prevention</p>
+                                   <p>• Rh-negative pregnant mothers</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Rh-positive mothers</p>
+                                   <p>• Hypersensitivity to immune globulins</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Injection site pain</p>
+                                   <p>• Mild fever</p>
+                                   <p>• Malaise</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Anaphylaxis</p>
+                                   <p>• Hemolytic reaction</p>
+                                   <p>• Disseminated intravascular coagulation (rare)</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Verify maternal Rh-negative blood type.</p>
+                                   <p>• Assess newborn Rh status postpartum.</p>
+                                   <p>• Review indirect Coombs test results.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer within recommended timeframe postpartum.</p>
+                                   <p>• Verify blood compatibility before administration.</p>
+                                   <p>• Use correct IM or IV technique.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for allergic reactions.</p>
+                                   <p>• Observe injection site for redness or swelling.</p>
+                                   <p>• Monitor maternal vital signs post-administration.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain purpose in preventing future pregnancy complications.</p>
+                                   <p>• Teach importance of follow-up prenatal testing.</p>
+                                   <p>• Encourage reporting fever or unusual reactions.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 10: Carboprost Tromethamine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Carboprost Tromethamine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Hemabate</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Uterotonic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Prostaglandin analogue</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250 mcg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 15–90 minutes as needed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until hemorrhage is controlled</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Carboprost stimulates strong uterine contractions by acting on prostaglandin receptors, reducing uterine bleeding during postpartum hemorrhage.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference</p>
+                                   <p>Wishart, D. S., et al. (2018). Carboprost tromethamine. DrugBank Online. <code>\`https://go.drugbank.com/drugs/DB00429\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Severe postpartum hemorrhage refractory to first-line uterotonics</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Asthma</p>
+                                   <p>• Hepatic disease</p>
+                                   <p>• Renal disease</p>
+                                   <p>• Cardiac disease</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p class="text-white font-semibold mb-2">Side Effects</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Fever</p>
+                                   <p>• Chills</p>
+                                   <p>• Nausea</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Adverse Effects</p>
+                                   <p>• Bronchospasm</p>
+                                   <p>• Severe hypertension</p>
+                                   <p>• Pulmonary edema</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess amount of postpartum bleeding.</p>
+                                   <p>• Assess uterine tone and fundal height.</p>
+                                   <p>• Review history of asthma or pulmonary disease.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer deep IM using aseptic technique.</p>
+                                   <p>• Ensure emergency equipment is available.</p>
+                                   <p>• Massage uterus as ordered with therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor uterine response and bleeding.</p>
+                                   <p>• Observe for bronchospasm and respiratory distress.</p>
+                                   <p>• Monitor maternal blood pressure and pulse.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain purpose of medication in controlling hemorrhage.</p>
+                                   <p>• Inform patient about temporary fever or diarrhea.</p>
+                                   <p>• Encourage immediate reporting of breathing difficulty.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 11: Oxytocin',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Oxytocin</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Pitocin, Syntocinon</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Uterotonic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Oxytocic hormone</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10–40 units in IV infusion or 10 units IM</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Continuous IV infusion during labor or immediately after delivery</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until adequate uterine contractions or bleeding control is achieved</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Oxytocin acts directly on oxytocin receptors in the uterine smooth muscle. It increases intracellular calcium levels, stimulating rhythmic uterine contractions. These contractions help induce labor, strengthen labor contractions, and compress uterine blood vessels after delivery to reduce postpartum bleeding.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>StatPearls Publishing. (2023). Oxytocin. National Center for Biotechnology Information. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK507848/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Induction of labor</p>
+                                   <p>• Augmentation of labor</p>
+                                   <p>• Prevention and treatment of postpartum hemorrhage</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Fetal distress when delivery is not imminent</p>
+                                   <p>• Cephalopelvic disproportion</p>
+                                   <p>• Uterine hypertonicity</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Uterine hyperstimulation</p>
+                                   <p>• Hypertension</p>
+                                   <p>• Water intoxication</p>
+                                   <p>• Tachycardia</p>
+                                   <p>• Nausea and vomiting</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess uterine contractions and fetal heart rate regularly to detect uterine hyperstimulation and fetal distress early.</p>
+                                   <p>• Monitor maternal vital signs, especially blood pressure because oxytocin may cause hypertension or hypotension.</p>
+                                   <p>• Check for signs of postpartum hemorrhage to evaluate effectiveness of therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer using an infusion pump for accurate dosing because rapid infusion can cause uterine rupture or fetal compromise.</p>
+                                   <p>• Dilute IV medication properly before infusion to ensure safe and controlled administration.</p>
+                                   <p>• Stop infusion if uterine hyperstimulation occurs to prevent fetal hypoxia and uterine injury.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor contraction frequency, duration, and intensity to evaluate therapeutic response and avoid excessive contractions.</p>
+                                   <p>• Observe for fetal distress or decreased fetal heart rate because excessive contractions reduce placental blood flow.</p>
+                                   <p>• Watch for signs of water intoxication because oxytocin has antidiuretic effects.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain the purpose of inducing or strengthening labor to reduce anxiety and promote cooperation.</p>
+                                   <p>• Instruct patient to report severe abdominal pain because it may indicate uterine rupture.</p>
+                                   <p>• Educate about expected uterine contractions to prepare the patient during labor.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 12: Misoprostol',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Misoprostol</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Cytotec</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Uterotonic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Prostaglandin E1 analog</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, Sublingual, Rectal, Vaginal</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>200–800 mcg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 4–6 hours depending on indication</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until labor is established or postpartum bleeding is controlled</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Misoprostol is a synthetic prostaglandin E1 analog that binds to prostaglandin receptors in the uterus. It softens and dilates the cervix while stimulating uterine contractions. This action promotes cervical ripening, labor induction, and control of postpartum hemorrhage.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Misoprostol. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK539873/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Cervical ripening</p>
+                                   <p>• Labor induction</p>
+                                   <p>• Postpartum hemorrhage</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypersensitivity to prostaglandins</p>
+                                   <p>• Previous uterine surgery (use cautiously)</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Fever</p>
+                                   <p>• Chills</p>
+                                   <p>• Diarrhea</p>
+                                   <p>• Uterine hyperstimulation</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess cervical status and uterine activity to determine readiness for labor induction.</p>
+                                   <p>• Monitor maternal temperature and bleeding because misoprostol may cause fever and excessive bleeding.</p>
+                                   <p>• Evaluate fetal heart rate before administration to establish fetal baseline status.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer through prescribed route correctly to achieve intended therapeutic effect.</p>
+                                   <p>• Follow proper dosage interval strictly to avoid uterine hyperstimulation.</p>
+                                   <p>• Use gloves when inserting vaginally to maintain aseptic technique.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for uterine hyperstimulation because excessive contractions can compromise fetal oxygenation.</p>
+                                   <p>• Observe for fever, chills, and diarrhea because these are common adverse effects.</p>
+                                   <p>• Monitor fetal status continuously during labor induction to identify fetal distress promptly.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain expected cramping and bleeding to reduce fear and anxiety.</p>
+                                   <p>• Inform patient about possible fever or chills so the patient knows common side effects.</p>
+                                   <p>• Teach when to seek immediate medical help to ensure prompt management of complications.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 13: Methylergometrine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Methylergometrine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Methergine</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Uterotonic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Ergot alkaloid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IM, IV, Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.2 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 2–4 hours as needed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Usually 24 hours postpartum or until bleeding is controlled</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Methylergometrine stimulates alpha-adrenergic, dopaminergic, and serotonergic receptors in uterine smooth muscle. This produces rapid and sustained uterine contractions that help compress bleeding vessels after childbirth and reduce postpartum hemorrhage.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2022). Methylergonovine. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK537094/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Prevention and treatment of postpartum hemorrhage</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypertension</p>
+                                   <p>• Preeclampsia</p>
+                                   <p>• Heart disease</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Hypertension</p>
+                                   <p>• Headache</p>
+                                   <p>• Chest pain</p>
+                                   <p>• Seizures</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess blood pressure before giving medication because methylergometrine can cause severe hypertension.</p>
+                                   <p>• Evaluate amount of postpartum bleeding to assess medication effectiveness.</p>
+                                   <p>• Check uterine tone and firmness because the drug promotes uterine contraction.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer IM slowly as prescribed to reduce adverse cardiovascular effects.</p>
+                                   <p>• Avoid IV route unless emergency and ordered because rapid IV use may cause sudden hypertension or stroke.</p>
+                                   <p>• Give after delivery of placenta only to prevent retained placenta complications.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for hypertension and headache because these may indicate vasospasm.</p>
+                                   <p>• Observe for chest pain or vasospasm because the drug causes vasoconstriction.</p>
+                                   <p>• Monitor uterine response and bleeding control to evaluate therapeutic effectiveness.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain purpose in controlling bleeding to improve understanding of treatment.</p>
+                                   <p>• Instruct patient to report severe headache because it may indicate hypertension.</p>
+                                   <p>• Teach importance of follow-up monitoring to detect complications early.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 14: Magnesium Sulfate',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Magnesium Sulfate</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Magnesium Sulfate</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Anticonvulsant</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Mineral/Electrolyte</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IV, IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>Loading dose: 4–6 g IV; Maintenance: 1–2 g/hr</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Continuous IV infusion after loading dose</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Commonly continued for 24 hours after delivery or after last seizure</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Magnesium sulfate decreases acetylcholine release at neuromuscular junctions and depresses the central nervous system. It also causes vasodilation, reducing cerebral ischemia and lowering seizure risk in preeclampsia and eclampsia.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Magnesium Sulfate. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK554553/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Preeclampsia</p>
+                                   <p>• Eclampsia</p>
+                                   <p>• Neuroprotection in preterm labor</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Myasthenia gravis</p>
+                                   <p>• Heart block</p>
+                                   <p>• Renal failure</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Respiratory depression</p>
+                                   <p>• Flushing</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Loss of reflexes</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess respiratory rate before administration because magnesium sulfate may cause respiratory depression.</p>
+                                   <p>• Check deep tendon reflexes regularly because absent reflexes indicate toxicity.</p>
+                                   <p>• Measure urine output hourly because impaired renal function increases magnesium toxicity risk.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer via infusion pump only to ensure controlled and accurate infusion rate.</p>
+                                   <p>• Keep calcium gluconate available as antidote because it reverses magnesium toxicity.</p>
+                                   <p>• Give loading dose slowly as prescribed to reduce risk of cardiac and respiratory complications.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor magnesium serum levels to maintain therapeutic range and avoid toxicity.</p>
+                                   <p>• Observe for respiratory depression because it is a life-threatening adverse effect.</p>
+                                   <p>• Monitor fetal heart rate and maternal vital signs to assess maternal and fetal well-being.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain purpose in preventing seizures to improve compliance with therapy.</p>
+                                   <p>• Inform patient about feeling warm or flushed because this is a common side effect.</p>
+                                   <p>• Teach to report difficulty breathing immediately because it may indicate toxicity.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 15: Nifedipine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Nifedipine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Adalat</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Calcium channel blocker</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Capsule, Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>10–20 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 6–8 hours orally</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Continued until blood pressure is controlled or contractions stop</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Nifedipine blocks calcium ion entry into vascular smooth muscle and cardiac muscle cells. Reduced calcium availability causes relaxation of blood vessels and uterine smooth muscle, lowering blood pressure and decreasing uterine contractions.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Nifedipine. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK537052/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Hypertension in pregnancy</p>
+                                   <p>• Tocolysis</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Cardiogenic shock</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Headache</p>
+                                   <p>• Dizziness</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Flushing</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess blood pressure before administration because nifedipine lowers blood pressure.</p>
+                                   <p>• Monitor for uterine contractions if used as tocolytic to determine effectiveness in stopping labor.</p>
+                                   <p>• Check heart rate regularly because reflex tachycardia may occur.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer orally as prescribed to maintain therapeutic effect safely.</p>
+                                   <p>• Avoid crushing extended-release tablets because it alters drug release mechanism.</p>
+                                   <p>• Ensure patient is in safe position after administration to prevent falls from dizziness.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor for hypotension and dizziness because vasodilation can lower BP significantly.</p>
+                                   <p>• Observe for headache and flushing because these are common side effects.</p>
+                                   <p>• Assess effectiveness in lowering BP or stopping contractions to evaluate therapeutic response.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Advise slow position changes to prevent dizziness because orthostatic hypotension may occur.</p>
+                                   <p>• Teach patient to avoid grapefruit juice because it increases nifedipine levels.</p>
+                                   <p>• Explain importance of regular BP monitoring to ensure safe treatment.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 16: Labetalol',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Labetalol</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Normodyne, Trandate</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Alpha and beta blocker</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>20–80 mg IV or 100–400 mg oral</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>IV every 10 minutes as needed or oral twice daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until blood pressure stabilizes; may continue throughout pregnancy</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Labetalol blocks alpha-1 adrenergic receptors causing vasodilation, while also blocking beta-1 and beta-2 receptors to decrease heart rate and cardiac output. Together, these effects reduce systemic blood pressure.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Labetalol. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK534787/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Severe hypertension in pregnancy</p>
+                                   <p>• Preeclampsia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Asthma</p>
+                                   <p>• Bradycardia</p>
+                                   <p>• Heart block</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Bradycardia</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Fatigue</p>
+                                   <p>• Dizziness</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess blood pressure and pulse before administration because labetalol decreases heart rate and BP.</p>
+                                   <p>• Check for history of asthma or heart block because beta-blockers may worsen these conditions.</p>
+                                   <p>• Evaluate severity of hypertension symptoms to determine treatment effectiveness.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer IV slowly as ordered to prevent sudden hypotension.</p>
+                                   <p>• Monitor patient during first dose carefully because severe BP changes may occur.</p>
+                                   <p>• Hold medication if pulse is too low to prevent bradycardia complications.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor BP frequently during therapy to evaluate response to treatment.</p>
+                                   <p>• Observe for bradycardia and hypotension because these are common adverse effects.</p>
+                                   <p>• Monitor fetal heart rate in pregnant patients to ensure fetal safety.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach patient to rise slowly from bed to prevent dizziness and falls.</p>
+                                   <p>• Instruct patient not to stop medication abruptly because rebound hypertension may occur.</p>
+                                   <p>• Explain importance of BP monitoring to maintain BP control.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 17: Hydralazine',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Hydralazine</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Apresoline</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Vasodilator</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet, Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral, IV</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>5–10 mg IV</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>IV every 20–30 minutes as needed</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Until severe hypertension is controlled</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Hydralazine directly relaxes arteriolar smooth muscle by interfering with calcium movement within vascular muscles. This results in peripheral vasodilation, decreased vascular resistance, and reduced blood pressure.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Hydralazine. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK470296/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Severe hypertension</p>
+                                   <p>• Preeclampsia</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Coronary artery disease</p>
+                                   <p>• Rheumatic heart disease involving mitral valve</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Tachycardia</p>
+                                   <p>• Headache</p>
+                                   <p>• Hypotension</p>
+                                   <p>• Nausea</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess blood pressure prior to administration because hydralazine rapidly lowers BP.</p>
+                                   <p>• Evaluate for headache or chest pain because these may indicate adverse reactions.</p>
+                                   <p>• Monitor heart rate and cardiac status because reflex tachycardia may occur.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer IV slowly over prescribed time to reduce risk of sudden hypotension.</p>
+                                   <p>• Ensure accurate dosage preparation to prevent medication errors.</p>
+                                   <p>• Place patient in supine position if dizzy to improve cerebral perfusion.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor BP closely after administration to detect excessive hypotension.</p>
+                                   <p>• Observe for reflex tachycardia because vasodilation stimulates compensatory heart rate increase.</p>
+                                   <p>• Assess for signs of hypotension to prevent shock or falls.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach patient to report palpitations because they may indicate tachycardia.</p>
+                                   <p>• Advise patient to avoid sudden standing to reduce orthostatic hypotension risk.</p>
+                                   <p>• Explain need for frequent BP checks to monitor treatment response.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 18: Methyldopa',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Methyldopa</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Aldomet</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Antihypertensive</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Alpha-2 adrenergic agonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>250–500 mg</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Two to three times daily</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Long-term treatment throughout pregnancy if needed</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Methyldopa is converted in the brain into alpha-methylnorepinephrine, which stimulates central alpha-2 adrenergic receptors. This decreases sympathetic nervous system activity, lowers peripheral resistance, and reduces blood pressure.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Methyldopa. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK551671/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Chronic hypertension in pregnancy</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Active liver disease</p>
+                                   <p>• Concurrent MAOI therapy</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Drowsiness</p>
+                                   <p>• Dry mouth</p>
+                                   <p>• Depression</p>
+                                   <p>• Hypotension</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess baseline blood pressure to determine effectiveness of therapy.</p>
+                                   <p>• Monitor liver function test results because methyldopa may cause hepatotoxicity.</p>
+                                   <p>• Assess for drowsiness or fatigue because CNS depression may occur.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer with meals if GI upset occurs to reduce stomach irritation.</p>
+                                   <p>• Give medication consistently at scheduled times to maintain stable BP control.</p>
+                                   <p>• Avoid abrupt discontinuation because rebound hypertension may occur.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor BP response regularly to evaluate therapeutic effect.</p>
+                                   <p>• Observe for signs of liver dysfunction because hepatotoxicity is a serious adverse effect.</p>
+                                   <p>• Monitor CBC for hemolytic anemia because prolonged use may affect blood cells.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach patient to avoid alcohol because it increases drowsiness.</p>
+                                   <p>• Instruct patient to report jaundice or fatigue because these may indicate liver problems.</p>
+                                   <p>• Explain importance of medication adherence to maintain BP control.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 19: Betamethasone',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Betamethasone</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Celestone</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Corticosteroid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Glucocorticoid</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>IM</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>12 mg IM</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 24 hours for 2 doses</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>48-hour total course</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Betamethasone crosses the placenta and stimulates fetal lung cells to produce surfactant. Surfactant reduces surface tension in the alveoli, improving lung expansion after birth and decreasing the risk of neonatal respiratory distress syndrome.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Betamethasone. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK560577/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Prevention of neonatal respiratory distress syndrome in preterm birth</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Systemic fungal infection</p>
+                                   <p>• Hypersensitivity to corticosteroids</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Hyperglycemia</p>
+                                   <p>• Infection risk</p>
+                                   <p>• Fluid retention</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess gestational age and fetal condition to determine appropriateness of therapy.</p>
+                                   <p>• Monitor maternal blood glucose levels because corticosteroids may increase blood sugar.</p>
+                                   <p>• Check for signs of infection because steroids suppress immune response.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer deep IM injection properly to ensure proper absorption.</p>
+                                   <p>• Follow exact dosing schedule to maximize fetal lung maturation.</p>
+                                   <p>• Rotate injection sites if needed to reduce tissue irritation.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor fetal movement and heart rate to assess fetal well-being.</p>
+                                   <p>• Observe for hyperglycemia because corticosteroids increase glucose production.</p>
+                                   <p>• Assess for adverse corticosteroid effects to identify complications early.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Explain role in fetal lung maturation to improve understanding and compliance.</p>
+                                   <p>• Teach importance of completing both doses because full treatment improves fetal outcomes.</p>
+                                   <p>• Inform patient about possible increase in blood sugar to encourage monitoring if diabetic.</p>
+                               </div>
+                           </div>`
+                },
+                {
+                    title: 'Page 20: Terbutaline',
+                    html: `<div class="space-y-4">
+                               <div class="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-zinc-900 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Drug Profile</p>
+                                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-zinc-300">
+                                       <p><span class="text-white font-semibold">Generic Name</span><br>Terbutaline</p>
+                                       <p><span class="text-white font-semibold">Brand Name</span><br>Brethine</p>
+                                       <p><span class="text-white font-semibold">Therapeutic Drug Class</span><br>Tocolytic</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Class</span><br>Beta-2 adrenergic agonist</p>
+                                       <p><span class="text-white font-semibold">Pharmaceutical Drug Form</span><br>Injection, Tablet</p>
+                                       <p><span class="text-white font-semibold">Route of Administration</span><br>Subcutaneous, Oral</p>
+                                       <p><span class="text-white font-semibold">Dosage</span><br>0.25 mg SC</p>
+                                       <p><span class="text-white font-semibold">Frequency of Administration</span><br>Every 20–30 minutes up to 3 doses if contractions persist</p>
+                                       <p class="md:col-span-2"><span class="text-white font-semibold">Duration of Treatment</span><br>Short-term use only (usually less than 48–72 hours)</p>
+                                   </div>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Mechanism of Action</p>
+                                   <p>Terbutaline stimulates beta-2 adrenergic receptors in uterine smooth muscle. Activation of these receptors increases cyclic AMP levels, leading to relaxation of uterine muscles and suppression of premature contractions.</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Reference:</p>
+                                   <p>National Center for Biotechnology Information. (2023). Terbutaline. <code>\`https://www.ncbi.nlm.nih.gov/books/NBK545303/\`</code></p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Indications</p>
+                                   <p>• Preterm labor</p>
+                                   <p>• Uterine tachysystole</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Contraindications</p>
+                                   <p>• Cardiac disease</p>
+                                   <p>• Hyperthyroidism</p>
+                                   <p>• Uncontrolled diabetes mellitus</p>
+                               </div>
+                               <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-purple-300 font-bold mb-2">Side Effects and Adverse Effects</p>
+                                   <p>• Tachycardia</p>
+                                   <p>• Tremors</p>
+                                   <p>• Hyperglycemia</p>
+                                   <p>• Pulmonary edema</p>
+                               </div>
+                               <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                                   <p class="text-[11px] uppercase tracking-[0.2em] text-amber-300 font-bold mb-2">Nursing Responsibilities</p>
+                                   <p class="text-white font-semibold mb-2">Assessment</p>
+                                   <p>• Assess contraction pattern before administration to establish baseline uterine activity.</p>
+                                   <p>• Check maternal pulse rate before giving because terbutaline may cause tachycardia.</p>
+                                   <p>• Evaluate fetal heart rate to assess fetal status before therapy.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Administration</p>
+                                   <p>• Administer subcutaneously as prescribed to achieve rapid therapeutic effect.</p>
+                                   <p>• Hold medication if maternal pulse exceeds 120 bpm to prevent cardiovascular complications.</p>
+                                   <p>• Limit use to short-term therapy only because prolonged use increases maternal risks.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Monitoring</p>
+                                   <p>• Monitor maternal heart rate and BP because cardiovascular stimulation may occur.</p>
+                                   <p>• Observe for tremors and chest pain because these are signs of adverse effects.</p>
+                                   <p>• Monitor effectiveness in reducing contractions to determine treatment response.</p>
+                                   <p class="text-white font-semibold mt-3 mb-2">Patient Education</p>
+                                   <p>• Teach patient to report chest pain immediately because it may indicate serious cardiac effects.</p>
+                                   <p>• Explain possible side effects like tremors to reduce anxiety during treatment.</p>
+                                   <p>• Inform patient that medication is for short-term use only to promote understanding of therapy goals.</p>
+                               </div>
+                           </div>`
+                }
+            ]
+        };
+
+        const wardDrugPageState = {};
+
+        function renderWardDrugPage(libraryKey, pageNum) {
+            const pages = pagedDrugLibraries[libraryKey];
+            if (!pages || !pages.length) return;
+
+            const totalPages = pages.length;
+            const safePage = Math.min(Math.max(pageNum, 1), totalPages);
+            wardDrugPageState[libraryKey] = safePage;
+
+            const contentEl = document.getElementById(`${libraryKey}-page-content`);
+            const statusEl = document.getElementById(`${libraryKey}-page-status`);
+            const inputEl = document.getElementById(`${libraryKey}-page-input`);
+            const buttonsEl = document.getElementById(`${libraryKey}-page-buttons`);
+
+            if (contentEl) {
+                contentEl.innerHTML = pages[safePage - 1].html;
+            }
+
+            if (statusEl) {
+                statusEl.innerText = `Page ${safePage} of ${totalPages}`;
+            }
+
+            if (inputEl) {
+                inputEl.max = String(totalPages);
+                inputEl.value = String(safePage);
+            }
+
+            if (buttonsEl) {
+                buttonsEl.innerHTML = pages.map((page, index) => {
+                    const pageIndex = index + 1;
+                    const activeClass = pageIndex === safePage
+                        ? 'bg-purple-500 text-white border-purple-400'
+                        : 'bg-zinc-800/70 text-zinc-300 border-zinc-700 hover:border-purple-400 hover:text-purple-300';
+                    return `<button onclick="setWardDrugPage('${libraryKey}', ${pageIndex})" class="w-9 h-9 rounded-full border text-[11px] font-bold transition-all ${activeClass}">${pageIndex}</button>`;
+                }).join('');
+            }
+        }
+
+        function setWardDrugPage(libraryKey, pageNum) {
+            renderWardDrugPage(libraryKey, pageNum);
+        }
+
+        function changeWardDrugPage(libraryKey, direction) {
+            const pages = pagedDrugLibraries[libraryKey];
+            if (!pages || !pages.length) return;
+
+            const totalPages = pages.length;
+            const currentPage = wardDrugPageState[libraryKey] || 1;
+            let nextPage = currentPage + direction;
+
+            if (nextPage < 1) nextPage = totalPages;
+            if (nextPage > totalPages) nextPage = 1;
+
+            renderWardDrugPage(libraryKey, nextPage);
+        }
+
+        function jumpWardDrugPage(libraryKey) {
+            const inputEl = document.getElementById(`${libraryKey}-page-input`);
+            if (!inputEl) return;
+
+            const requestedPage = Number(inputEl.value);
+            if (Number.isNaN(requestedPage)) return;
+
+            renderWardDrugPage(libraryKey, requestedPage);
+        }
+
+        function handleWardDrugPageJump(event, libraryKey) {
+            if (event.key === 'Enter') {
+                jumpWardDrugPage(libraryKey);
+            }
+        }
+
+        // TODO_SIMULATION_LINK: Paste the deployed simulation website URL inside this constant later. DITO URL LINK COMMENT
+        const SIMULATION_REDIRECT_URL = '';
+
+        function openSimulationLink(event) {
+            if (event) {
+                event.preventDefault();
+            }
+
+            if (!SIMULATION_REDIRECT_URL) {
+                return false;
+            }
+
+            window.location.href = SIMULATION_REDIRECT_URL;
+            return false;
+        }
+
+        function toggleMobileNavMenu(forceState) {
+            const menu = document.getElementById('mobile-nav-menu');
+            const toggle = document.getElementById('mobile-nav-toggle');
+            if (!menu || !toggle) return;
+
+            const shouldOpen = typeof forceState === 'boolean'
+                ? forceState
+                : menu.classList.contains('hidden');
+
+            menu.classList.toggle('hidden', !shouldOpen);
+            toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+            toggle.innerHTML = shouldOpen
+                ? '<i class="fa-solid fa-xmark"></i>'
+                : '<i class="fa-solid fa-bars"></i>';
+        }
+
+        function updateActiveNavState() {
+            const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+            if (!navLinks.length) return;
+
+            const uniqueSectionIds = [...new Set(navLinks.map((link) => link.dataset.section).filter(Boolean))];
+            const sections = uniqueSectionIds
+                .map((sectionId) => document.getElementById(sectionId))
+                .filter(Boolean);
+
+            let activeSectionId = uniqueSectionIds[0] || 'home';
+            const currentScroll = window.scrollY + 180;
+
+            sections.forEach((section) => {
+                if (section.offsetTop <= currentScroll && section.offsetTop + section.offsetHeight > currentScroll) {
+                    activeSectionId = section.id;
+                }
+            });
+
+            navLinks.forEach((link) => {
+                const isActive = link.dataset.section === activeSectionId;
+                link.classList.toggle('text-white', isActive);
+                link.classList.toggle('text-zinc-400', !isActive && link.closest('#main-nav'));
+                link.classList.toggle('text-zinc-300', !isActive && link.closest('#mobile-nav-menu'));
+                link.classList.toggle('bg-green-400/15', isActive);
+                link.classList.toggle('border', isActive);
+                link.classList.toggle('border-green-400/30', isActive);
+                link.classList.toggle('shadow-[0_0_0_1px_rgba(74,222,128,0.08)]', isActive);
+                link.classList.toggle('hover:text-green-400', !isActive && link.closest('#main-nav'));
+                link.classList.toggle('hover:text-green-300', !isActive && link.closest('#mobile-nav-menu'));
+                link.classList.toggle('hover:bg-zinc-800/70', !isActive && link.closest('#mobile-nav-menu'));
+            });
+        }
+
+        function isPopupSectionHeading(node) {
+            if (!node || node.tagName !== 'P') return false;
+
+            const text = (node.textContent || '').trim();
+            if (!text || text.startsWith('A:') || text.startsWith('•') || text.startsWith('') || text.startsWith(':')) {
+                return false;
+            }
+
+            const isAllCaps = text.length <= 80 && text === text.toUpperCase();
+            const isSdgLine = text.startsWith('SDG 3:') || text.startsWith('SDG 9:');
+            const isSectionLabel = text.endsWith('?') && text.length <= 80;
+
+            return isAllCaps || isSdgLine || isSectionLabel;
+        }
+
+        function applyUnifiedPopupDesign(contentEl) {
+            if (!contentEl) return;
+            if (contentEl.querySelector('.rounded-2xl')) return;
+
+            const directChildren = Array.from(contentEl.children);
+            let sourceNodes = directChildren;
+
+            if (
+                directChildren.length === 1 &&
+                directChildren[0].tagName === 'DIV' &&
+                !directChildren[0].classList.contains('rounded-2xl')
+            ) {
+                const innerChildren = Array.from(directChildren[0].children);
+                if (innerChildren.length > 0) {
+                    sourceNodes = innerChildren;
+                }
+            }
+
+            const sections = [];
+            let currentSection = [];
+
+            sourceNodes.forEach((node, index) => {
+                const startsNewSection = index !== 0 && isPopupSectionHeading(node);
+                if (startsNewSection && currentSection.length) {
+                    sections.push(currentSection);
+                    currentSection = [];
+                }
+                currentSection.push(node);
+            });
+
+            if (currentSection.length) {
+                sections.push(currentSection);
+            }
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'space-y-4';
+
+            sections.forEach((sectionNodes, sectionIndex) => {
+                const card = document.createElement('div');
+                const firstNodeIsHeading = isPopupSectionHeading(sectionNodes[0]);
+                card.className = sectionIndex === 0
+                    ? 'rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4'
+                    : 'rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4';
+
+                sectionNodes.forEach((node, nodeIndex) => {
+                    const clonedNode = node.cloneNode(true);
+
+                    if (clonedNode.tagName === 'UL' || clonedNode.tagName === 'OL') {
+                        clonedNode.classList.add('pl-5', 'space-y-1');
+                    }
+
+                    if (clonedNode.tagName === 'BLOCKQUOTE') {
+                        clonedNode.classList.add('border-l-4', 'border-emerald-400', 'pl-4', 'italic', 'text-zinc-200');
+                    }
+
+                    if (firstNodeIsHeading && nodeIndex === 0 && clonedNode.tagName === 'P') {
+                        clonedNode.classList.add('text-[11px]', 'uppercase', 'tracking-[0.2em]', 'text-emerald-300', 'font-bold', 'mb-2');
+                    }
+
+                    if (firstNodeIsHeading && nodeIndex > 0 && clonedNode.tagName === 'P') {
+                        clonedNode.classList.add('text-zinc-300');
+                    }
+
+                    card.appendChild(clonedNode);
+                });
+
+                wrapper.appendChild(card);
+            });
+
+            contentEl.innerHTML = '';
+            contentEl.appendChild(wrapper);
+        }
+
+        function openContentModal(key) {
+            const data = docxContentEngine[key];
+            if (!data) return;
+
+            const modal = document.getElementById('content-detailed-modal');
+            const modalCard = document.getElementById('content-modal-card');
+            modalCard.classList.remove('max-w-2xl', 'max-w-4xl');
+            modalCard.classList.add(data.wide ? 'max-w-4xl' : 'max-w-2xl');
+            
+            const badgeEl = document.getElementById('content-modal-badge');
+            document.getElementById('content-modal-title').innerText = data.title;
+            badgeEl.innerText = data.badge || '';
+            badgeEl.classList.toggle('hidden', !data.badge);
+            const bodyEl = document.getElementById('content-modal-body');
+            bodyEl.innerHTML = data.body;
+            applyUnifiedPopupDesign(bodyEl);
+            if (pagedDrugLibraries[key]) {
+                renderWardDrugPage(key, 1);
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-95');
+            modalCard.classList.add('scale-100');
+        }
+
+        function closeContentModal() {
+            const modal = document.getElementById('content-detailed-modal');
+            const modalCard = document.getElementById('content-modal-card');
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+        }
+
+        // Close content modal automatically when background is clicked
+        document.getElementById('content-detailed-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeContentModal();
+        });
+
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', function() {
+                toggleMobileNavMenu();
+            });
+        }
+
+        document.querySelectorAll('.nav-link').forEach((link) => {
+            link.addEventListener('click', function() {
+                toggleMobileNavMenu(false);
+                setTimeout(updateActiveNavState, 100);
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-nav-menu');
+            const toggle = document.getElementById('mobile-nav-toggle');
+            if (!menu || !toggle || menu.classList.contains('hidden')) return;
+
+            if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+                toggleMobileNavMenu(false);
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) {
+                toggleMobileNavMenu(false);
+            }
+        });
+
+        window.addEventListener('scroll', updateActiveNavState);
+        window.addEventListener('load', updateActiveNavState);
+        updateActiveNavState();
+
+
+        // --- 1. HERO CAROUSEL LOOP ENGINE (2 SECONDS) ---
+        let currentLoopIndex = 0;
+        const scanEntries = [
+            {
+                headerClass: "flex items-center gap-2 text-emerald-600 font-bold text-xs tracking-wider",
+                headerHtml: '<i class="fa-solid fa-circle-check"></i> SCAN SUCCESSFUL',
+                bodyHtml: '<p><strong>Patient:</strong> Maria Santos</p><p><strong>MRN:</strong> 2026-05-01</p><p><strong>Allergies:</strong> <span class="text-red-500 font-semibold">Penicillin</span></p>'
+            },
+            {
+                headerClass: "flex items-center gap-2 text-rose-600 font-bold text-xs tracking-wider animate-pulse",
+                headerHtml: '<i class="fa-solid fa-triangle-exclamation"></i> MISMATCH DETECTED',
+                bodyHtml: '<p><strong>Patient:</strong> Juan Dela Cruz</p><p><strong>MRN:</strong> 2026-11-89</p><p><strong>Order Alert:</strong> <span class="text-amber-600 font-semibold">Wrong Dose Gap</span></p>'
+            },
+            {
+                headerClass: "flex items-center gap-2 text-sky-600 font-bold text-xs tracking-wider",
+                headerHtml: '<i class="fa-solid fa-spinner fa-spin"></i> PENDING VERIFY',
+                bodyHtml: '<p><strong>Patient:</strong> Clara Mendoza</p><p><strong>MRN:</strong> 2026-02-14</p><p><strong>Scanning:</strong> <span class="text-zinc-500">Ceftriaxone Vial</span></p>'
+            }
+        ];
+
+        function runSystemHeroLoop() {
+            const img1 = document.getElementById('hero-img-1');
+            const img2 = document.getElementById('hero-img-2');
+            const badgeContainer = document.getElementById('scan-badge-container');
+            const bHeader = document.getElementById('badge-status-header');
+            const bBody = document.getElementById('badge-status-body');
+
+            currentLoopIndex = (currentLoopIndex + 1) % 3;
+
+            if (currentLoopIndex % 2 === 0) {
+                if(img1 && img2) {
+                    img1.classList.replace('opacity-0', 'opacity-100');
+                    img2.classList.replace('opacity-100', 'opacity-0');
+                }
+            } else {
+                if(img1 && img2) {
+                    img1.classList.replace('opacity-100', 'opacity-0');
+                    img2.classList.replace('opacity-0', 'opacity-100');
+                }
+            }
+
+            if(badgeContainer) {
+                badgeContainer.classList.remove('translate-y-0', 'opacity-100');
+                badgeContainer.classList.add('translate-y-2', 'opacity-0');
+            }
+
+            setTimeout(() => {
+                if(bHeader && bBody && badgeContainer) {
+                    const currentData = scanEntries[currentLoopIndex];
+                    bHeader.className = currentData.headerClass;
+                    bHeader.innerHTML = currentData.headerHtml;
+                    bBody.innerHTML = currentData.bodyHtml;
+
+                    badgeContainer.classList.remove('translate-y-2', 'opacity-0');
+                    badgeContainer.classList.add('translate-y-0', 'opacity-100');
+                }
+            }, 250);
+        }
+        setInterval(runSystemHeroLoop, 2000);
+
+
+        // --- 2. QUICK ACCESS CAROUSEL PAGINATION ---
+        function changePage(pageNum) {
+            document.querySelectorAll('.carousel-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(`page-${pageNum}`).classList.add('active');
+
+            for(let i = 1; i <= 3; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if(i === pageNum) {
+                    dot.className = "w-3 h-3 rounded-full bg-[#10b981] transition-all";
+                } else {
+                    dot.className = "w-3 h-2 rounded-full bg-zinc-600/70 hover:bg-zinc-400 transition-all";
+                }
+            }
+        }
+
+        let currentFaqPage = 1;
+        const totalFaqPages = 7;
+
+        function setFaqPage(pageNum) {
+            if (pageNum < 1 || pageNum > totalFaqPages) return;
+
+            currentFaqPage = pageNum;
+            document.querySelectorAll('.faq-page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const activePage = document.getElementById(`faq-page-${pageNum}`);
+            if (activePage) activePage.classList.add('active');
+
+            const label = document.getElementById('faq-page-label');
+            if (label) label.innerText = `Page ${pageNum} of ${totalFaqPages}`;
+
+            for (let i = 1; i <= totalFaqPages; i++) {
+                const dot = document.getElementById(`faq-dot-${i}`);
+                if (!dot) continue;
+                if (i === pageNum) {
+                    dot.className = 'w-8 h-8 rounded-full bg-emerald-500 text-white text-[11px] font-bold transition-all';
+                } else {
+                    dot.className = 'w-8 h-8 rounded-full bg-zinc-200 text-zinc-700 text-[11px] font-bold hover:bg-zinc-300 transition-all';
+                }
+            }
+        }
+
+        function changeFaqPage(direction) {
+            let nextPage = currentFaqPage + direction;
+            if (nextPage < 1) nextPage = totalFaqPages;
+            if (nextPage > totalFaqPages) nextPage = 1;
+            setFaqPage(nextPage);
+        }
+
+        function scrollHowSteps(direction) {
+            const carousel = document.getElementById('how-steps-carousel');
+            if (!carousel) return;
+
+            const firstCard = carousel.querySelector('[data-how-step-card]');
+            const scrollAmount = firstCard ? firstCard.offsetWidth + 16 : 320;
+
+            carousel.scrollBy({
+                left: scrollAmount * direction,
+                behavior: 'smooth'
+            });
+        }
+
+        let troubleshootingAutoLoop = null;
+        let troubleshootingResumeTimer = null;
+
+        function scrollTroubleshooting(direction, isUserInteraction = false) {
+            const carousel = document.getElementById('troubleshooting-carousel');
+            if (!carousel) return;
+
+            const firstCard = carousel.querySelector('[data-troubleshooting-card]');
+            const scrollAmount = firstCard ? firstCard.offsetWidth + 16 : 320;
+            const maxScrollLeft = Math.max(0, carousel.scrollWidth - carousel.clientWidth);
+
+            if (direction > 0) {
+                if (carousel.scrollLeft >= maxScrollLeft - 5) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                }
+            } else {
+                if (carousel.scrollLeft <= 5) {
+                    carousel.scrollTo({ left: maxScrollLeft, behavior: 'smooth' });
+                } else {
+                    carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                }
+            }
+
+            if (isUserInteraction) {
+                pauseTroubleshootingAutoLoop();
+            }
+        }
+
+        function startTroubleshootingAutoLoop() {
+            const carousel = document.getElementById('troubleshooting-carousel');
+            if (!carousel) return;
+
+            clearInterval(troubleshootingAutoLoop);
+            troubleshootingAutoLoop = setInterval(() => {
+                scrollTroubleshooting(1, false);
+            }, 2000);
+        }
+
+        function pauseTroubleshootingAutoLoop() {
+            clearInterval(troubleshootingAutoLoop);
+            clearTimeout(troubleshootingResumeTimer);
+            troubleshootingResumeTimer = setTimeout(() => {
+                startTroubleshootingAutoLoop();
+            }, 2000);
+        }
+
+        const troubleshootingCarousel = document.getElementById('troubleshooting-carousel');
+        if (troubleshootingCarousel) {
+            ['pointerdown', 'touchstart', 'wheel'].forEach(eventName => {
+                troubleshootingCarousel.addEventListener(eventName, pauseTroubleshootingAutoLoop, { passive: true });
+            });
+            startTroubleshootingAutoLoop();
+        }
+
+        function toggleReturnDemoGuide() {
+            const content = document.getElementById('return-demo-full');
+            const button = document.getElementById('return-demo-toggle');
+            if (!content || !button) return;
+
+            const label = button.querySelector('span');
+            const icon = button.querySelector('i');
+            const isExpanded = content.classList.contains('max-h-[4000px]');
+
+            if (isExpanded) {
+                content.classList.remove('max-h-[4000px]', 'opacity-100', 'mt-4');
+                content.classList.add('max-h-0', 'opacity-0');
+                if (label) label.innerText = 'Read More';
+                if (icon) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            } else {
+                content.classList.remove('max-h-0', 'opacity-0');
+                content.classList.add('max-h-[4000px]', 'opacity-100', 'mt-4');
+                if (label) label.innerText = 'See Less';
+                if (icon) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            }
+        }
+
+
+        // --- 3. TWO-WAY SCROLL REVEAL ENGINE (PABABA AT PAANGAT) ---
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll(".reveal");
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(element => {
+                const revealTop = element.getBoundingClientRect().top;
+                const revealBottom = element.getBoundingClientRect().bottom;
+
+                if (revealTop < windowHeight - 50 && revealBottom > 50) {
+                    element.classList.add("active");
+                } else {
+                    element.classList.remove("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", revealOnScroll);
+        window.addEventListener("load", revealOnScroll);
+
+
+        // --- 4. LOGO MODAL LOGIC ENGINE ---
+        function openLogoModal(imgSrc, titleText) {
+            const modal = document.getElementById('logo-popup-modal');
+            const modalCard = document.getElementById('modal-card');
+            const modalImg = document.getElementById('modal-logo-target');
+            const modalTitle = document.getElementById('modal-logo-title');
+
+            modalImg.src = imgSrc;
+            modalTitle.innerText = titleText;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-95');
+            modalCard.classList.add('scale-100');
+        }
+
+        function closeLogoModal() {
+            const modal = document.getElementById('logo-popup-modal');
+            const modalCard = document.getElementById('modal-card');
+
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalCard.classList.remove('scale-100');
+            modalCard.classList.add('scale-95');
+        }
+
+        // Close modal automatically when background is clicked
+        document.getElementById('logo-popup-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeLogoModal();
+        });
+
+
+        // --- 5. SONNER STYLE TOAST SYSTEM ENGINE ---
+        function triggerHotlineToast() {
+            const container = document.getElementById('sonner-toast-container');
+            
+            const toast = document.createElement('div');
+            toast.className = "pointer-events-auto bg-[#121214] border border-zinc-800 text-white rounded-xl px-4 py-3 shadow-2xl flex items-center gap-3 min-w-[300px] transform translate-y-4 opacity-0 transition-all duration-300 border-l-4 border-l-green-400";
+            toast.innerHTML = `
+                <div class="text-green-400 text-sm"><i class="fa-solid fa-phone-volume animate-bounce"></i></div>
+                <div class="flex-1 font-sans text-xs">
+                    <p class="font-bold text-zinc-200">Connecting to Support...</p>
+                    <p class="text-zinc-400 mt-0.5 font-mono text-[11px]">Dialing: 1-800-BCMA-HELP</p>
+                </div>
+                <button class="text-zinc-500 hover:text-white text-xs font-bold font-space uppercase tracking-widest pl-2">Call</button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 4000);
+        }
+    </script>
+
+</body>
+</html>
