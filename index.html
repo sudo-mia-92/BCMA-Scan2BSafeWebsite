@@ -259,6 +259,20 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+            <div onclick="openContentModal('about-bcma-welcome')" class="md:col-span-12 bg-white text-black border border-zinc-200 rounded-3xl p-6 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer">
+                <div class="space-y-4">
+                    <div class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">BCMA Website Overview</div>
+                    <h3 class="font-bold text-lg font-space text-zinc-900 leading-snug">Welcome to Our BCMA Interactive Website</h3>
+                    <p class="text-zinc-600 font-sans text-xs leading-relaxed line-clamp-4">
+                        Welcome to our BCMA (Barcode Medication Administration) Interactive Website! Our platform was created to help people better understand how technology can improve safety in healthcare, especially during medication administration. This website is made for nursing students, healthcare professionals, clinical instructors, and anyone interested in learning about BCMA.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-zinc-100 flex justify-between items-center text-[11px] font-bold text-emerald-600">
+                    <span>Read Full Introduction</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
             <div onclick="openContentModal('literature-review')" class="md:col-span-7 bg-white text-black border border-zinc-200 rounded-3xl p-6 flex flex-col justify-between shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-green-400/50 cursor-pointer">
                 <div class="space-y-4">
                     <div class="inline-block bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">Literature Review</div>
@@ -1147,7 +1161,7 @@
                     <div class="lg:max-w-sm space-y-5">
                         <div>
                             <p class="text-[11px] uppercase tracking-[0.25em] text-emerald-300 font-bold">Team A</p>
-                            <h4 class="text-lg md:text-xl font-bold text-white font-space mt-2">2nd Year UC Nursing Students</h4>
+                            <h4 class="text-lg md:text-xl font-bold text-white font-space mt-2">UC NURSING LEVEL 2: BSN 2B 2025-2026</h4>
                             <p class="text-[11px] font-sans text-zinc-400 mt-2 leading-relaxed">Integrated BCMA learning project team under the Scan2BSafe platform.</p>
                         </div>
                         <div class="flex flex-wrap items-center gap-4">
@@ -1160,6 +1174,12 @@
                             <button onclick="openLogoModal('UCN.jpg', 'UC Nursing Logo')" class="bg-zinc-900 border border-zinc-700 rounded-2xl p-3 hover:border-emerald-400/50 transition-all">
                                 <img src="UCN.jpg" alt="UC Nursing Logo" class="h-14 w-auto object-contain rounded-lg">
                             </button>
+                        </div>
+                        <div class="rounded-2xl border border-zinc-800 bg-[#0f0f10] px-4 py-4">
+                            <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Private Copyright Notice</p>
+                            <p class="text-[11px] font-sans text-zinc-400 mt-2 leading-relaxed">
+                                Copyright 2025-2026 Team A, UC NURSING LEVEL 2: BSN 2B. This private academic website and its contents were created solely by the student developers for educational purposes. Unauthorized copying, redistribution, republication, commercial use, or reproduction of any part of this website without permission is strictly prohibited. Any unauthorized use may be subject to academic, civil, or legal action.
+                            </p>
                         </div>
                     </div>
                     <div class="flex-1 space-y-5">
@@ -1186,6 +1206,23 @@
                                 <p class="block pl-5 -indent-5 text-[11px] font-sans text-zinc-300 leading-relaxed break-words">World Health Organization. (2021). <em>Global patient safety action plan 2021–2030: Towards eliminating avoidable harm in health care</em>. <a href="https://www.who.int/publications/i/item/9789240032705" target="_blank" rel="noopener noreferrer" class="break-all text-emerald-300 hover:underline">https://www.who.int/publications/i/item/9789240032705</a></p>
                             </div>
                         </div>
+                        <div class="rounded-3xl border border-zinc-700 bg-zinc-900/60 p-5">
+                            <p class="text-[11px] uppercase tracking-[0.25em] text-emerald-300 font-bold">Submitted To</p>
+                            <div class="mt-3 rounded-2xl border border-zinc-800 bg-[#0f0f10] px-4 py-4 space-y-3">
+                                <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 px-3 py-3">
+                                    <p class="text-[10px] uppercase tracking-[0.18em] text-zinc-500 font-bold">Course</p>
+                                    <div class="mt-1 text-[11px] font-sans text-zinc-200 leading-relaxed space-y-1">
+                                        <p>NCM 110 &amp; NCM 110A:</p>
+                                        <p class="font-semibold text-white">NURSING INFORMATICS</p>
+                                        <p>Theory and Laboratory</p>
+                                    </div>
+                                </div>
+                                <div class="rounded-xl border border-zinc-800 bg-zinc-900/60 px-3 py-3">
+                                    <p class="text-[10px] uppercase tracking-[0.18em] text-zinc-500 font-bold">Clinical Instructor</p>
+                                    <p class="mt-1 text-[11px] font-sans text-zinc-200 leading-relaxed">JM Zamora, RN, CLSSYB, EMT, MAN</p>
+                                </div>
+                            </div>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-2 text-[11px] font-sans text-zinc-300">
                             <p>ABLOG, ALLYSHA KATE F.</p>
                             <p>ALMONTE, REXSON DAVE V.</p>
@@ -1196,13 +1233,13 @@
                             <p>CAMPOS, KRISTINE MAE M.</p>
                             <p>CARINO, ADELIE YESHA M.</p>
                             <p>DIMAS, PRUDENCIO JR. S</p>
-                            <p>DRUGA, KATE G.</p>
+                            <p>DRUGA, KATE GLAIHZA B. </p>
                             <p>FERNANDEZ, SHAYNE D.</p>
                             <p>GAYADEN, RAQUELE K.</p>
-                            <p>MACAWARIS, ISABEL DAINE D.</p>
+                            <p>MACAWARIS, ISABEL DIANE D. </p>
                             <p>MIGUEL, ANNA MARIE A.</p>
-                            <p>ODSEY, TAULEE</p>
-                            <p>OLIVIA, AZALEA</p>
+                            <p>ODSEY, TAUL LEE C. </p>
+                            <p>OLIVA, AZALEA GLAIZELLE E.</p>
                             <p>ONG-ONGAWAN, DANIEL D.</p>
                             <p>REALUBIN, ROY DOMINIQUE</p>
                             <p>TEBIA, KASHMIR M.</p>
@@ -1288,14 +1325,25 @@
                 body: `<p>The nursing program is fully committed to delivering modern experiential clinical competencies, robust evidence-based healthcare integration, interactive virtual simulations, and intensive field community practice parameters to nurture top-tier clinical intelligence.</p>
                        <p><strong>Action Blueprint:</strong> Deploying cross-department software solutions like BCMA Simulators to enforce flawless "5 Rights" synchronization loops into the routine behavioral reflexes of junior clinicians.</p>`
             },
+            'about-bcma-welcome': {
+                title: 'B. ABOUT BCMA PAGE',
+                badge: 'BCMA Website Overview',
+                wide: true,
+                body: `<div class="max-w-4xl mx-auto text-center space-y-10">
+                           <p>Welcome to Scan2BSafe, our BCMA (Barcode Medication Administration) Interactive Website! Our platform was created to help people better understand how technology can improve safety in healthcare, especially during medication administration.</p> <br>
+                           <p>This website is made for nursing students, healthcare professionals, clinical instructors, and anyone interested in learning about BCMA. Through interactive and easy-to-understand content, we aim to make learning more engaging and accessible for everyone.</p> <br>
+                           <p>Barcode Medication Administration helps reduce medication errors by making sure that the right patient receives the right medication, in the right dose, at the right time, and through the right route. By using barcode scanning technology, healthcare workers can provide safer and more accurate patient care.</p> <br>
+                           <p>Our goal is to create a simple, informative, and user-friendly platform that promotes patient safety, supports learning, and increases awareness about the importance of BCMA in modern healthcare.</p>
+                       </div>`
+            },
             'literature-review': {
                 title: 'B. ABOUT BCMA PAGE',
                 badge: 'Literature Review',
                 wide: true,
-                body: `<div class="space-y-5">
+                body: `<div class="space-y-4">
                            <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
                                <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Overview</p>
-                               <p>Barcode Medication Administration (BCMA) is a healthcare information technology system that improves <span class="text-emerald-300 font-semibold">patient safety</span> by ensuring accurate medication administration at the bedside. It uses barcode scanning technology integrated with <span class="text-white font-semibold">electronic health records</span> and the <span class="text-white font-semibold">electronic medication administration record (eMAR)</span> to support the <span class="text-emerald-300 font-semibold">five rights of medication administration</span>: right patient, right medication, right dose, right route, and right time. By scanning the patient's identification wristband and the medication barcode, the system performs real-time verification before administration, helping reduce medication errors and preventable adverse events in hospitals (World Health Organization, 2021; Westbrook et al., 2021).</p>
+                               <p>Barcode Medication Administration (BCMA) is a healthcare information technology system that improves <span class="text-emerald-300 font-semibold">patient safety</span> by ensuring accurate medication administration at the bedside. It uses barcode scanning technology integrated with <span class="text-white font-semibold">electronic health records</span> and the <span class="text-white font-semibold">electronic medication administration record (eMAR)</span> to support the <span class="text-emerald-300 font-semibold">five rights of medication administration</span>: right patient, right medication, right dose, right route, and right time. By scanning the patient's identification wristband and the medication barcode, the system performs real-time verification before administration, helping reduce medication errors and preventable adverse events in hospitals (World Health Organization, 2021; Westbrook et al., 2021). </p>
                            </div>
                            <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
                                <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Closed-Loop Workflow</p>
@@ -7596,10 +7644,7 @@
                 return false;
             }
 
-            const newWindow = window.open(SIMULATION_REDIRECT_URL, '_blank', 'noopener,noreferrer');
-            if (newWindow) {
-                newWindow.opener = null;
-            }
+            window.location.href = SIMULATION_REDIRECT_URL;
             return false;
         }
 
