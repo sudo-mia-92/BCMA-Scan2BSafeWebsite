@@ -63,6 +63,8 @@
         .consent-scroll-lock {
             overflow: hidden !important;
             height: 100vh;
+            touch-action: none;
+            overscroll-behavior: none;
         }
         .reference-link-wrap {
             overflow-wrap: anywhere;
@@ -1217,7 +1219,7 @@
                                 Copyright 2025-2026 Team A, UC NURSING LEVEL 2: BSN 2B. This private academic website and its contents were created solely by the student developers for educational purposes. Unauthorized copying, redistribution, republication, commercial use, or reproduction of any part of this website without permission is strictly prohibited. Any unauthorized use may be subject to academic, civil, or legal action.
                             </p>
                         </div>
-                        <div id="footer-privacy-acknowledgement" onclick="openContentModal('privacy-acknowledgement')" class="hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-4 cursor-pointer transition-all duration-300 hover:border-emerald-400/40 hover:bg-emerald-500/10">
+                        <div id="footer-privacy-acknowledgement" onclick="openContentModal('privacy-policy')" class="hidden rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-4 py-4 cursor-pointer transition-all duration-300 hover:border-emerald-400/40 hover:bg-emerald-500/10">
                             <div class="flex items-start gap-3">
                                 <div class="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-400/20 flex items-center justify-center text-emerald-300 shrink-0">
                                     <i class="fa-solid fa-user-shield"></i>
@@ -1225,7 +1227,7 @@
                                 <div class="space-y-2">
                                     <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold">Privacy Notice Accepted</p>
                                     <p class="text-[11px] font-sans text-zinc-300 leading-relaxed">
-                                        The user has acknowledged the privacy notice and has read the website concerns related to integrity, safe browsing, and responsible use of the Scan2BSafe platform.
+                                        The user has acknowledged the privacy notice. Click to view the Terms Privacy Policy and Terms of Use.
                                     </p>
                                     <div class="inline-flex items-center gap-2 text-[11px] font-bold text-emerald-300">
                                         <span>View User Privacy Details</span>
@@ -1351,8 +1353,8 @@
                 We use essential browser storage to keep this website secure, maintain a stable learning experience, and remember privacy-related interface choices during your visit. We protect the integrity and privacy of our users, do not request unnecessary personal information, and work to keep this educational platform safe from misuse, unauthorized alterations, and harmful behavior.
             </p>
             <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-bold text-emerald-700">
-                <button type="button" onclick="openContentModal('privacy-policy')" class="hover:text-emerald-800 transition-colors">Privacy Policy</button>
-                <button type="button" onclick="openContentModal('privacy-more-info')" class="hover:text-emerald-800 transition-colors">More Information</button>
+                <button type="button" onclick="openPrivacyInfoPanel('policy')" class="hover:text-emerald-800 transition-colors">Privacy Policy</button>
+                <button type="button" onclick="openPrivacyInfoPanel('more-info')" class="hover:text-emerald-800 transition-colors">More Information</button>
             </div>
             <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div class="rounded-2xl bg-zinc-100 text-zinc-600 font-bold text-center text-sm px-4 py-3 border border-zinc-200">
@@ -1363,6 +1365,21 @@
                 </button>
             </div>
             <p class="mt-3 text-center text-[11px] text-zinc-500 font-sans">By continuing after acceptance, you acknowledge this privacy notice for the current visit.</p>
+        </div>
+    </div>
+    <div id="privacy-info-panel" class="fixed inset-0 bg-black/75 backdrop-blur-md z-[70] hidden px-4">
+        <div class="min-h-full flex items-center justify-center py-6">
+            <div class="bg-[#121214] border border-zinc-800 rounded-3xl max-w-3xl w-full max-h-[88vh] overflow-y-auto p-6 md:p-8 relative">
+                <button type="button" onclick="closePrivacyInfoPanel()" class="inline-flex items-center gap-2 rounded-2xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-emerald-200 hover:bg-emerald-500/20 transition-all">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back</span>
+                </button>
+                <div id="privacy-info-badge" class="inline-block bg-emerald-500/10 border border-emerald-500/30 text-green-400 text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mt-4 mb-3">
+                    USER PROTECTION NOTICE
+                </div>
+                <h2 id="privacy-info-title" class="text-xl md:text-2xl font-bold font-space tracking-tight text-white mb-4">Privacy Details</h2>
+                <div id="privacy-info-body" class="text-zinc-300 font-sans text-xs md:text-sm leading-relaxed space-y-4 border-t border-zinc-800 pt-4"></div>
+            </div>
         </div>
     </div>
 
@@ -1429,39 +1446,48 @@
                                <div class="w-28 h-28 mx-auto rounded-3xl bg-zinc-950 border border-zinc-800 flex items-center justify-center overflow-hidden mb-4">
                                    <img src="logo.jpg" alt="Scan2BSafe Official Logo" class="w-full h-full object-contain">
                                </div>
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Official Project Logo</p>
-                               <p>The logo presented above is the official visual identity of <span class="text-white font-semibold">Scan2BSafe</span>.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">JUSTIFICATION OF THE LOGO</p>
+                               <p>The “SCAN2BSAFE” logo is an original design that represents safe, technology-assisted medication administration through the Barcode Medication Administration (BCMA) system. Every element, color, shape, and symbol in the logo was intentionally designed to reflect the project's purpose: promoting patient safety, accurate medication scanning, and modern healthcare technology. The logo was conceptualized and arranged uniquely and was not adapted, copied, or based on any existing logo design.</p>
                            </div>
                            <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Authenticity Statement</p>
-                               <p>This logo was independently conceptualized and created by <span class="text-white font-semibold">UC Nursing Level 2: BSN 2B</span> as an original academic identity for this project. It was not copied, imitated, or reproduced from another organization's logo, symbol, or trademark.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Elements and Their Meanings</p>
+                               <p><span class="text-white font-semibold">a. Medical Cross (Center Symbol)</span> - Represents healthcare, patient care, and safe medication administration.</p>
+                               <p><span class="text-white font-semibold">b. Shield Shape Behind the Cross</span> - Symbolizes protection, security, and patient safety through BCMA technology.</p>
+                               <p><span class="text-white font-semibold">c. Heart Icons</span> - Represent compassion, patient-centered care, and commitment to patient well-being.</p>
+                               <p><span class="text-white font-semibold">d. Barcode Lines Inside the Cross</span> - Symbolize barcode scanning technology for accurate patient identification and medication verification.</p>
+                               <p><span class="text-white font-semibold">e. Circuit Lines and Microchips</span> - Represent technology, innovation, and digital healthcare systems that reduce errors and improve efficiency.</p>
+                               <p><span class="text-white font-semibold">f. Scanner Device</span> - Represents the BCMA scanning process for verification and safe medication administration.</p>
+                               <p><span class="text-white font-semibold">g. Medicine Bottle and Capsule</span> - Symbolize medications, pharmaceutical care, and drug safety practices.</p>
+                               <p><span class="text-white font-semibold">h. Circular Lines Around the Logo</span> - Represent continuity, connection, and the complete medication administration cycle focused on patient safety.</p>
                            </div>
                            <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Design Meaning</p>
-                               <p>The shield, medical cross, barcode-inspired lines, medicine elements, and handheld scanner were intentionally combined to represent <span class="text-white font-semibold">patient safety</span>, <span class="text-white font-semibold">digital verification</span>, and <span class="text-white font-semibold">accurate medication administration</span>. These visual elements directly reflect the educational purpose of the Scan2BSafe BCMA platform.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Color Justification</p>
+                               <p><span class="text-white font-semibold">a. Blue Color Palette</span> - The dominant blue color represents trust, professionalism, responsibility, and healthcare excellence. Blue is commonly associated with medical environments because it gives a sense of safety, reliability, and calmness.</p>
+                               <p><span class="text-white font-semibold">b. Light Blue Glow Effects</span> - The glowing light blue accents symbolize advanced technology, innovation, and digital systems. These effects also give the logo a modern appearance that reflects healthcare modernization.</p>
+                               <p><span class="text-white font-semibold">c. White Background and Highlights</span> - White represents cleanliness, sterility, and purity, which are important values in healthcare and medication administration.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Typography Justification</p>
+                               <p>Bold “SCAN2BSAFE” Text. The bold font style emphasizes clarity, confidence, and visibility. The word “SCAN” highlights the scanning process used in BCMA, while “SAFE” emphasizes the project's goal of promoting medication safety.</p>
                            </div>
                            <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Project Ownership Context</p>
-                               <p>This logo serves as a project-specific visual signature developed for the Scan2BSafe website and stands as proof that the identity was created for this educational initiative by its student developers.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Originality Statement</p>
+                               <p>The “SCAN2BSAFE” logo is an independently created and original design conceptualized specifically for this project. All symbols, colors, shapes, and arrangements were intentionally combined to visually represent BCMA, patient safety, healthcare technology, and medication administration. The logo was not copied, traced, adapted, or based on any existing company, organization, or healthcare logo design.</p>
                            </div>
                        </div>`
             },
             'privacy-policy': {
-                title: 'Scan2BSafe Privacy Policy',
+                title: 'Terms Privacy Policy',
                 badge: 'User Protection Notice',
                 wide: true,
                 body: `<div class="space-y-4">
                            <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Privacy Commitment</p>
-                               <p>Scan2BSafe is committed to protecting the integrity, privacy, and safety of all users who access this educational website. We do not intentionally request unnecessary personal data, and we aim to keep all browsing interactions limited to what is needed for the site's learning experience and interface stability.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms Privacy Policy</p>
+                               <p>At Scan2BSafe, we value and protect the privacy of users. Our website, which focuses on Barcode Medication Administration (BCMA), is designed for educational and informational purposes only. Any information collected through the website will be handled responsibly and and kept confidential.</p>
                            </div>
                            <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Essential Browser Storage</p>
-                               <p>This website may use essential browser storage or similar privacy-related interface tools only to support secure navigation, preserve interface preferences during use, and maintain a stable user experience. These functions help prevent disruption and preserve the integrity of the learning platform.</p>
-                           </div>
-                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Security and Integrity</p>
-                               <p>We value responsible digital use and take reasonable steps within this static educational website to discourage misuse, malicious modification, unauthorized injections, and harmful interference with the content presented to users.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms of Use</p>
+                               <p>By Using the Scan2BSafe website, users agree to use the content responsibly and for educational purposes related to medication safety and BCMA awareness.</p>
                            </div>
                        </div>`
             },
@@ -1485,25 +1511,17 @@
                        </div>`
             },
             'privacy-acknowledgement': {
-                title: 'Accepted User Privacy Notice',
-                badge: 'Confirmed Website Acknowledgement',
+                title: 'Terms Privacy Policy',
+                badge: 'Accepted Privacy Notice',
                 wide: true,
                 body: `<div class="space-y-4">
                            <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Acknowledgement Status</p>
-                               <p>The user has accepted the Scan2BSafe privacy notice and acknowledged the platform's concerns regarding safe browsing, responsible use, educational integrity, and secure website interaction.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms Privacy Policy</p>
+                               <p>At Scan2BSafe, we value and protect the privacy of users. Our website, which focuses on Barcode Medication Administration (BCMA), is designed for educational and informational purposes only. Any information collected through the website will be handled responsibly and and kept confidential.</p>
                            </div>
                            <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">What We Protect</p>
-                               <p>We protect user privacy by limiting unnecessary data collection, maintaining a secure and educational browsing environment, and preserving the integrity of BCMA-related learning content across the platform.</p>
-                           </div>
-                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Website Concerns Addressed</p>
-                               <p>This notice covers our commitment to website safety, user awareness, protection against misuse, and the responsible presentation of educational content for nursing students, instructors, and healthcare learners.</p>
-                           </div>
-                           <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-4">
-                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">User Reminder</p>
-                               <p>Acceptance of the notice allows full website access while confirming that the user has read and acknowledged the platform's privacy concerns and safe-use expectations.</p>
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms of Use</p>
+                               <p>By Using the Scan2BSafe website, users agree to use the content responsibly and for educational purposes related to medication safety and BCMA awareness.</p>
                            </div>
                        </div>`
             },
@@ -7835,25 +7853,132 @@
             acknowledgement.classList.toggle('hidden', !isVisible);
         }
 
+        const privacyPanelContent = {
+            policy: {
+                title: 'Terms Privacy Policy',
+                badge: 'User Protection Notice',
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/10 to-zinc-900 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms Privacy Policy</p>
+                               <p>At Scan2BSafe, we value and protect the privacy of users. Our website, which focuses on Barcode Medication Administration (BCMA), is designed for educational and informational purposes only. Any information collected through the website will be handled responsibly and and kept confidential.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">Terms of Use</p>
+                               <p>By Using the Scan2BSafe website, users agree to use the content responsibly and for educational purposes related to medication safety and BCMA awareness.</p>
+                           </div>
+                       </div>`
+            },
+            'more-info': {
+                title: 'More Information About User Privacy',
+                badge: 'Website Transparency',
+                body: `<div class="space-y-4">
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">What We Protect</p>
+                               <p>We protect the browsing integrity of our users by keeping this website focused on educational delivery, clean user navigation, and a secure presentation of BCMA-related information.</p>
+                           </div>
+                           <div class="rounded-2xl border border-zinc-700 bg-zinc-900/70 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">What We Avoid</p>
+                               <p>We do not design this platform to collect unnecessary personal details, intrusive tracking behavior, or unrelated commercial data. The goal of Scan2BSafe is academic learning, patient safety awareness, and accessible BCMA education.</p>
+                           </div>
+                           <div class="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-4">
+                               <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300 font-bold mb-2">User Notice</p>
+                               <p>By selecting <span class="text-white font-semibold">Got It</span>, users acknowledge this privacy notice for the current visit and may continue using the website with full access to its interactive educational sections.</p>
+                           </div>
+                       </div>`
+            }
+        };
+
+        let lockedScrollY = 0;
+
+        function isPrivacyFlowActive() {
+            const overlay = document.getElementById('privacy-consent-overlay');
+            return !!overlay && !overlay.classList.contains('hidden');
+        }
+
+        function canScrollInsidePrivacyPanel(target) {
+            if (!target) return false;
+
+            const infoScroller = target.closest('#privacy-info-panel .overflow-y-auto');
+            if (!infoScroller) return false;
+
+            return infoScroller.scrollHeight > infoScroller.clientHeight;
+        }
+
+        function preventBackgroundScrollWhileConsentOpen(event) {
+            if (!isPrivacyFlowActive()) return;
+            if (canScrollInsidePrivacyPanel(event.target)) return;
+
+            event.preventDefault();
+        }
+
+        function lockPageScroll() {
+            lockedScrollY = window.scrollY || window.pageYOffset || 0;
+            document.documentElement.classList.add('consent-scroll-lock');
+            document.body.classList.add('consent-scroll-lock');
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${lockedScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.width = '100%';
+        }
+
+        function unlockPageScroll() {
+            document.documentElement.classList.remove('consent-scroll-lock');
+            document.body.classList.remove('consent-scroll-lock');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            document.body.style.width = '';
+            window.scrollTo(0, lockedScrollY);
+        }
+
         function showPrivacyConsent() {
             const overlay = document.getElementById('privacy-consent-overlay');
             const banner = document.getElementById('privacy-consent-banner');
             if (!overlay || !banner) return;
 
-            document.body.classList.add('consent-scroll-lock');
+            lockPageScroll();
             overlay.classList.remove('hidden');
             banner.classList.remove('hidden');
             setPrivacyAcknowledgementState(false);
         }
 
+        function openPrivacyInfoPanel(type) {
+            const panel = document.getElementById('privacy-info-panel');
+            const banner = document.getElementById('privacy-consent-banner');
+            const title = document.getElementById('privacy-info-title');
+            const badge = document.getElementById('privacy-info-badge');
+            const body = document.getElementById('privacy-info-body');
+            const data = privacyPanelContent[type];
+            if (!panel || !banner || !title || !badge || !body || !data) return;
+
+            title.innerText = data.title;
+            badge.innerText = data.badge;
+            body.innerHTML = data.body;
+            banner.classList.add('hidden');
+            panel.classList.remove('hidden');
+        }
+
+        function closePrivacyInfoPanel() {
+            const panel = document.getElementById('privacy-info-panel');
+            const banner = document.getElementById('privacy-consent-banner');
+            if (!panel || !banner) return;
+
+            panel.classList.add('hidden');
+            banner.classList.remove('hidden');
+        }
+
         function acceptPrivacyConsent() {
             const overlay = document.getElementById('privacy-consent-overlay');
             const banner = document.getElementById('privacy-consent-banner');
+            const panel = document.getElementById('privacy-info-panel');
             if (!overlay || !banner) return;
 
-            document.body.classList.remove('consent-scroll-lock');
+            unlockPageScroll();
             overlay.classList.add('hidden');
             banner.classList.add('hidden');
+            if (panel) panel.classList.add('hidden');
             setPrivacyAcknowledgementState(true);
         }
 
@@ -8065,6 +8190,8 @@
 
         window.addEventListener('scroll', updateActiveNavState);
         window.addEventListener('load', updateActiveNavState);
+        document.addEventListener('wheel', preventBackgroundScrollWhileConsentOpen, { passive: false });
+        document.addEventListener('touchmove', preventBackgroundScrollWhileConsentOpen, { passive: false });
         updateActiveNavState();
         showPrivacyConsent();
 
